@@ -15,12 +15,43 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Transactional
-    public void save(User user) {
+    public List<User> findAllUsers() {
+        return userDAO.listAllUsers();
+    }
+
+    @Transactional
+    public User findById(long id) {
+        return userDAO.findById(id);
+    }
+
+    @Transactional
+    public User findByName(String name) {
+        return userDAO.findByName(name);
+    }
+
+    @Transactional
+    public void saveUser(User user) {
         userDAO.save(user);
     }
 
-    @Transactional(readOnly = true)
-    public List<User> list() {
-        return userDAO.list();
+    @Transactional
+    public void updateUser(User user) {
+        userDAO.update(user);
     }
+
+    @Transactional
+    public void deleteUserById(long id) {
+        userDAO.delete(id);
+    }
+
+    @Transactional
+    public boolean isUserExist(User user) {
+        return userDAO.isUserExist(user);
+    }
+
+    @Transactional
+    public void deleteAllUsers(){
+        userDAO.deleteAllUsers();
+    }
+
 }

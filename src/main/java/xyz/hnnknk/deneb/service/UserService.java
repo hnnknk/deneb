@@ -5,7 +5,19 @@ import xyz.hnnknk.deneb.model.User;
 import java.util.List;
 
 public interface UserService {
-    void save(User user);
+    User findById(long id);
 
-    List<User> list();
+    User findByName(String name);
+
+    void saveUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUserById(long id);
+
+    List<User> findAllUsers();
+
+    void deleteAllUsers();
+
+    public boolean isUserExist(User user);
 }
