@@ -13,4 +13,6 @@ public interface UpsService {
     Ups findById(long id);
 
     List<Ups> listAllUpses();
+
+    boolean isUpsExists(Ups ups);
 }

@@ -44,5 +44,10 @@ public class UpsServiceImpl implements UpsService {
         return upsDAO.listAllUpses();
     }
 
+    @Transactional
+    @Override
+    public boolean isUpsExists(Ups ups) {
+        return upsDAO.isUpsExists(ups);
+    }
 }
 

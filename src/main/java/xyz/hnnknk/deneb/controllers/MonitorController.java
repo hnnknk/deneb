@@ -39,7 +39,7 @@ public class MonitorController {
     }
 
     @RequestMapping(value = "/components/monitor/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createUser(@RequestBody Monitor monitor, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createMonitor(@RequestBody Monitor monitor, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + monitor.toString());
 
         if (monitorService.isMonitorExists(monitor)) {

@@ -46,4 +46,14 @@ public class UpsDAOImpl implements UpsDAO {
         TypedQuery<Ups> query = sessionFactory.getCurrentSession().createQuery("from Ups");
         return query.getResultList();
     }
+
+    @Override
+    public boolean isUpsExists(Ups ups) {
+        for(Ups u : listAllUpses()) {
+            if (u.equals(ups)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

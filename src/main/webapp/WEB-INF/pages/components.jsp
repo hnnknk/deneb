@@ -13,6 +13,15 @@
         .field.ng-dirty.ng-invalid-minlength {
             background-color: yellow;
         }
+        .ups_field.ng-valid {
+            background-color: lightgreen;
+        }
+        .ups_field.ng-dirty.ng-invalid-required {
+            background-color: red;
+        }
+        .ups_field.ng-dirty.ng-invalid-minlength {
+            background-color: yellow;
+        }
 
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -77,7 +86,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="serial">Serial number</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.serial" id="serial" class="field form-control input-sm" placeholder="Enter monitor serail number" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.serial" id="serial" class="field form-control input-sm" placeholder="Enter monitor serial number" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.field.$error.minlength">Minimum length required is 2</span>
@@ -107,7 +116,7 @@
                     <th>Inventory number</th>
                     <th>Manufacter</th>
                     <th>Model</th>
-                    <th>Serail number</th>
+                    <th>Serial number</th>
                     <th width="20%"></th>
                 </tr>
                 </thead>
@@ -128,12 +137,118 @@
     </div>
 </div>
 
+<div id="ups_div" class="generic-container" ng-controller="UpsController as ctrl_ups">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Ups Registration Form </span></div>
+        <div class="formcontainer">
+            <form ng-submit="ctrl_ups.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl_ups.ups.id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="ups_invNumber">Inventory number</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ups.ups.invNumber" id="ups_invNumber" class="field form-control input-sm" placeholder="Enter inventory number" required ng-minlength="1"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
+                                <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 1</span>
+                                <span ng-show="myForm.ups_field.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="ups_manufacter">Manufacter</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ups.ups.manufacter" id="ups_manufacter" class="field form-control input-sm" placeholder="Enter ups manufacter" required ng-minlength="2"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
+                                <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 2</span>
+                                <span ng-show="myForm.ups_field.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="ups_model">Model</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ups.ups.model" id="ups_model" class="field form-control input-sm" placeholder="Enter ups model" required ng-minlength="2"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
+                                <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 2</span>
+                                <span ng-show="myForm.ups_field.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="ups_serial">Serial number</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ups.ups.serial" id="ups_serial" class="field form-control input-sm" placeholder="Enter ups serial number" required ng-minlength="2"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
+                                <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 2</span>
+                                <span ng-show="myForm.ups_field.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl_ups.ups.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl_ups.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of Upses </span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Inventory number</th>
+                    <th>Manufacter</th>
+                    <th>Model</th>
+                    <th>Serial number</th>
+                    <th width="20%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="up in ctrl_ups.upses">
+                    <td><span ng-bind="up.id"></span></td>
+                    <td><span ng-bind="up.invNumber"></span></td>
+                    <td><span ng-bind="up.manufacter"></span></td>
+                    <td><span ng-bind="up.model"></span></td>
+                    <td><span ng-bind="up.serial"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl_ups.edit(up.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl_ups.remove(up.id)" class="btn btn-danger custom-width">Remove</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="<c:url value='/static/js/app.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/ups_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/ups_controller.js' />"></script>
 <script src="<c:url value='/static/js/show_components.js' />"></script>
 </body>
 </html>
