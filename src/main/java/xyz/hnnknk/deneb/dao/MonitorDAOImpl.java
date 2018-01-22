@@ -46,4 +46,14 @@ public class MonitorDAOImpl implements MonitorDAO {
         TypedQuery<Monitor> query = sessionFactory.getCurrentSession().createQuery("from Monitor");
         return query.getResultList();
     }
+
+    @Override
+    public boolean isMonitorExists(Monitor monitor) {
+        for(Monitor a : listAllMonitors()) {
+            if (a.equals(monitor)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

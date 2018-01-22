@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import xyz.hnnknk.deneb.model.User;
+import xyz.hnnknk.deneb.model.*;
 
 @Configuration
 @EnableTransactionManagement
@@ -20,7 +20,9 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
-        factoryBean.setAnnotatedClasses(User.class);
+        Class[] classes = new Class[] {User.class, Monitor.class, Mouse.class,
+                Keyboard.class, Backups.class};
+        factoryBean.setAnnotatedClasses(classes);
         return factoryBean;
     }
 

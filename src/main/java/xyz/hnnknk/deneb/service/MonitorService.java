@@ -13,4 +13,6 @@ public interface MonitorService {
     Monitor findById(long id);
 
     List<Monitor> listAllMonitors();
+
+    boolean isMonitorExists(Monitor monitor);
 }

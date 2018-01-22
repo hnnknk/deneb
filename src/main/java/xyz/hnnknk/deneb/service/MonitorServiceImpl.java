@@ -43,4 +43,10 @@ public class MonitorServiceImpl implements MonitorService {
     public List<Monitor> listAllMonitors() {
         return monitorDAO.listAllMonitors();
     }
+
+    @Transactional
+    @Override
+    public boolean isMonitorExists(Monitor monitor) {
+        return monitorDAO.isMonitorExists(monitor);
+    }
 }

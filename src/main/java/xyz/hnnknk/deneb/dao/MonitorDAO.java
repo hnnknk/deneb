@@ -15,4 +15,6 @@ public interface MonitorDAO {
 
     List<Monitor> listAllMonitors();
 
+    boolean isMonitorExists(Monitor monitor);
+
 }
