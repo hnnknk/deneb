@@ -3,27 +3,27 @@ package xyz.hnnknk.deneb.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "backups")
-public class Backups {
+@Table(name = "ups")
+public class Ups {
 
     @Id
     @GeneratedValue
-    @Column(name = "backups_id")
+    @Column(name = "ups_id")
     private Long id;
 
-    @Column(name = "backups_invnumber")
+    @Column(name = "ups_invnumber")
     private int invNumber;
 
-    @Column(name = "backups_manufacter")
+    @Column(name = "ups_manufacter")
     private String manufacter;
 
-    @Column(name = "backups_model")
+    @Column(name = "ups_model")
     private String model;
 
-    @Column(name = "backups_serial")
+    @Column(name = "ups_serial")
     private String serial;
 
-    public Backups() {
+    public Ups() {
     }
 
     public Long getId() {
@@ -80,9 +80,9 @@ public class Backups {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof Backups))
+        if (!(obj instanceof Ups))
             return false;
-        Backups other = (Backups) obj;
+        Ups other = (Ups) obj;
         if (id != other.id)
             return false;
         return true;
@@ -90,7 +90,7 @@ public class Backups {
 
     @Override
     public String toString() {
-        return "Backups [id=" + id + ", inventory number=" + invNumber + ", manufacter="
+        return "Ups [id=" + id + ", inventory number=" + invNumber + ", manufacter="
                 + manufacter + ", model=" + model + ", serial number=" + serial + "]";
     }
 }

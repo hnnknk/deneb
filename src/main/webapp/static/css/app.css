@@ -26,15 +26,16 @@ body, .form-control{
 }
 
 .generic-container {
-  width:80%;
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: #EAE7E7;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 0 30px black;
+    width:80%;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #EAE7E7;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 30px black;
+    display: none;
 }
 
 .custom-width {

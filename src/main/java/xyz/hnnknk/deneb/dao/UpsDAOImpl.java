@@ -3,25 +3,25 @@ package xyz.hnnknk.deneb.dao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.Backups;
+import xyz.hnnknk.deneb.model.Ups;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class BackupsDAOImpl implements BackupsDAO {
+public class UpsDAOImpl implements UpsDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(Backups backups) {
-        sessionFactory.getCurrentSession().save(backups);
+    public void save(Ups ups) {
+        sessionFactory.getCurrentSession().save(ups);
     }
 
     @Override
-    public void update(Backups backups) {
-        sessionFactory.getCurrentSession().update(backups);
+    public void update(Ups ups) {
+        sessionFactory.getCurrentSession().update(ups);
     }
 
     @Override
@@ -30,9 +30,9 @@ public class BackupsDAOImpl implements BackupsDAO {
     }
 
     @Override
-    public Backups findById(long id) {
+    public Ups findById(long id) {
 
-        for(Backups key : listAllBackupses()) {
+        for(Ups key : listAllUpses()) {
             if (id == key.getId()) {
                 return key;
             }
@@ -41,9 +41,9 @@ public class BackupsDAOImpl implements BackupsDAO {
     }
 
     @Override
-    public List<Backups> listAllBackupses() {
+    public List<Ups> listAllUpses() {
         @SuppressWarnings("unchecked")
-        TypedQuery<Backups> query = sessionFactory.getCurrentSession().createQuery("from Backups");
+        TypedQuery<Ups> query = sessionFactory.getCurrentSession().createQuery("from Ups");
         return query.getResultList();
     }
 }

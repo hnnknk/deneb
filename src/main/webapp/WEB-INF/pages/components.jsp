@@ -19,7 +19,12 @@
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 </head>
 <body ng-app="myApp" class="ng-cloak">
-<div class="generic-container" ng-controller="MonitorController as ctrl">
+
+<img id="mon_icon" src="/static/images/mon.png" class="img-rounded" alt="Monitor">
+<img id="ups_icon" src="/static/images/ups.png" class="img-rounded" alt="UPS">
+
+
+<div id="monitor_div" class="generic-container" ng-controller="MonitorController as ctrl">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">Monitor Registration Form </span></div>
         <div class="formcontainer">
@@ -29,9 +34,10 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="invNumber">Inventory number</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.invNumber" id="invNumber" class="field form-control input-sm" placeholder="Enter inventory number"/>
+                            <input type="text" ng-model="ctrl.monitor.invNumber" id="invNumber" class="field form-control input-sm" placeholder="Enter inventory number" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.field.$error.required">This is a required field</span>
+                                <span ng-show="myForm.field.$error.minlength">Minimum length required is 1</span>
                                 <span ng-show="myForm.field.$invalid">This field is invalid </span>
                             </div>
                         </div>
@@ -122,9 +128,12 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="<c:url value='/static/js/app.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
+<script src="<c:url value='/static/js/show_components.js' />"></script>
 </body>
 </html>
