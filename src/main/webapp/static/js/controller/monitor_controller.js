@@ -59,6 +59,8 @@ angular.module('myApp').controller('MonitorController', ['$scope', 'MonitorServi
 
     function submit() {
         if(self.monitor.id===null){
+            $(".alert").removeClass("in").show();
+            $(".alert").delay(1000).addClass("in").fadeOut(4000);
             console.log('Saving New Monitor', self.monitor);
             createMonitor(self.monitor);
         }else{

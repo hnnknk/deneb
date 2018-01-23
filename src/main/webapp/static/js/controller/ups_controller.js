@@ -59,6 +59,8 @@ angular.module('myApp').controller('UpsController', ['$scope', 'UpsService', fun
 
     function submit() {
         if(self.ups.id===null){
+            $(".alert").removeClass("in").show();
+            $(".alert").delay(1000).addClass("in").fadeOut(4000);
             console.log('Saving New Ups', self.ups);
             createUps(self.ups);
         }else{

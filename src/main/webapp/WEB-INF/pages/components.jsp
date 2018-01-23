@@ -10,6 +10,13 @@
 </head>
 <body ng-app="myApp" class="ng-cloak">
 
+<!-- Successful alert message -->
+<div class="alert alert-success fade al">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Вы успешно добавили периферийное устройство!</strong>
+</div>
+
+<!-- Images for content changing -->
 <div class="icon-container">
     <div class="row">
         <div class="col-sm-3 col-md-3">
@@ -40,7 +47,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="invNumber">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.invNumber" id="invNumber" class="field form-control input-sm" placeholder="Enter inventory number" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl.monitor.invNumber" id="invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.field.$error.minlength">Minimum length required is 1</span>
@@ -55,7 +62,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="manufacter">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.manufacter" id="manufacter" class="field form-control input-sm" placeholder="Enter monitor manufacter" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.manufacter" id="manufacter" class="field form-control input-sm" placeholder="Введите производителя монитора" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.field.$error.minlength">Minimum length required is 2</span>
@@ -69,7 +76,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="model">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.model" id="model" class="field form-control input-sm" placeholder="Enter monitor model" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.model" id="model" class="field form-control input-sm" placeholder="Введите модель монитора" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.field.$error.minlength">Minimum length required is 2</span>
@@ -83,7 +90,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="serial">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.serial" id="serial" class="field form-control input-sm" placeholder="Enter monitor serial number" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.serial" id="serial" class="field form-control input-sm" placeholder="Введите серийный номер монитора" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.field.$error.minlength">Minimum length required is 2</span>
@@ -144,7 +151,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="ups_invNumber">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.invNumber" id="ups_invNumber" class="field form-control input-sm" placeholder="Enter inventory number" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl_ups.ups.invNumber" id="ups_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 1</span>
@@ -159,7 +166,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="ups_manufacter">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.manufacter" id="ups_manufacter" class="field form-control input-sm" placeholder="Enter ups manufacter" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_ups.ups.manufacter" id="ups_manufacter" class="field form-control input-sm" placeholder="Введите производителя ИБП" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 2</span>
@@ -173,7 +180,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="ups_model">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.model" id="ups_model" class="field form-control input-sm" placeholder="Enter ups model" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_ups.ups.model" id="ups_model" class="field form-control input-sm" placeholder="Введите модель ИБП" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 2</span>
@@ -187,7 +194,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="ups_serial">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.serial" id="ups_serial" class="field form-control input-sm" placeholder="Enter ups serial number" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_ups.ups.serial" id="ups_serial" class="field form-control input-sm" placeholder="Введите серийный номер ИБП" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.ups_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.ups_field.$error.minlength">Minimum length required is 2</span>
@@ -248,7 +255,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="mouse_invNumber">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.invNumber" id="mouse_invNumber" class="field form-control input-sm" placeholder="Enter inventory number" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.invNumber" id="mouse_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.mouse_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.mouse_field.$error.minlength">Minimum length required is 1</span>
@@ -263,7 +270,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="mouse_manufacter">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.manufacter" id="mouse_manufacter" class="field form-control input-sm" placeholder="Enter mouse manufacter" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.manufacter" id="mouse_manufacter" class="field form-control input-sm" placeholder="Введите производителя мышки" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.mouse_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.mouse_field.$error.minlength">Minimum length required is 2</span>
@@ -277,7 +284,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="mouse_model">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.model" id="mouse_model" class="field form-control input-sm" placeholder="Enter mouse model" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.model" id="mouse_model" class="field form-control input-sm" placeholder="Введите модель мышки" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.mouse_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.mouse_field.$error.minlength">Minimum length required is 2</span>
@@ -291,7 +298,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="mouse_serial">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.serial" id="mouse_serial" class="field form-control input-sm" placeholder="Enter mouse serial number" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.serial" id="mouse_serial" class="field form-control input-sm" placeholder="Введите серийный номер мышки" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.mouse_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.mouse_field.$error.minlength">Minimum length required is 2</span>
@@ -352,7 +359,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="keyboard_invNumber">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.invNumber" id="keyboard_invNumber" class="field form-control input-sm" placeholder="Enter inventory number" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.invNumber" id="keyboard_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.keyboard_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.keyboard_field.$error.minlength">Minimum length required is 1</span>
@@ -367,7 +374,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="keyboard_manufacter">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.manufacter" id="keyboard_manufacter" class="field form-control input-sm" placeholder="Enter keyboard manufacter" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.manufacter" id="keyboard_manufacter" class="field form-control input-sm" placeholder="Введите производителя клавиатуры" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.keyboard_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.keyboard_field.$error.minlength">Minimum length required is 2</span>
@@ -381,7 +388,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="keyboard_model">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.model" id="keyboard_model" class="field form-control input-sm" placeholder="Enter keyboard model" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.model" id="keyboard_model" class="field form-control input-sm" placeholder="Введите модель клавиатуры" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.keyboard_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.keyboard_field.$error.minlength">Minimum length required is 2</span>
@@ -395,7 +402,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="keyboard_serial">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.serial" id="keyboard_serial" class="field form-control input-sm" placeholder="Enter keyboard serial number" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.serial" id="keyboard_serial" class="field form-control input-sm" placeholder="Введите серийный номер клавиатуры" required ng-minlength="2"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.keyboard_field.$error.required">This is a required field</span>
                                 <span ng-show="myForm.keyboard_field.$error.minlength">Minimum length required is 2</span>

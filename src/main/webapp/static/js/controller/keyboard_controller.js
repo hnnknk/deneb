@@ -10,6 +10,7 @@ angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardSer
     self.remove = remove;
     self.reset = reset;
 
+    var name = 'keyboard';
 
     fetchAllKeyboards();
 
@@ -59,6 +60,8 @@ angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardSer
 
     function submit() {
         if(self.keyboard.id===null){
+            $(".alert").removeClass("in").show();
+            $(".alert").delay(1000).addClass("in").fadeOut(4000);
             console.log('Saving New Keyboard', self.keyboard);
             createKeyboard(self.keyboard);
         }else{
