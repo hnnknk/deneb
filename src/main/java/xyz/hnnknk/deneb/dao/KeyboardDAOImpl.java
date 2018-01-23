@@ -46,4 +46,14 @@ public class KeyboardDAOImpl implements KeyboardDAO {
         TypedQuery<Keyboard> query = sessionFactory.getCurrentSession().createQuery("from Keyboard");
         return query.getResultList();
     }
+
+    @Override
+    public boolean isKeyboardExists(Keyboard keyboard) {
+        for(Keyboard k : listAllKeyboards()) {
+            if (k.equals(keyboard)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

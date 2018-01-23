@@ -46,4 +46,14 @@ public class MouseDAOImpl implements MouseDAO {
         TypedQuery<Mouse> query = sessionFactory.getCurrentSession().createQuery("from Mouse");
         return query.getResultList();
     }
+
+    @Override
+    public boolean isMouseExists(Mouse mouse) {
+        for(Mouse m : listAllMouses()) {
+            if (m.equals(mouse)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -43,4 +43,10 @@ public class MouseServiceImpl implements MouseService {
     public List<Mouse> listAllMouses() {
         return mouseDAO.listAllMouses();
     }
+
+    @Transactional
+    @Override
+    public boolean isMouseExists(Mouse mouse) {
+        return mouseDAO.isMouseExists(mouse);
+    }
 }

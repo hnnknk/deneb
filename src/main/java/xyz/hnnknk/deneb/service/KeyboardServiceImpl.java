@@ -43,4 +43,10 @@ public class KeyboardServiceImpl implements KeyboardService {
     public List<Keyboard> listAllKeyboards() {
         return keyboardDAO.listAllKeyboards();
     }
+
+    @Transactional
+    @Override
+    public boolean isKeyboardExists(Keyboard keyboard) {
+        return keyboardDAO.isKeyboardExists(keyboard);
+    }
 }

@@ -13,4 +13,6 @@ public interface KeyboardDAO {
     Keyboard findById(long id);
 
     List<Keyboard> listAllKeyboards();
+
+    boolean isKeyboardExists(Keyboard keyboard);
 }

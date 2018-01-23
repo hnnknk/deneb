@@ -13,4 +13,6 @@ public interface MouseService {
     Mouse findById(long id);
 
     List<Mouse> listAllMouses();
+
+    boolean isMouseExists(Mouse mouse);
 }

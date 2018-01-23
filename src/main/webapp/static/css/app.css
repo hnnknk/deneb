@@ -35,7 +35,6 @@ body, .form-control{
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 0 30px black;
-    display: none;
 }
 
 .custom-width {

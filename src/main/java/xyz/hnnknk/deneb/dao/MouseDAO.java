@@ -13,4 +13,6 @@ public interface MouseDAO {
     Mouse findById(long id);
 
     List<Mouse> listAllMouses();
+
+    boolean isMouseExists(Mouse mouse);
 }
