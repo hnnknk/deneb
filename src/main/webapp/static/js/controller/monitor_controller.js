@@ -46,13 +46,15 @@ angular.module('myApp').controller('MonitorController', ['$scope', 'MonitorServi
     }
 
     function deleteMonitor(id){
-        MonitorService.deleteMonitor(id)
-            .then(
-                fetchAllMonitors,
-                function(errResponse){
-                    console.error('Error while deleting Monitor');
-                }
-            );
+        if (confirm('Вы действительно хотите удалить этот монитор?')) {
+            MonitorService.deleteMonitor(id)
+                .then(
+                    fetchAllMonitors,
+                    function(errResponse){
+                        console.error('Error while deleting Monitor');
+                    }
+                );
+        }
     }
 
     function submit() {

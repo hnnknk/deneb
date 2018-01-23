@@ -1,0 +1,36 @@
+.field.ng-valid {
+    background-color: lightgreen;
+}
+.field.ng-dirty.ng-invalid-required {
+    background-color: red;
+}
+.field.ng-dirty.ng-invalid-minlength {
+    background-color: yellow;
+}
+.ups_field.ng-valid {
+    background-color: lightgreen;
+}
+.ups_field.ng-dirty.ng-invalid-required {
+    background-color: red;
+}
+.ups_field.ng-dirty.ng-invalid-minlength {
+    background-color: yellow;
+}
+.mouse_field.ng-valid {
+    background-color: lightgreen;
+}
+.mouse_field.ng-dirty.ng-invalid-required {
+    background-color: red;
+}
+.mouse_field.ng-dirty.ng-invalid-minlength {
+    background-color: yellow;
+}
+.keyboard_field.ng-valid {
+    background-color: lightgreen;
+}
+.keyboard_field.ng-dirty.ng-invalid-required {
+    background-color: red;
+}
+.keyboard_field.ng-dirty.ng-invalid-minlength {
+    background-color: yellow;
+}

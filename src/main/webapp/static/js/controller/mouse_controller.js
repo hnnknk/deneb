@@ -46,13 +46,15 @@ angular.module('myApp').controller('MouseController', ['$scope', 'MouseService',
     }
 
     function deleteMouse(id){
-        MouseService.deleteMouse(id)
-            .then(
-                fetchAllMouses,
-                function(errResponse){
-                    console.error('Error while deleting Mouse');
-                }
-            );
+        if (confirm('Вы действительно хотите удалить эту мышку?')) {
+            MouseService.deleteMouse(id)
+                .then(
+                    fetchAllMouses,
+                    function(errResponse){
+                        console.error('Error while deleting Mouse');
+                    }
+                );
+        }
     }
 
     function submit() {

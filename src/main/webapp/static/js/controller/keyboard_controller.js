@@ -46,13 +46,15 @@ angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardSer
     }
 
     function deleteKeyboard(id){
-        KeyboardService.deleteKeyboard(id)
-            .then(
-                fetchAllKeyboards,
-                function(errResponse){
-                    console.error('Error while deleting Keyboard');
-                }
-            );
+        if (confirm('Вы действительно хотите удалить эту клавиатуру?')) {
+            KeyboardService.deleteKeyboard(id)
+                .then(
+                    fetchAllKeyboards,
+                    function(errResponse){
+                        console.error('Error while deleting Keyboard');
+                    }
+                );
+        }
     }
 
     function submit() {

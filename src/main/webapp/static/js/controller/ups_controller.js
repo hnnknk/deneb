@@ -46,13 +46,15 @@ angular.module('myApp').controller('UpsController', ['$scope', 'UpsService', fun
     }
 
     function deleteUps(id){
-        UpsService.deleteUps(id)
-            .then(
-                fetchAllUpses,
-                function(errResponse){
-                    console.error('Error while deleting Ups');
-                }
-            );
+        if (confirm('Вы действительно хотите удалить этот ИБП?')) {
+            UpsService.deleteUps(id)
+                .then(
+                    fetchAllUpses,
+                    function(errResponse){
+                        console.error('Error while deleting Ups');
+                    }
+                );
+        }
     }
 
     function submit() {
