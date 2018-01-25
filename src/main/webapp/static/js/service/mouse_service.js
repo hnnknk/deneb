@@ -33,11 +33,11 @@ angular.module('myApp').factory('MouseService', ['$http', '$q', function($http, 
         $http.post(REST_SERVICE_URI, mouse)
             .then(
                 function (response) {
+                    handleSuccessCreate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while creating Mouse');
-                    deferred.reject(errResponse);
+                    handleErrors(errResponse.status);
                 }
             );
         return deferred.promise;
@@ -49,11 +49,11 @@ angular.module('myApp').factory('MouseService', ['$http', '$q', function($http, 
         $http.put(REST_SERVICE_URI+id, mouse)
             .then(
                 function (response) {
+                    handleSuccessUpdate()
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while updating Mouse');
-                    deferred.reject(errResponse);
+                    handleErrors(errResponse.status);
                 }
             );
         return deferred.promise;

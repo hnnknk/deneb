@@ -18,12 +18,17 @@
 
 <div class="confalert alert-danger fade al">
     <button type="button" class="close" data-dismiss="confalert">×</button>
-    <strong>Ошибка! Такой монитор уже существует.</strong>
+    <strong>Ошибка! Такоe периферийное устройство уже существует.</strong>
 </div>
 
 <div class="badalert alert-danger fade al">
-    <button type="button" class="close" data-dismiss="confalert">×</button>
+    <button type="button" class="close" data-dismiss="badalert">×</button>
     <strong>Ошибка! Введенные данные неккоректны.</strong>
+</div>
+
+<div class="upalert alert-success fade al">
+    <button type="button" class="close" data-dismiss="upalert">×</button>
+    <strong>Вы успешно обновили периферийное устройство!</strong>
 </div>
 
 
@@ -475,5 +480,6 @@
 <script src="<c:url value='/static/js/service/mouse_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/mouse_controller.js' />"></script>
 <script src="<c:url value='/static/js/show_components.js' />"></script>
+<script src="<c:url value='/static/js/errors.js' />"></script>
 </body>
 </html>

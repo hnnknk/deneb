@@ -33,11 +33,11 @@ angular.module('myApp').factory('KeyboardService', ['$http', '$q', function($htt
         $http.post(REST_SERVICE_URI, keyboard)
             .then(
                 function (response) {
+                    handleSuccessCreate()
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while creating Keyboard');
-                    deferred.reject(errResponse);
+                    handleErrors(errResponse.status);
                 }
             );
         return deferred.promise;
@@ -49,11 +49,11 @@ angular.module('myApp').factory('KeyboardService', ['$http', '$q', function($htt
         $http.put(REST_SERVICE_URI+id, keyboard)
             .then(
                 function (response) {
+                    handleSuccessUpdate()
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while updating Keyboard');
-                    deferred.reject(errResponse);
+                    handleErrors(errResponse.status);
                 }
             );
         return deferred.promise;

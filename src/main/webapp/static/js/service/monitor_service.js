@@ -33,11 +33,11 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
         $http.post(REST_SERVICE_URI, monitor)
             .then(
                 function (response) {
+                    handleSuccessCreate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while creating Monitor' + errResponse.status);
-                    deferred.reject(errResponse);
+                    handleErrors(errResponse.status);
                 }
             );
         return deferred.promise;
@@ -49,11 +49,11 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
         $http.put(REST_SERVICE_URI+id, monitor)
             .then(
                 function (response) {
+                    handleSuccessUpdate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while updating Monitor');
-                    deferred.reject(errResponse);
+                    handleErrors(errResponse.status);
                 }
             );
         return deferred.promise;
