@@ -10,24 +10,20 @@
 </head>
 <body ng-app="myApp" class="ng-cloak">
 
-<!-- Successful alert message -->
+<!-- Alert messages -->
 <div class="alert alert-success fade al">
-    <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Вы успешно добавили периферийное устройство!</strong>
 </div>
 
 <div class="confalert alert-danger fade al">
-    <button type="button" class="close" data-dismiss="confalert">×</button>
     <strong>Ошибка! Такоe периферийное устройство уже существует.</strong>
 </div>
 
 <div class="badalert alert-danger fade al">
-    <button type="button" class="close" data-dismiss="badalert">×</button>
     <strong>Ошибка! Введенные данные неккоректны.</strong>
 </div>
 
 <div class="upalert alert-success fade al">
-    <button type="button" class="close" data-dismiss="upalert">×</button>
     <strong>Вы успешно обновили периферийное устройство!</strong>
 </div>
 
@@ -63,10 +59,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.invNumber" name="invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl.monitor.invNumber" name="invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1" ng-maxlength="7"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.invNumber.$error.required">Это поле необходимо заполнить</span>
                                 <span ng-show="myForm.invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
+                                <span ng-show="myForm.invNumber.$error.maxlength">Поле должно содержать не более 7 символов</span>
                             </div>
                         </div>
                     </div>
@@ -166,10 +163,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.invNumber" name="ups_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl_ups.ups.invNumber" name="ups_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1" ng-maxlength="7"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.ups_invNumber.$error.required">Это поле необходимо заполнить</span>
                                 <span ng-show="myForm.ups_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
+                                <span ng-show="myForm.ups_invNumber.$error.maxlength">Поле должно содержать не более 7 символов</span>
                             </div>
                         </div>
                     </div>
@@ -269,10 +267,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.invNumber" name="mouse_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.invNumber" name="mouse_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1" ng-maxlength="7"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.mouse_invNumber.$error.required">Это поле необходимо заполнить</span>
                                 <span ng-show="myForm.mouse_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
+                                <span ng-show="myForm.mouse_invNumber.$error.maxlength">Поле должно содержать не более 7 символов</span>
                             </div>
                         </div>
                     </div>
@@ -372,10 +371,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Инвентарный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.invNumber" name="keyboard_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.invNumber" name="keyboard_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1" ng-maxlength="7"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.keyboard_invNumber.$error.required">Это поле необходимо заполнить</span>
                                 <span ng-show="myForm.keyboard_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
+                                <span ng-show="myForm.keyboard_invNumber.$error.maxlength">Поле должно содержать не более 7 символов</span>
                             </div>
                         </div>
                     </div>

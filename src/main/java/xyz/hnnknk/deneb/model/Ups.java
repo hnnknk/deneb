@@ -13,9 +13,9 @@ public class Ups {
     @Column(name = "ups_id")
     private Long id;
 
-    @NotNull
+    @Size(min = 1)
     @Column(name = "ups_invnumber")
-    private int invNumber;
+    private String invNumber;
 
     @Size(min = 2, max = 10)
     @Column(name = "ups_manufacter")
@@ -40,11 +40,11 @@ public class Ups {
         this.id = id;
     }
 
-    public int getInvNumber() {
+    public String getInvNumber() {
         return invNumber;
     }
 
-    public void setInvNumber(int invNumber) {
+    public void setInvNumber(String invNumber) {
         this.invNumber = invNumber;
     }
 
