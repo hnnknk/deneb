@@ -1,6 +1,8 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "keyboard")
@@ -11,15 +13,19 @@ public class Keyboard {
     @Column(name = "keyboard_id")
     private Long id;
 
+    @NotNull
     @Column(name = "keyboard_invnumber")
     private int invNumber;
 
+    @Size(min = 2, max = 10)
     @Column(name = "keyboard_manufacter")
     private String manufacter;
 
+    @Size(min = 2, max = 10)
     @Column(name = "keyboard_model")
     private String model;
 
+    @Size(min = 2, max = 17)
     @Column(name = "keyboard_serial")
     private String serial;
 

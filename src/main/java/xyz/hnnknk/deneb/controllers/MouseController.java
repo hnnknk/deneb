@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.model.Mouse;
 import xyz.hnnknk.deneb.service.MouseService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,7 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/mouse/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createmouse(@RequestBody Mouse mouse, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createmouse(@Valid @RequestBody Mouse mouse, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + mouse.toString());
 
         if (mouseService.isMouseExists(mouse)) {
@@ -54,7 +55,7 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Mouse> updatemouse(@PathVariable("id") long id, @RequestBody Mouse mouse) {
+    public ResponseEntity<Mouse> updatemouse(@PathVariable("id") long id,@Valid @RequestBody Mouse mouse) {
         System.out.println("Updating " + mouse.toString());
 
         Mouse currentmouse = mouseService.findById(id);

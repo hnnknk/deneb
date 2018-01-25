@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.model.Ups;
 import xyz.hnnknk.deneb.service.UpsService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -39,7 +40,7 @@ public class UpsController {
     }
 
     @RequestMapping(value = "/components/ups/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createUps(@RequestBody Ups ups, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createUps(@Valid @RequestBody Ups ups, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + ups.toString());
 
         if (upsService.isUpsExists(ups)) {
@@ -55,7 +56,7 @@ public class UpsController {
     }
 
     @RequestMapping(value = "/components/ups{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Ups> updateUps(@PathVariable("id") long id, @RequestBody Ups ups) {
+    public ResponseEntity<Ups> updateUps(@PathVariable("id") long id,@Valid @RequestBody Ups ups) {
         System.out.println("Updating " + ups.toString());
 
         Ups currentUps = upsService.findById(id);

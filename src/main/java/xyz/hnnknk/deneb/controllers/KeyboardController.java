@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.model.Keyboard;
 import xyz.hnnknk.deneb.service.KeyboardService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,7 @@ public class KeyboardController {
     }
 
     @RequestMapping(value = "/components/keyboard/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createKeyboard(@RequestBody Keyboard keyboard, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createKeyboard(@Valid @RequestBody Keyboard keyboard, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + keyboard.toString());
 
         if (keyboardService.isKeyboardExists(keyboard)) {
@@ -54,7 +55,7 @@ public class KeyboardController {
     }
 
     @RequestMapping(value = "/components/keyboard/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Keyboard> updateKeyboard(@PathVariable("id") long id, @RequestBody Keyboard keyboard) {
+    public ResponseEntity<Keyboard> updateKeyboard(@PathVariable("id") long id,@Valid @RequestBody Keyboard keyboard) {
         System.out.println("Updating " + keyboard.toString());
 
         Keyboard currentKeyboard = keyboardService.findById(id);

@@ -1,6 +1,8 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "ups")
@@ -11,15 +13,19 @@ public class Ups {
     @Column(name = "ups_id")
     private Long id;
 
+    @NotNull
     @Column(name = "ups_invnumber")
     private int invNumber;
 
+    @Size(min = 2, max = 10)
     @Column(name = "ups_manufacter")
     private String manufacter;
 
+    @Size(min = 2, max = 10)
     @Column(name = "ups_model")
     private String model;
 
+    @Size(min = 2, max = 17)
     @Column(name = "ups_serial")
     private String serial;
 

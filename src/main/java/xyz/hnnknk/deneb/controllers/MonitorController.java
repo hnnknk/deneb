@@ -5,11 +5,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.model.Monitor;
 import xyz.hnnknk.deneb.service.MonitorService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -39,7 +42,7 @@ public class MonitorController {
     }
 
     @RequestMapping(value = "/components/monitor/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createMonitor(@RequestBody Monitor monitor, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createMonitor(@Valid @RequestBody Monitor monitor, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + monitor.toString());
 
         if (monitorService.isMonitorExists(monitor)) {
@@ -48,14 +51,13 @@ public class MonitorController {
         }
 
         monitorService.save(monitor);
-
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/components/monitor/{id}").buildAndExpand(monitor.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/components/monitor/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Monitor> updateMonitor(@PathVariable("id") long id, @RequestBody Monitor monitor) {
+    public ResponseEntity<Monitor> updateMonitor(@PathVariable("id") long id,@Valid @RequestBody Monitor monitor) {
         System.out.println("Updating " + monitor.toString());
 
         Monitor currentMonitor = monitorService.findById(id);

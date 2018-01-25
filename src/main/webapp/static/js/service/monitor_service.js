@@ -36,7 +36,7 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while creating Monitor');
+                    console.error('Error while creating Monitor' + errResponse.status);
                     deferred.reject(errResponse);
                 }
             );

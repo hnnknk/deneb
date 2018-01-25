@@ -1,6 +1,10 @@
 package xyz.hnnknk.deneb.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "monitor")
@@ -11,15 +15,19 @@ public class Monitor {
     @Column(name = "monitor_id")
     private Long id;
 
+    @NotNull
     @Column(name = "monitor_invnumber")
     private int invNumber;
 
+    @Size(min = 2, max = 10)
     @Column(name = "monitor_manufacter")
     private String manufacter;
 
+    @Size(min = 2, max = 10)
     @Column(name = "monitor_model")
     private String model;
 
+    @Size(min = 2, max = 17)
     @Column(name = "monitor_serial")
     private String serial;
 
@@ -64,14 +72,6 @@ public class Monitor {
 
     public void setSerial(String serial) {
         this.serial = serial;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 32;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 33));
-        return result;
     }
 
     @Override

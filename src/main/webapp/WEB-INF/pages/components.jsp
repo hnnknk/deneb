@@ -16,6 +16,17 @@
     <strong>Вы успешно добавили периферийное устройство!</strong>
 </div>
 
+<div class="confalert alert-danger fade al">
+    <button type="button" class="close" data-dismiss="confalert">×</button>
+    <strong>Ошибка! Такой монитор уже существует.</strong>
+</div>
+
+<div class="badalert alert-danger fade al">
+    <button type="button" class="close" data-dismiss="confalert">×</button>
+    <strong>Ошибка! Введенные данные неккоректны.</strong>
+</div>
+
+
 <!-- Images for content changing -->
 <div class="icon-container">
     <div class="row">

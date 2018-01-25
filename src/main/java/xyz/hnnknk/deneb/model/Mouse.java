@@ -1,6 +1,8 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "mouse")
@@ -11,15 +13,19 @@ public class Mouse {
     @Column(name = "mouse_id")
     private Long id;
 
+    @NotNull
     @Column(name = "mouse_invnumber")
     private int invNumber;
 
+    @Size(min = 2, max = 10)
     @Column(name = "mouse_manufacter")
     private String manufacter;
 
+    @Size(min = 2, max = 10)
     @Column(name = "mouse_model")
     private String model;
 
+    @Size(min = 2, max = 17)
     @Column(name = "mouse_serial")
     private String serial;
 
