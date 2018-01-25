@@ -65,9 +65,8 @@
                         <div class="col-md-7">
                             <input type="text" ng-model="ctrl.monitor.invNumber" name="invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.invNumber.$error.required">This is a required field</span>
-                                <span ng-show="myForm.invNumber.$error.minlength">Minimum length required is 1</span>
-                                <span ng-show="myForm.invNumber.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.invNumber.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
                             </div>
                         </div>
                     </div>
@@ -78,11 +77,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.manufacter" name="manufacter" class="field form-control input-sm" placeholder="Введите производителя монитора" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.manufacter" name="manufacter" class="field form-control input-sm" placeholder="Введите производителя монитора" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.manufacter.$error.required">This is a required field</span>
-                                <span ng-show="myForm.manufacter.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.manufacter.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -92,11 +91,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.model" name="model" class="field form-control input-sm" placeholder="Введите модель монитора" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.model" name="model" class="field form-control input-sm" placeholder="Введите модель монитора" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.model.$error.required">This is a required field</span>
-                                <span ng-show="myForm.model.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.model.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.model.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -106,11 +105,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl.monitor.serial" name="serial" class="field form-control input-sm" placeholder="Введите серийный номер монитора" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl.monitor.serial" name="serial" class="field form-control input-sm" placeholder="Введите серийный номер монитора" required ng-minlength="2" ng-maxlength="17"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.serial.$error.required">This is a required field</span>
-                                <span ng-show="myForm.serial.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.serial.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.serial.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.serial.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.serial.$error.maxlength">Поле должно содержать не более 17 символов</span>
                             </div>
                         </div>
                     </div>
@@ -169,9 +168,8 @@
                         <div class="col-md-7">
                             <input type="text" ng-model="ctrl_ups.ups.invNumber" name="ups_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ups_invNumber.$error.required">This is a required field</span>
-                                <span ng-show="myForm.ups_invNumber.$error.minlength">Minimum length required is 1</span>
-                                <span ng-show="myForm.ups_invNumber.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.ups_invNumber.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ups_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
                             </div>
                         </div>
                     </div>
@@ -182,11 +180,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.manufacter" name="ups_manufacter" class="field form-control input-sm" placeholder="Введите производителя ИБП" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_ups.ups.manufacter" name="ups_manufacter" class="field form-control input-sm" placeholder="Введите производителя ИБП" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ups_manufacter.$error.required">This is a required field</span>
-                                <span ng-show="myForm.ups_manufacter.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.ups_manufacter.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.ups_manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ups_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ups_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -196,11 +194,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.model" name="ups_model" class="field form-control input-sm" placeholder="Введите модель ИБП" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_ups.ups.model" name="ups_model" class="field form-control input-sm" placeholder="Введите модель ИБП" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ups_model.$error.required">This is a required field</span>
-                                <span ng-show="myForm.ups_model.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.ups_model.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.ups_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ups_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ups_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -210,11 +208,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ups.ups.serial" name="ups_serial" class="field form-control input-sm" placeholder="Введите серийный номер ИБП" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_ups.ups.serial" name="ups_serial" class="field form-control input-sm" placeholder="Введите серийный номер ИБП" required ng-minlength="2" ng-maxlength="17"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ups_serial.$error.required">This is a required field</span>
-                                <span ng-show="myForm.ups_serial.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.ups_serial.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.ups_serial.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ups_serial.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ups_serial.$error.maxlength">Поле должно содержать не более 17 символов</span>
                             </div>
                         </div>
                     </div>
@@ -273,9 +271,8 @@
                         <div class="col-md-7">
                             <input type="text" ng-model="ctrl_mouse.mouse.invNumber" name="mouse_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.mouse_invNumber.$error.required">This is a required field</span>
-                                <span ng-show="myForm.mouse_invNumber.$error.minlength">Minimum length required is 1</span>
-                                <span ng-show="myForm.mouse_invNumber.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.mouse_invNumber.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.mouse_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
                             </div>
                         </div>
                     </div>
@@ -286,11 +283,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.manufacter" name="mouse_manufacter" class="field form-control input-sm" placeholder="Введите производителя мышки" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.manufacter" name="mouse_manufacter" class="field form-control input-sm" placeholder="Введите производителя мышки" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.mouse_manufacter.$error.required">This is a required field</span>
-                                <span ng-show="myForm.mouse_manufacter.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.mouse_manufacter.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.mouse_manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.mouse_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.mouse_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -300,11 +297,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.model" name="mouse_model" class="field form-control input-sm" placeholder="Введите модель мышки" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.model" name="mouse_model" class="field form-control input-sm" placeholder="Введите модель мышки" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.mouse_model.$error.required">This is a required field</span>
-                                <span ng-show="myForm.mouse_model.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.mouse_model.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.mouse_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.mouse_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.mouse_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -314,11 +311,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_mouse.mouse.serial" name="mouse_serial" class="field form-control input-sm" placeholder="Введите серийный номер мышки" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_mouse.mouse.serial" name="mouse_serial" class="field form-control input-sm" placeholder="Введите серийный номер мышки" required ng-minlength="2" ng-maxlength="17"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.mouse_serial.$error.required">This is a required field</span>
-                                <span ng-show="myForm.mouse_serial.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.mouse_serial.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.mouse_serial.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.mouse_serial.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.mouse_serial.$error.maxlength">Поле должно содержать не более 17 символов</span>
                             </div>
                         </div>
                     </div>
@@ -377,9 +374,8 @@
                         <div class="col-md-7">
                             <input type="text" ng-model="ctrl_keyboard.keyboard.invNumber" name="keyboard_invNumber" class="field form-control input-sm" placeholder="Введите инвентарный номер" required ng-minlength="1"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.keyboard_invNumber.$error.required">This is a required field</span>
-                                <span ng-show="myForm.keyboard_invNumber.$error.minlength">Minimum length required is 1</span>
-                                <span ng-show="myForm.keyboard_invNumber.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.keyboard_invNumber.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.keyboard_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
                             </div>
                         </div>
                     </div>
@@ -390,11 +386,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.manufacter" name="keyboard_manufacter" class="field form-control input-sm" placeholder="Введите производителя клавиатуры" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.manufacter" name="keyboard_manufacter" class="field form-control input-sm" placeholder="Введите производителя клавиатуры" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.keyboard_manufacter.$error.required">This is a required field</span>
-                                <span ng-show="myForm.keyboard_manufacter.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.keyboard_manufacter.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.keyboard_manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.keyboard_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.keyboard_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -404,11 +400,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Модель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.model" name="keyboard_model" class="field form-control input-sm" placeholder="Введите модель клавиатуры" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.model" name="keyboard_model" class="field form-control input-sm" placeholder="Введите модель клавиатуры" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.keyboard_model.$error.required">This is a required field</span>
-                                <span ng-show="myForm.keyboard_model.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.keyboard_model.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.keyboard_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.keyboard_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.keyboard_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -418,11 +414,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Серийный номер</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_keyboard.keyboard.serial" name="keyboard_serial" class="field form-control input-sm" placeholder="Введите серийный номер клавиатуры" required ng-minlength="2"/>
+                            <input type="text" ng-model="ctrl_keyboard.keyboard.serial" name="keyboard_serial" class="field form-control input-sm" placeholder="Введите серийный номер клавиатуры" required ng-minlength="2" ng-maxlength="17"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.keyboard_serial.$error.required">This is a required field</span>
-                                <span ng-show="myForm.keyboard_serial.$error.minlength">Minimum length required is 2</span>
-                                <span ng-show="myForm.keyboard_serial.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.keyboard_serial.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.keyboard_serial.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.keyboard_serial.$error.maxlength">Поле должно содержать не более 17 символов</span>
                             </div>
                         </div>
                     </div>

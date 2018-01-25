@@ -7,6 +7,9 @@
 .field.ng-dirty.ng-invalid-minlength {
     background-color: yellow;
 }
+.field.ng-dirty.ng-invalid-maxlength {
+    background-color: yellow;
+}
 .ups_field.ng-valid {
     background-color: lightgreen;
 }
@@ -14,6 +17,9 @@
     background-color: red;
 }
 .ups_field.ng-dirty.ng-invalid-minlength {
+     background-color: yellow;
+}
+.ups_field.ng-dirty.ng-invalid-maxlength {
     background-color: yellow;
 }
 .mouse_field.ng-valid {
@@ -25,6 +31,9 @@
 .mouse_field.ng-dirty.ng-invalid-minlength {
     background-color: yellow;
 }
+.mouse_field.ng-dirty.ng-invalid-maxlength {
+    background-color: yellow;
+}
 .keyboard_field.ng-valid {
     background-color: lightgreen;
 }
@@ -32,5 +41,8 @@
     background-color: red;
 }
 .keyboard_field.ng-dirty.ng-invalid-minlength {
+    background-color: yellow;
+}
+.keyboard_field.ng-dirty.ng-invalid-maxlength {
     background-color: yellow;
 }
