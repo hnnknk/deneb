@@ -50,7 +50,7 @@ public class MouseDAOImpl implements MouseDAO {
     @Override
     public boolean isMouseExists(Mouse mouse) {
         for(Mouse m : listAllMouses()) {
-            if (m.equals(mouse)) {
+            if (m.getInvNumber() == mouse.getInvNumber()) {
                 return true;
             }
         }

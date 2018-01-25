@@ -50,7 +50,7 @@ public class UpsDAOImpl implements UpsDAO {
     @Override
     public boolean isUpsExists(Ups ups) {
         for(Ups u : listAllUpses()) {
-            if (u.equals(ups)) {
+            if (u.getInvNumber() == ups.getInvNumber()) {
                 return true;
             }
         }

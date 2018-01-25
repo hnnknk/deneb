@@ -50,7 +50,7 @@ public class KeyboardDAOImpl implements KeyboardDAO {
     @Override
     public boolean isKeyboardExists(Keyboard keyboard) {
         for(Keyboard k : listAllKeyboards()) {
-            if (k.equals(keyboard)) {
+            if (k.getInvNumber() == keyboard.getInvNumber()) {
                 return true;
             }
         }

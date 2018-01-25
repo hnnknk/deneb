@@ -50,7 +50,7 @@ public class MonitorDAOImpl implements MonitorDAO {
     @Override
     public boolean isMonitorExists(Monitor monitor) {
         for(Monitor mon : listAllMonitors()) {
-            if (mon.equals(monitor)) {
+            if (mon.getInvNumber() == monitor.getInvNumber()) {
                 return true;
             }
         }
