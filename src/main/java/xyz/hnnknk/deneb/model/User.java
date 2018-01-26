@@ -14,8 +14,8 @@ public class User {
     @Column(name = "user_name")
     private String name;
 
-    @Column(name = "user_phone")
-    private int phone;
+    @Column(name = "user_role")
+    private String role;
 
     public User(String name) {
         this.name = name;
@@ -40,12 +40,12 @@ public class User {
         this.name = name;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getRole() {
+        return role;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -72,6 +72,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + name + ", phone=" + phone + "]";
+        return "User [id=" + id + ", username=" + name + ", role=" + role + "]";
     }
 }

@@ -67,7 +67,6 @@ public class UserController {
         }
 
         currentUser.setName(user.getName());
-        currentUser.setPhone(user.getPhone());
 
         userService.updateUser(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);

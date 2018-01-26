@@ -466,7 +466,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://code.angularjs.org/1.5.5/angular-cookies.min.js"></script>
 <script src="<c:url value='/static/js/app.js' />"></script>
+<script src="<c:url value='/static/js/authInterceptor.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/ups_service.js' />"></script>
