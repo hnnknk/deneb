@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http, $q){
+angular.module('myApp').factory('MonitorService', ['$http', '$q', '$cookies', function($http, $q, $cookies){
 
     var REST_SERVICE_URI = 'http://localhost:8080/components/monitor/';
 
@@ -15,8 +15,11 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
 
     function fetchAllMonitors() {
         var deferred = $q.defer();
-        $http.get(REST_SERVICE_URI)
-            .then(
+        $http.get(REST_SERVICE_URI, {
+            headers: {
+                "Authorization": 'Bearer ' + $cookies.get("access_token")
+            }
+        }).then(
                 function (response) {
                     deferred.resolve(response.data);
                 },
@@ -30,7 +33,11 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
 
     function createMonitor(monitor) {
         var deferred = $q.defer();
-        $http.post(REST_SERVICE_URI, monitor)
+        $http.post(REST_SERVICE_URI, monitor, {
+            headers: {
+                "Authorization": 'Bearer ' + $cookies.get("access_token")
+            }
+        })
             .then(
                 function (response) {
                     handleSuccessCreate();
@@ -46,7 +53,11 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
 
     function updateMonitor(monitor, id) {
         var deferred = $q.defer();
-        $http.put(REST_SERVICE_URI+id, monitor)
+        $http.put(REST_SERVICE_URI+id, monitor, {
+            headers: {
+                "Authorization": 'Bearer ' + $cookies.get("access_token")
+            }
+        })
             .then(
                 function (response) {
                     handleSuccessUpdate();
@@ -61,7 +72,11 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
 
     function deleteMonitor(id) {
         var deferred = $q.defer();
-        $http.delete(REST_SERVICE_URI+id)
+        $http.delete(REST_SERVICE_URI+id, {
+            headers: {
+                "Authorization": 'Bearer ' + $cookies.get("access_token")
+            }
+        })
             .then(
                 function (response) {
                     deferred.resolve(response.data);
