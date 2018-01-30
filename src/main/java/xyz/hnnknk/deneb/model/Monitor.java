@@ -1,10 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "monitor")
