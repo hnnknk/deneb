@@ -25,12 +25,18 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpPara
                 data: $httpParamSerializer($scope.data)
 
             }
-            $http(req).then(function(data){
+            $http(req)
+                .then(
+                    function(data){
                 $http.defaults.headers.common.Authorization =
                     'Bearer ' + data.data.access_token;
                 console.log($http.defaults.headers.common.Authorization)
                 $cookies.put("access_token", data.data.access_token);
                 window.location.href='components';
-            });
+                    }, function (error) {
+                        console.error(error);
+                        handleErrors(error.status)
+                    }
+                );
         }
     });

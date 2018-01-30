@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Computer components</title>
+    <title>Периферийные устройства</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
@@ -468,6 +468,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="https://code.angularjs.org/1.5.5/angular-cookies.min.js"></script>
 <script src="<c:url value='/static/js/app.js' />"></script>
+<script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
+<script src="<c:url value='/static/js/interceptors/headerInterceptor.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/ups_service.js' />"></script>
@@ -476,7 +478,7 @@
 <script src="<c:url value='/static/js/controller/keyboard_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/mouse_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/mouse_controller.js' />"></script>
-<script src="<c:url value='/static/js/show_components.js' />"></script>
-<script src="<c:url value='/static/js/errors.js' />"></script>
+<script src="<c:url value='/static/js/others/show_components.js' />"></script>
+<script src="<c:url value='/static/js/others/errors.js' />"></script>
 </body>
 </html>
