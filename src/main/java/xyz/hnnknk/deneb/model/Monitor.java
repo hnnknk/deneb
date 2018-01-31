@@ -31,6 +31,13 @@ public class Monitor {
     public Monitor() {
     }
 
+    public Monitor(String invNumber, String manufacter, String model, String serial) {
+        this.invNumber = invNumber;
+        this.manufacter = manufacter;
+        this.model = model;
+        this.serial = serial;
+    }
+
     public Long getId() {
         return id;
     }

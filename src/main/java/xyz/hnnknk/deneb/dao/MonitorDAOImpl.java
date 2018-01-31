@@ -49,11 +49,16 @@ public class MonitorDAOImpl implements MonitorDAO {
 
     @Override
     public boolean isMonitorExists(Monitor monitor) {
+
+        boolean result = false;
+
         for(Monitor mon : listAllMonitors()) {
-            if (mon.getInvNumber() == monitor.getInvNumber()) {
-                return true;
+            if (mon.getInvNumber().equals(monitor.getInvNumber())) {
+                result = true;
+                break;
             }
         }
-        return false;
+
+        return result;
     }
 }
