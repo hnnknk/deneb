@@ -52,9 +52,18 @@
 <div id="monitor_div" class="generic-container" ng-controller="MonitorController as ctrl">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">Регистрация монитора</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchMonitor" size="34"/>
+                </div>
+            </div>
+        </div>
+
         <div class="formcontainer">
             <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                 <input type="hidden" ng-model="ctrl.monitor.id" />
+
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Инвентарный номер</label>
@@ -136,7 +145,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="mon in ctrl.monitors">
+                <tr ng-repeat="mon in ctrl.monitors | filter:searchMonitor">
                     <td><span ng-bind="mon.invNumber"></span></td>
                     <td><span ng-bind="mon.manufacter"></span></td>
                     <td><span ng-bind="mon.model"></span></td>
@@ -156,6 +165,14 @@
 <div id="ups_div" class="generic-container" ng-controller="UpsController as ctrl_ups">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">Регистрация источника бесперебойного питания</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchUps" size="34"/>
+                </div>
+            </div>
+        </div>
+
         <div class="formcontainer">
             <form ng-submit="ctrl_ups.submit()" name="myForm" class="form-horizontal">
                 <input type="hidden" ng-model="ctrl_ups.ups.id" />
@@ -240,7 +257,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="up in ctrl_ups.upses">
+                <tr ng-repeat="up in ctrl_ups.upses | filter:searchUps">
                     <td><span ng-bind="up.invNumber"></span></td>
                     <td><span ng-bind="up.manufacter"></span></td>
                     <td><span ng-bind="up.model"></span></td>
@@ -260,6 +277,14 @@
 <div id="mouse_div" class="generic-container" ng-controller="MouseController as ctrl_mouse">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">Регистрация мышки</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchMouse" size="34"/>
+                </div>
+            </div>
+        </div>
+
         <div class="formcontainer">
             <form ng-submit="ctrl_mouse.submit()" name="myForm" class="form-horizontal">
                 <input type="hidden" ng-model="ctrl_mouse.mouse.id" />
@@ -344,7 +369,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="mous in ctrl_mouse.mouses">
+                <tr ng-repeat="mous in ctrl_mouse.mouses | filter:searchMouse">
                     <td><span ng-bind="mous.invNumber"></span></td>
                     <td><span ng-bind="mous.manufacter"></span></td>
                     <td><span ng-bind="mous.model"></span></td>
@@ -364,6 +389,14 @@
 <div id="keyboard_div" class="generic-container" ng-controller="KeyboardController as ctrl_keyboard">
     <div class="panel panel-default">
         <div class="panel-heading"><span class="lead">Регистрация клавиатуры</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchKeyboard" size="34"/>
+                </div>
+            </div>
+        </div>
+
         <div class="formcontainer">
             <form ng-submit="ctrl_keyboard.submit()" name="myForm" class="form-horizontal">
                 <input type="hidden" ng-model="ctrl_keyboard.keyboard.id" />
@@ -448,7 +481,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="keyb in ctrl_keyboard.keyboards">
+                <tr ng-repeat="keyb in ctrl_keyboard.keyboards | filter:searchKeyboard">
                     <td><span ng-bind="keyb.invNumber"></span></td>
                     <td><span ng-bind="keyb.manufacter"></span></td>
                     <td><span ng-bind="keyb.model"></span></td>
