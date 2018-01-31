@@ -32,6 +32,13 @@ public class Keyboard {
     public Keyboard() {
     }
 
+    public Keyboard(String invNumber, String manufacter, String model, String serial) {
+        this.invNumber = invNumber;
+        this.manufacter = manufacter;
+        this.model = model;
+        this.serial = serial;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,14 +77,6 @@ public class Keyboard {
 
     public void setSerial(String serial) {
         this.serial = serial;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 33;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 34));
-        return result;
     }
 
     @Override

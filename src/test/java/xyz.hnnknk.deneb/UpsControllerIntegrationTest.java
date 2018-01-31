@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
-import xyz.hnnknk.deneb.model.Monitor;
-import xyz.hnnknk.deneb.service.MonitorService;
+import xyz.hnnknk.deneb.model.Ups;
+import xyz.hnnknk.deneb.service.UpsService;
 
 import javax.servlet.ServletContext;
 
@@ -29,13 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
-public class MonitorControllerIntegrationTest {
+public class UpsControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
-    private MonitorService monitorService;
+    private UpsService upsService;
 
     private MockMvc mockMvc;
 
@@ -45,32 +45,31 @@ public class MonitorControllerIntegrationTest {
     @Before
     public void setup()  {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.monitorService.save(new Monitor("144", "Philips", "170v", "3Hg45ks86Gr"));
-        this.monitorService.save(new Monitor("155", "Philips", "170v", "783G6r45TNe"));
+        this.upsService.save(new Ups("133", "APC", "CS500", "3Hg45ks86Gr"));
+        this.upsService.save(new Ups("118", "APC", "CS500", "8Hg4DF54s4r"));
 
-        for(Monitor m : this.monitorService.listAllMonitors()) {
-            if(m.getInvNumber().equals("144")) {
-                firstId = m.getId();
-            } else if (m.getInvNumber().equals("155")) {
-                secondId = m.getId();
+        for(Ups u : this.upsService.listAllUpses()) {
+            if(u.getInvNumber().equals("133")) {
+                firstId = u.getId();
+            } else if (u.getInvNumber().equals("118")) {
+                secondId = u.getId();
             }
         }
-
     }
 
     @Test
-    public void monitorControllerExists() {
+    public void upsControllerExists() {
         ServletContext servletContext = wac.getServletContext();
 
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
-        Assert.assertNotNull(wac.getBean("monitorController"));
+        Assert.assertNotNull(wac.getBean("upsController"));
     }
 
     @Test
     public void testGetAllSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/monitor/"))
+        mockMvc.perform(get("/components/ups/"))
                 .andExpect(status().isOk());
 
     }
@@ -78,26 +77,26 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testGetSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/monitor/" + firstId))
+        mockMvc.perform(get("/components/ups/" + firstId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.*", hasSize(5)))
                 .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacter", is("Philips")))
-                .andExpect(jsonPath("$.model", is("170v")))
+                .andExpect(jsonPath("$.manufacter", is("APC")))
+                .andExpect(jsonPath("$.model", is("CS500")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
-                .andExpect(jsonPath("$.invNumber", is("144")));
+                .andExpect(jsonPath("$.invNumber", is("133")));
     }
 
     @Test
     public void testCreateSuccess() throws Exception {
 
-        Monitor m = new Monitor("131", "Samsung", "7200p", "75HdnG45K23ls");
+        Ups m = new Ups("171", "Ippon", "I4000", "75HdnG45K23ls");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(post("/components/monitor/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/components/ups/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
@@ -106,26 +105,28 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testDeleteSuccess() throws Exception {
 
-        mockMvc.perform(delete("/components/monitor/" + secondId))
+        mockMvc.perform(delete("/components/ups/" + secondId))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     public void testUpdateSuccess() throws Exception {
 
-        Monitor m = new Monitor("144", "Acer", "v2543", "u4Rgd620Nc3b");
+        Ups m = new Ups("114", "Ippon", "I3500", "u4Rgd620Nc3b");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(put("/components/monitor/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+
+        mockMvc.perform(put("/components/ups/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
 
     }
 
+
     @Test
     public void testGetFailed() throws Exception {
 
-        mockMvc.perform(get("/components/monitor/144444"))
+        mockMvc.perform(get("/components/ups/144444"))
                 .andExpect(status().isNotFound());
 
     }
@@ -133,11 +134,11 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testCreateFailed() throws Exception {
 
-        Monitor m = new Monitor("144", "Samsung", "7200p", "75HdnG45K23ls");
+        Ups m = new Ups("133", "Ippon", "I3500", "u4Rgd620Nc3b");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(post("/components/monitor/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/components/ups/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isConflict());
 
@@ -147,11 +148,11 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testUpdateFailed() throws Exception {
 
-        Monitor m = new Monitor("144", "Acer", "v2543", "u4Rgd620Nc3b");
+        Ups m = new Ups("171", "Ippon", "I4000", "75HdnG45K23ls");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(put("/components/monitor/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/components/ups/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
 
     }
@@ -159,8 +160,9 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testDeleteFailed() throws Exception {
 
-        mockMvc.perform(delete("/components/monitor/144444"))
+        mockMvc.perform(delete("/components/ups/144444"))
                 .andExpect(status().isNotFound());
     }
 
 }
+

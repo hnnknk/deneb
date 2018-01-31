@@ -49,11 +49,16 @@ public class MouseDAOImpl implements MouseDAO {
 
     @Override
     public boolean isMouseExists(Mouse mouse) {
-        for(Mouse m : listAllMouses()) {
-            if (m.getInvNumber() == mouse.getInvNumber()) {
-                return true;
+
+        boolean result = false;
+
+        for (Mouse m : listAllMouses()) {
+            if (m.getInvNumber().equals(mouse.getInvNumber())) {
+                result = true;
+                break;
             }
         }
-        return false;
+
+        return result;
     }
 }

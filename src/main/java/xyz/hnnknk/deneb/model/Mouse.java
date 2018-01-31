@@ -32,6 +32,13 @@ public class Mouse {
     public Mouse() {
     }
 
+    public Mouse(String invNumber, String manufacter, String model, String serial) {
+        this.invNumber = invNumber;
+        this.manufacter = manufacter;
+        this.model = model;
+        this.serial = serial;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,14 +77,6 @@ public class Mouse {
 
     public void setSerial(String serial) {
         this.serial = serial;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 34;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 35));
-        return result;
     }
 
     @Override

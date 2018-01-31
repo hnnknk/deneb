@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
-import xyz.hnnknk.deneb.model.Monitor;
-import xyz.hnnknk.deneb.service.MonitorService;
+import xyz.hnnknk.deneb.model.Mouse;
+import xyz.hnnknk.deneb.service.MouseService;
 
 import javax.servlet.ServletContext;
 
@@ -29,13 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
-public class MonitorControllerIntegrationTest {
+public class MouseControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
-    private MonitorService monitorService;
+    private MouseService mouseService;
 
     private MockMvc mockMvc;
 
@@ -45,13 +45,13 @@ public class MonitorControllerIntegrationTest {
     @Before
     public void setup()  {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.monitorService.save(new Monitor("144", "Philips", "170v", "3Hg45ks86Gr"));
-        this.monitorService.save(new Monitor("155", "Philips", "170v", "783G6r45TNe"));
+        this.mouseService.save(new Mouse("133", "A4Tech", "X-718F", "3Hg45ks86Gr"));
+        this.mouseService.save(new Mouse("118", "Logitech", "B100", "8Hg4DF54s4r"));
 
-        for(Monitor m : this.monitorService.listAllMonitors()) {
-            if(m.getInvNumber().equals("144")) {
+        for(Mouse m : this.mouseService.listAllMouses()) {
+            if(m.getInvNumber().equals("133")) {
                 firstId = m.getId();
-            } else if (m.getInvNumber().equals("155")) {
+            } else if (m.getInvNumber().equals("118")) {
                 secondId = m.getId();
             }
         }
@@ -59,18 +59,18 @@ public class MonitorControllerIntegrationTest {
     }
 
     @Test
-    public void monitorControllerExists() {
+    public void mouseControllerExists() {
         ServletContext servletContext = wac.getServletContext();
 
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
-        Assert.assertNotNull(wac.getBean("monitorController"));
+        Assert.assertNotNull(wac.getBean("mouseController"));
     }
 
     @Test
     public void testGetAllSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/monitor/"))
+        mockMvc.perform(get("/components/mouse/"))
                 .andExpect(status().isOk());
 
     }
@@ -78,26 +78,26 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testGetSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/monitor/" + firstId))
+        mockMvc.perform(get("/components/mouse/" + firstId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.*", hasSize(5)))
                 .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacter", is("Philips")))
-                .andExpect(jsonPath("$.model", is("170v")))
+                .andExpect(jsonPath("$.manufacter", is("A4Tech")))
+                .andExpect(jsonPath("$.model", is("X-718F")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
-                .andExpect(jsonPath("$.invNumber", is("144")));
+                .andExpect(jsonPath("$.invNumber", is("133")));
     }
 
     @Test
     public void testCreateSuccess() throws Exception {
 
-        Monitor m = new Monitor("131", "Samsung", "7200p", "75HdnG45K23ls");
+        Mouse mous = new Mouse("171", "Razer", "deathadder", "75HdnG45K23ls");
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(mous);
 
-        mockMvc.perform(post("/components/monitor/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/components/mouse/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
@@ -106,26 +106,28 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testDeleteSuccess() throws Exception {
 
-        mockMvc.perform(delete("/components/monitor/" + secondId))
+        mockMvc.perform(delete("/components/mouse/" + secondId))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     public void testUpdateSuccess() throws Exception {
 
-        Monitor m = new Monitor("144", "Acer", "v2543", "u4Rgd620Nc3b");
+        Mouse m = new Mouse("114", "Defender", "df-54012", "u4Rgd620Nc3b");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(put("/components/monitor/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+
+        mockMvc.perform(put("/components/mouse/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
 
     }
 
+
     @Test
     public void testGetFailed() throws Exception {
 
-        mockMvc.perform(get("/components/monitor/144444"))
+        mockMvc.perform(get("/components/mouse/144444"))
                 .andExpect(status().isNotFound());
 
     }
@@ -133,11 +135,11 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testCreateFailed() throws Exception {
 
-        Monitor m = new Monitor("144", "Samsung", "7200p", "75HdnG45K23ls");
+        Mouse m = new Mouse("133", "Defender", "df-54012", "u4Rgd620Nc3b");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(post("/components/monitor/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/components/mouse/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isConflict());
 
@@ -147,11 +149,11 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testUpdateFailed() throws Exception {
 
-        Monitor m = new Monitor("144", "Acer", "v2543", "u4Rgd620Nc3b");
+        Mouse m = new Mouse("114", "Defender", "df-54012", "u4Rgd620Nc3b");
 
         String d = new ObjectMapper().writeValueAsString(m);
 
-        mockMvc.perform(put("/components/monitor/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/components/mouse/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
 
     }
@@ -159,8 +161,9 @@ public class MonitorControllerIntegrationTest {
     @Test
     public void testDeleteFailed() throws Exception {
 
-        mockMvc.perform(delete("/components/monitor/144444"))
+        mockMvc.perform(delete("/components/mouse/144444"))
                 .andExpect(status().isNotFound());
     }
 
 }
+

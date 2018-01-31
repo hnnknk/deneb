@@ -49,11 +49,16 @@ public class UpsDAOImpl implements UpsDAO {
 
     @Override
     public boolean isUpsExists(Ups ups) {
+
+        boolean result = false;
+
         for(Ups u : listAllUpses()) {
-            if (u.getInvNumber() == ups.getInvNumber()) {
-                return true;
+            if (u.getInvNumber().equals(ups.getInvNumber())) {
+                result = true;
+                break;
             }
         }
-        return false;
+
+        return result;
     }
 }

@@ -49,11 +49,15 @@ public class KeyboardDAOImpl implements KeyboardDAO {
 
     @Override
     public boolean isKeyboardExists(Keyboard keyboard) {
+        boolean result = false;
+
         for(Keyboard k : listAllKeyboards()) {
-            if (k.getInvNumber() == keyboard.getInvNumber()) {
-                return true;
+            if (k.getInvNumber().equals(keyboard.getInvNumber())) {
+                result = true;
+                break;
             }
         }
-        return false;
+
+        return result;
     }
 }

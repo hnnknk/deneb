@@ -55,7 +55,7 @@ public class UpsController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/components/ups{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/components/ups/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Ups> updateUps(@PathVariable("id") long id,@Valid @RequestBody Ups ups) {
         System.out.println("Updating " + ups.toString());
 
