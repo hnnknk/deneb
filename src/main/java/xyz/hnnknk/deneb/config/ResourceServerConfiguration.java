@@ -22,8 +22,14 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.
                 anonymous().disable()
                 .requestMatchers().antMatchers("/components/monitor/**")
+                .requestMatchers().antMatchers("/components/ups/**")
+                .requestMatchers().antMatchers("/components/mouse/**")
+                .requestMatchers().antMatchers("/components/keyboard/**")
                 .and().authorizeRequests()
                 .antMatchers("/components/monitor/**").access("hasRole('ADMIN')")
+                .antMatchers("/components/ups/**").access("hasRole('ADMIN')")
+                .antMatchers("/components/mouse/**").access("hasRole('ADMIN')")
+                .antMatchers("/components/keyboard/**").access("hasRole('ADMIN')")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 
