@@ -58,3 +58,7 @@ body, .form-control{
 .custom-width {
     width: 90px !important;
 }
+
+a:hover, a:focus {
+    cursor: pointer;
+}

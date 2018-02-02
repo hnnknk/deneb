@@ -10,53 +10,26 @@
 </head>
 <body ng-app="myApp" class="ng-cloak">
 
-<!-- Alert messages -->
-<div class="alert alert-success fade al">
-    <strong>Вы успешно добавили периферийное устройство!</strong>
-</div>
-
-<div class="confalert alert-danger fade al">
-    <strong>Ошибка! Такоe периферийное устройство уже существует.</strong>
-</div>
-
-<div class="badalert alert-danger fade al">
-    <strong>Ошибка! Введенные данные неккоректны.</strong>
-</div>
-
-<div class="upalert alert-success fade al">
-    <strong>Вы успешно обновили периферийное устройство!</strong>
-</div>
-
-
-<!-- Images for content changing -->
-
-<div class="icon-container">
-    <div class="row">
-        <div class="col-sm-3 col-md-3">
-            <a href="#!monitor">
-            <img class="img-responsive center-block img-pointer" id="mon_icon" src="/static/images/mon.png" class="img-rounded" alt="Monitor" title="Мониторы">
-            </a>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Deneb</a>
         </div>
-
-        <div class="col-sm-3 col-md-3">
-            <a href="#!ups">
-            <img class="img-responsive center-block img-pointer" id="ups_icon" src="/static/images/ups.png" class="img-rounded" alt="UPS" title="Источники бесперебойного питания">
-            </a>
-        </div>
-
-        <div class="col-sm-3 col-md-3">
-            <a href="#!mouse">
-            <img class="img-responsive center-block img-pointer" id="mouse_icon" src="/static/images/mouse.png" class="img-rounded" alt="Mouse" title="Мышки">
-            </a>
-        </div>
-
-        <div class="col-sm-3 col-md-3">
-            <a href="#!keyboard">
-            <img class="img-responsive center-block img-pointer" id="key_icon" src="/static/images/keyboard.png" class="img-rounded" alt="Keyboard" title="Клавиатуры">
-            </a>
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Компоненты
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#!monitor">Мониторы</a></li>
+                    <li><a href="#!mouse">Мышки</a></li>
+                    <li><a href="#!keyboard">Клавиатуры</a></li>
+                    <li><a href="#!ups">Ибп</a></li>
+                </ul>
+            </li>
+            <li><a href="/admin">Панель администратора</a></li>
+        </ul>
     </div>
-</div>
+</nav>
 
 <div ng-view></div>
 
