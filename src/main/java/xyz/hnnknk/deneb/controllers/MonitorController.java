@@ -5,12 +5,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import xyz.hnnknk.deneb.service.NotificationService;
+import xyz.hnnknk.deneb.enums.NotificationTypes;
 import xyz.hnnknk.deneb.model.Monitor;
-import xyz.hnnknk.deneb.service.EmailServiceImpl;
 import xyz.hnnknk.deneb.service.MonitorService;
 
 import javax.validation.Valid;
@@ -21,6 +20,9 @@ public class MonitorController {
 
     @Autowired
     MonitorService monitorService;
+
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping(value = "/components/monitor/", method = RequestMethod.GET)
     public ResponseEntity<List<Monitor>> listAllMonitors() {
@@ -50,6 +52,8 @@ public class MonitorController {
             System.out.println("A " + monitor.toString() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
+
+        notificationService.checkNotifications(NotificationTypes.MONITOR, monitor.toString());
 
         monitorService.save(monitor);
         HttpHeaders headers = new HttpHeaders();

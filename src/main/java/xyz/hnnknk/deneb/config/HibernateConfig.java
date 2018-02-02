@@ -21,7 +21,7 @@ public class HibernateConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
         Class[] classes = new Class[] {User.class, Monitor.class, Mouse.class,
-                Keyboard.class, Ups.class};
+                Keyboard.class, Ups.class, Notification.class};
         factoryBean.setAnnotatedClasses(classes);
         return factoryBean;
     }

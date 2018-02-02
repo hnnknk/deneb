@@ -7,16 +7,22 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import xyz.hnnknk.deneb.enums.NotificationTypes;
 import xyz.hnnknk.deneb.model.Keyboard;
 import xyz.hnnknk.deneb.service.KeyboardService;
+import xyz.hnnknk.deneb.service.NotificationService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 public class KeyboardController {
+
     @Autowired
     KeyboardService keyboardService;
+
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping(value = "/components/keyboard/", method = RequestMethod.GET)
     public ResponseEntity<List<Keyboard>> listAllKeyboards() {
@@ -46,6 +52,8 @@ public class KeyboardController {
             System.out.println("A " + keyboard.toString() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
+
+        notificationService.checkNotifications(NotificationTypes.KEYBOARD, keyboard.toString());
 
         keyboardService.save(keyboard);
 

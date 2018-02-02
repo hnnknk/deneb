@@ -28,6 +28,11 @@ App.config(function($routeProvider){
             templateUrl: 'static/views/keyboard.html'
 
         })
+        .when('/notification',{
+
+            templateUrl: 'static/views/notification.html'
+
+        })
         .otherwise(
 
             { redirectTo: '/'}

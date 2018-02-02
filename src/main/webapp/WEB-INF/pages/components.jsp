@@ -26,7 +26,7 @@
                     <li><a href="#!ups">Ибп</a></li>
                 </ul>
             </li>
-            <li><a href="/admin">Панель администратора</a></li>
+            <li><a href="#!notification">Панель администратора</a></li>
         </ul>
     </div>
 </nav>
@@ -51,6 +51,8 @@
 <script src="<c:url value='/static/js/controller/keyboard_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/mouse_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/mouse_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/notification_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/notification_controller.js' />"></script>
 <script src="<c:url value='/static/js/others/errors.js' />"></script>
 </body>
 </html>

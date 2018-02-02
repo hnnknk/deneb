@@ -15,8 +15,8 @@ public class EmailServiceImpl implements EmailService{
     public void send(String name) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("ur_shak@mail.ru");
-        message.setSubject("Successful authorization");
-        message.setText("User " + name + " successful created" );
+        message.setSubject("Уведомление о действиях в системе Deneb");
+        message.setText(name + " успешно создан" );
         javaMailSender.send(message);
     }
 }

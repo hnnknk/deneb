@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import xyz.hnnknk.deneb.service.NotificationService;
+import xyz.hnnknk.deneb.enums.NotificationTypes;
 import xyz.hnnknk.deneb.model.Mouse;
 import xyz.hnnknk.deneb.service.MouseService;
 
@@ -15,8 +17,12 @@ import java.util.List;
 
 @RestController
 public class MouseController {
+
     @Autowired
     MouseService mouseService;
+
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping(value = "/components/mouse/", method = RequestMethod.GET)
     public ResponseEntity<List<Mouse>> listAllmouses() {
@@ -46,6 +52,8 @@ public class MouseController {
             System.out.println("A " + mouse.toString() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
+
+        notificationService.checkNotifications(NotificationTypes.MOUSE, mouse.toString());
 
         mouseService.save(mouse);
 
