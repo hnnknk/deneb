@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.model.Monitor;
+import xyz.hnnknk.deneb.service.EmailServiceImpl;
 import xyz.hnnknk.deneb.service.MonitorService;
 
 import javax.validation.Valid;

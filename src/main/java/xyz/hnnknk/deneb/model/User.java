@@ -14,8 +14,8 @@ public class User {
     @Column(name = "user_name")
     private String name;
 
-    @Column(name = "user_role")
-    private String role;
+    @Column(name = "user_password")
+    private String password;
 
     public User(String name) {
         this.name = name;
@@ -40,21 +40,14 @@ public class User {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        return result;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -72,6 +65,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + name + ", role=" + role + "]";
+        return "User [id=" + id + ", username=" + name + ", password=" + password + "]";
     }
 }
