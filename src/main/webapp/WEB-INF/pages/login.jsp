@@ -15,58 +15,39 @@
     <strong>Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.</strong>
 </div>
 
-
-<h1>Login</h1>
-<label>Username</label><input ng-model="data.username"/>
-<label>Password</label><input type="password" ng-model="data.password"/>
-<a href="#" ng-click="login()">Login</a>
-
-<div id="user_div" class="generic-container" ng-controller="UserController as ctrl_user">
+<div id="login_div" class="generic-container">
     <div class="panel panel-default">
-        <div class="panel-heading"><span class="lead">Регистрация</span></div>
+        <div class="panel-heading"><span class="lead">Вход в систему</span></div>
 
         <div class="formcontainer">
-            <form ng-submit="ctrl_user.submit()" name="myForm" class="form-horizontal">
-                <input type="hidden" ng-model="ctrl_user.user.id" />
+            <form ng-submit="login()" name="myForm" class="form-horizontal">
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label class="col-md-2 control-lable">Имя пользователя</label>
-                        <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_user.user.name" name="user_name" class="field form-control input-sm" placeholder="Введите имя" required ng-minlength="1" ng-maxlength="7"/>
-                            <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ups_invNumber.$error.required">Это поле необходимо заполнить</span>
-                                <span ng-show="myForm.ups_invNumber.$error.minlength">Поле должно содержать как минимум 1 цифру</span>
-                                <span ng-show="myForm.ups_invNumber.$error.maxlength">Поле должно содержать не более 7 символов</span>
-                            </div>
+                        <label class="col-md-3 control-lable">Имя пользователя</label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="data.username" name="username" class="field form-control input-sm" placeholder="Введите имя пользователя"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label class="col-md-2 control-lable">Пароль</label>
-                        <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_user.user.password" name="user_password" class="field form-control input-sm" placeholder="Введите пароль" required ng-minlength="2" ng-maxlength="10"/>
-                            <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ups_manufacter.$error.required">Это поле необходимо заполнить</span>
-                                <span ng-show="myForm.ups_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
-                                <span ng-show="myForm.ups_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
-                            </div>
+                        <label class="col-md-3 control-lable">Пароль</label>
+                        <div class="col-md-6">
+                            <input type="password" ng-model="data.password" name="password" class="field form-control input-sm" placeholder="Введите пароль"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-actions floatRight">
-                        <input type="submit"  value="Добавить" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <input type="submit"  value="Войти" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
