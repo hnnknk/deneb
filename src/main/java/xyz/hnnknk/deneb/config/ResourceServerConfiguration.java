@@ -25,11 +25,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .requestMatchers().antMatchers("/components/ups/**")
                 .requestMatchers().antMatchers("/components/mouse/**")
                 .requestMatchers().antMatchers("/components/keyboard/**")
+                .requestMatchers().antMatchers("/components/notification/**")
                 .and().authorizeRequests()
                 .antMatchers("/components/monitor/**").access("hasRole('ADMIN')")
                 .antMatchers("/components/ups/**").access("hasRole('ADMIN')")
                 .antMatchers("/components/mouse/**").access("hasRole('ADMIN')")
                 .antMatchers("/components/keyboard/**").access("hasRole('ADMIN')")
+                .antMatchers("/components/notification/**").access("hasRole('ADMIN')")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 

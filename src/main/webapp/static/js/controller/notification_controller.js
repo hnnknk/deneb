@@ -2,49 +2,43 @@
 
 angular.module('myApp').controller('NotificationController', ['$scope', 'NotificationService', function($scope, NotificationService) {
     var self = this;
-    self.Notification={id:null,isMonitor:'',isMouse:'',isKeyboard:'',isUps:'',isUser:''};
-    self.Notifications=[];
+    self.notification={id:null,monitorCreated:'',upsCreated:'',mouseCreated:'',keyboardCreated:'',userCreated:''}
+    self.notifications=[];
 
     self.submit = submit;
-    self.edit = edit;
-    self.reset = reset;
 
+    fetchAllNotifications();
 
-    getNotification();
-
-    function getNotification(){
-        NotificationService.getNotification()
+    function fetchAllNotifications(){
+        NotificationService.fetchAllNotifications()
             .then(
                 function(d) {
                     self.notifications = d;
+                    for(var i = 0; i < self.notifications.length; i++){
+                        self.notification = angular.copy(self.notifications[i]);
+                        console.log(self.notification);
+                        break;
+                    }
                 },
                 function(errResponse){
-                    console.error('Error while fetching Notification');
+                    console.error('Error while fetching Notifications');
                 }
             );
     }
 
-    function updateNotification(notification){
-        NotificationService.updateNotification(notification)
+    function updateNotification(notification, id){
+        NotificationService.updateNotification(notification,id)
             .then(
-                getNotification,
+                fetchAllNotifications,
                 function(errResponse){
                     console.error('Error while updating Notification');
                 }
             );
     }
 
-
     function submit() {
-        updateNotification(self.Notification);
-        console.log('Notificationupdated with id ', self.Notification.id);
-        reset();
-    }
-
-
-    function reset(){
-        self.Notification={id:null,isMonitor:'',isMouse:'',isKeyboard:'',isUps:'',isUser:''};
-        $scope.myForm.$setPristine();
+        updateNotification(self.notification, self.notification.id);
+        console.log('Notification updated with id ', self.notification.id);
     }
 
 }]);

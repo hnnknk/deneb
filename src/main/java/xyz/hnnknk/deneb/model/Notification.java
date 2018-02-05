@@ -3,28 +3,29 @@ package xyz.hnnknk.deneb.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "note")
+@Table(name = "noti")
 public class Notification {
 
     @Id
     @GeneratedValue
-    @Column(name = "note_id")
+    @Column(name = "noti_id")
     private long id;
 
-    @Column(name = "note_user")
-    private boolean isUserCreated = false;
+    @Column(name = "noti_monitor")
+    private boolean monitorCreated;
 
-    @Column(name = "note_monitor")
-    private boolean isMonitorCreated = false;
+    @Column(name = "noti_ups")
+    private boolean upsCreated;
 
-    @Column(name = "note_mouse")
-    private boolean isMouseCreated = false;
+    @Column(name = "noti_mouse")
+    private boolean mouseCreated;
 
-    @Column(name = "note_ups")
-    private boolean isUpsCreated = false;
+    @Column(name = "noti_keyboard")
+    private boolean keyboardCreated;
 
-    @Column(name = "note_keyboard")
-    private boolean isKeyboardCreated = false;
+    @Column(name = "noti_user")
+    private boolean userCreated;
+
 
     public Notification() {
     }
@@ -37,43 +38,45 @@ public class Notification {
         this.id = id;
     }
 
-    public boolean isUserCreated() {
-        return isUserCreated;
-    }
-
-    public void setUserCreated(boolean userCreated) {
-        isUserCreated = userCreated;
-    }
-
-    public boolean isMonitorCreated() {
-        return isMonitorCreated;
+    public boolean getMonitorCreated() {
+        return monitorCreated;
     }
 
     public void setMonitorCreated(boolean monitorCreated) {
-        isMonitorCreated = monitorCreated;
+        this.monitorCreated = monitorCreated;
     }
 
-    public boolean isMouseCreated() {
-        return isMouseCreated;
+    public boolean getMouseCreated() {
+        return  this.mouseCreated;
     }
 
-    public void setMouseCreated(boolean mouseCreated) {
-        isMouseCreated = mouseCreated;
+    public void  setMouseCreated(boolean mouseCreated) {
+        this.mouseCreated = mouseCreated;
     }
 
-    public boolean isUpsCreated() {
-        return isUpsCreated;
+    public boolean getKeyboardCreated() {
+        return  this.keyboardCreated;
     }
 
-    public void setUpsCreated(boolean upsCreated) {
-        isUpsCreated = upsCreated;
+    public void  setKeyboardCreated(boolean keyboardCreated) {
+        this.keyboardCreated = keyboardCreated;
     }
 
-    public boolean isKeyboardCreated() {
-        return isKeyboardCreated;
+    public boolean getUserCreated() {
+        return  this.userCreated;
     }
 
-    public void setKeyboardCreated(boolean keyboardCreated) {
-        isKeyboardCreated = keyboardCreated;
+    public void  setUserCreated(boolean userCreated) {
+        this.userCreated = userCreated;
     }
+
+    public boolean getUpsCreated() {
+        return  this.upsCreated;
+    }
+
+    public void  setUpsCreated(boolean upsCreated) {
+        this.upsCreated = upsCreated;
+    }
+
+
 }

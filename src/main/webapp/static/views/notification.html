@@ -1,0 +1,84 @@
+<!-- Notification section -->
+<div id="notification_div" class="generic-container" ng-controller="NotificationController as ctrl_notification">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Получать уведомления:</span></div>
+
+        <div class="formcontainer">
+            <form ng-submit="ctrl_notification.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl_notification.notification.id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable">При регистрации монитора</label>
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <input type="radio" ng-model="ctrl_notification.notification.monitorCreated" ng-value="true"> Получать
+                            </div>
+                            <div class="col-md-5">
+                                <input type="radio" ng-model="ctrl_notification.notification.monitorCreated" ng-value="false"> Не получать
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable">При регистрации ИБП</label>
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <input type="radio" ng-model="ctrl_notification.notification.upsCreated" ng-value="true"> Получать
+                            </div>
+                            <div class="col-md-5">
+                                <input type="radio" ng-model="ctrl_notification.notification.upsCreated" ng-value="false"> Не получать
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable">При регистрации мышки</label>
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <input type="radio" ng-model="ctrl_notification.notification.mouseCreated" ng-value="true"> Получать
+                            </div>
+                            <div class="col-md-5">
+                                <input type="radio" ng-model="ctrl_notification.notification.mouseCreated" ng-value="false"> Не получать
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable">При регистрации клавиатуры</label>
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <input type="radio" ng-model="ctrl_notification.notification.keyboardCreated" ng-value="true"> Получать
+                            </div>
+                            <div class="col-md-5">
+                                <input type="radio" ng-model="ctrl_notification.notification.keyboardCreated" ng-value="false"> Не получать
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable">При создании пользователя</label>
+                        <div class="col-md-6">
+                            <div class="col-md-3">
+                                <input type="radio" ng-model="ctrl_notification.notification.userCreated" ng-value="true"> Получать
+                            </div>
+                            <div class="col-md-5">
+                                <input type="radio" ng-model="ctrl_notification.notification.userCreated" ng-value="false"> Не получать
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="Обновить" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

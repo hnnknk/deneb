@@ -23,24 +23,44 @@ public class NotificationDAOImpl  implements NotificationDAO{
 
     @Override
     public void update(Notification notification) {
-        sessionFactory.getCurrentSession().save(notification);
+        sessionFactory.getCurrentSession().update(notification);
+    }
+
+    @Override
+    public void delete(long id) {
+        sessionFactory.getCurrentSession().delete(findById(id));
     }
 
     @Override
     public Notification findById(long id) {
 
-        for(Notification note : listAllNotifications()) {
-            if (id == note.getId()) {
-                return note;
+        for(Notification n : listAllNots()) {
+            if (id == n.getId()) {
+                return n;
             }
         }
         return null;
     }
 
     @Override
-    public List<Notification> listAllNotifications() {
+    public List<Notification> listAllNots() {
         @SuppressWarnings("unchecked")
         TypedQuery<Notification> query = sessionFactory.getCurrentSession().createQuery("from Notification");
         return query.getResultList();
+    }
+
+    @Override
+    public boolean isNotificationExists(Notification notification) {
+
+        boolean result = false;
+
+        for (Notification n : listAllNots()) {
+            if (n.getId() == notification.getId()) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

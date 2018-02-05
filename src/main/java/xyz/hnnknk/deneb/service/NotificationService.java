@@ -9,7 +9,13 @@ public interface NotificationService {
 
     void save(Notification notification);
     void update(Notification notification);
-    Notification getNotification();
+    void delete(long id);
+
+    Notification findById(long id);
+
+    List<Notification> listAllNots();
+
+    boolean isNotificationExists(Notification notification);
 
     void checkNotifications(NotificationTypes notificationTypes, String name);
 }

@@ -8,7 +8,11 @@ public interface NotificationDAO {
 
     void save(Notification notification);
     void update(Notification notification);
+    void delete(long id);
+
     Notification findById(long id);
 
-    List<Notification> listAllNotifications();
+    List<Notification> listAllNots();
+
+    boolean isNotificationExists(Notification notification);
 }
