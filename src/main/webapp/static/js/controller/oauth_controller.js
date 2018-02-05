@@ -39,4 +39,11 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpPara
                     }
                 );
         }
+
+    $scope.logout = function() {
+            $cookies.remove("access_token");
+            window.location.href='/';
+    }
+
+
     });

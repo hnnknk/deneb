@@ -10,7 +10,7 @@
 </head>
 <body ng-app="myApp" class="ng-cloak">
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="mainCtrl">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Deneb</a>
@@ -27,6 +27,7 @@
                 </ul>
             </li>
             <li><a href="#!notification">Панель администратора</a></li>
+            <li><a href="#" ng-click="logout()">Выход</a></li>
         </ul>
     </div>
 </nav>
@@ -40,9 +41,11 @@
 <script src="https://code.angularjs.org/1.6.7/angular-cookies.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-resource.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-route.min.js"></script>
+
 <script src="<c:url value='/static/js/app.js' />"></script>
 <script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
 <script src="<c:url value='/static/js/interceptors/headerInterceptor.js' />"></script>
+<script src="<c:url value='/static/js/controller/oauth_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/ups_service.js' />"></script>

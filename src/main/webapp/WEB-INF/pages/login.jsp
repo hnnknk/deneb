@@ -52,18 +52,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script
-        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js">
-</script>
-<script
-        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js">
-</script>
-<script
-        src="https://code.angularjs.org/1.4.4/angular-cookies.min.js">
-</script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.9/ngStorage.min.js">
-</script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+<script src="https://code.angularjs.org/1.4.4/angular-cookies.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.9/ngStorage.min.js"></script>
+
 <script src="<c:url value='/static/js/app.js' />"></script>
 <script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
 <script src="<c:url value='/static/js/interceptors/headerInterceptor.js' />"></script>
