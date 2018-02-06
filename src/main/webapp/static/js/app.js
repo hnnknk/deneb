@@ -53,6 +53,11 @@ App.config(function($routeProvider){
             templateUrl: 'static/views/roKeyboard.html'
 
         })
+        .when('/login',{
+
+            templateUrl: 'static/views/login.html'
+
+        })
         .otherwise(
 
             { redirectTo: '/'}

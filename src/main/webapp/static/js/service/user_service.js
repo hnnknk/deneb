@@ -4,8 +4,12 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
 
     var REST_SERVICE_URI = 'http://localhost:8080/user/';
 
+    var s = false;
+
     var factory = {
         createUser: createUser,
+        getS: getS,
+        setS: setS
     };
 
     return factory;
@@ -24,6 +28,14 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
                 }
             );
         return deferred.promise;
+    }
+
+    function getS() {
+        return s;
+    }
+
+    function setS(e) {
+        s = e;
     }
 
 }]);

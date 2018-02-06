@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Периферийные устройства</title>
+    <base href="/">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
@@ -10,7 +11,7 @@
 </head>
 <body ng-app="myApp" class="ng-cloak">
 
-<nav class="navbar navbar-default" ng-controller="mainCtrl">
+<nav class="navbar navbar-default" ng-controller="navCtrl">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Deneb</a>
@@ -26,8 +27,9 @@
                     <li><a href="#!ups">Ибп</a></li>
                 </ul>
             </li>
-            <li><a href="#!notification">Панель администратора</a></li>
-            <li><a href="#" ng-click="logout()">Выход</a></li>
+            <li data-ng-if="islogged"><a href="#!notification">Панель администратора</a></li>
+            <li data-ng-if="!islogged"><a href="#!login">Вход в систему</a></li>
+            <li data-ng-if="islogged"><a href="#" ng-click="logout()">Выход</a></li>
         </ul>
     </div>
 </nav>
@@ -46,6 +48,7 @@
 <script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
 <script src="<c:url value='/static/js/interceptors/headerInterceptor.js' />"></script>
 <script src="<c:url value='/static/js/controller/oauth_controller.js' />"></script>
+v<script src="<c:url value='/static/js/controller/navbar_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/ups_service.js' />"></script>
@@ -57,6 +60,7 @@
 <script src="<c:url value='/static/js/service/notification_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/notification_controller.js' />"></script>
 <script src="<c:url value='/static/js/controller/ro_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/user_service.js' />"></script>
 <script src="<c:url value='/static/js/others/errors.js' />"></script>
 </body>
 </html>

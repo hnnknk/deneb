@@ -1,20 +1,19 @@
 'use strict';
 
-angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpParamSerializer, $cookies) {
-
-
+angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpParamSerializer, $cookies, $rootScope, UserService) {
 
     $scope.data = {
             grant_type:"password",
             username: "bill",
             password: "abc123",
-            client_id: "my-trusted-client"
+            client_id: "my-trusted-client",
         };
         $scope.encoded = btoa("my-trusted-client:secret");
 
         $scope.login = function() {
             console.log("tttttt");
             console.log($scope.data);
+
             var req = {
                 method: 'POST',
                 url: "http://localhost:8080/oauth/token",
@@ -25,6 +24,7 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpPara
                 data: $httpParamSerializer($scope.data)
 
             }
+
             $http(req)
                 .then(
                     function(data){
@@ -32,18 +32,15 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpPara
                     'Bearer ' + data.data.access_token;
                 console.log($http.defaults.headers.common.Authorization)
                 $cookies.put("access_token", data.data.access_token);
-                window.location.href='components';
+
+                UserService.setS(true);
+                $rootScope.$broadcast('login-done');
+                window.location.href='#';
                     }, function (error) {
                         console.error(error);
                         handleErrors(error.status)
                     }
                 );
         }
-
-    $scope.logout = function() {
-            $cookies.remove("access_token");
-            window.location.href='/';
-    }
-
 
     });
