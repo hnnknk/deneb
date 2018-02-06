@@ -33,6 +33,15 @@ public class KeyboardController {
         return new ResponseEntity<List<Keyboard>>(keyboards, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/components/ro/keyboard/", method = RequestMethod.GET)
+    public ResponseEntity<List<Keyboard>> listAllKeyboardsRO() {
+        List<Keyboard> keyboards = keyboardService.listAllKeyboards();
+        if(keyboards.isEmpty()){
+            return new ResponseEntity<List<Keyboard>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Keyboard>>(keyboards, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/components/keyboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Keyboard> getKeyboard(@PathVariable("id") long id) {
         System.out.println("Fetching Keyboard with id " + id);

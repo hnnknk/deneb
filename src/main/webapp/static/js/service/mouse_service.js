@@ -3,9 +3,11 @@
 angular.module('myApp').factory('MouseService', ['$http', '$q', function($http, $q){
 
     var REST_SERVICE_URI = 'http://localhost:8080/components/mouse/';
+    var REST_SERVICE_URI_RO = 'http://localhost:8080/components/ro/mouse/';
 
     var factory = {
         fetchAllMouses: fetchAllMouses,
+        fetchAllMousesRO: fetchAllMousesRO,
         createMouse: createMouse,
         updateMouse:updateMouse,
         deleteMouse:deleteMouse
@@ -16,6 +18,21 @@ angular.module('myApp').factory('MouseService', ['$http', '$q', function($http, 
     function fetchAllMouses() {
         var deferred = $q.defer();
         $http.get(REST_SERVICE_URI)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching Mouses');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+    function fetchAllMousesRO() {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI_RO)
             .then(
                 function (response) {
                     deferred.resolve(response.data);

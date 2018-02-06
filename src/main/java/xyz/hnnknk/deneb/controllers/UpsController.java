@@ -33,6 +33,15 @@ public class UpsController {
         return new ResponseEntity<List<Ups>>(upses, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/components/ro/ups/", method = RequestMethod.GET)
+    public ResponseEntity<List<Ups>> listAllUpsesRO() {
+        List<Ups> upses = upsService.listAllUpses();
+        if(upses.isEmpty()){
+            return new ResponseEntity<List<Ups>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Ups>>(upses, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/components/ups/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Ups> getUps(@PathVariable("id") long id) {
         System.out.println("Fetching ups with id " + id);

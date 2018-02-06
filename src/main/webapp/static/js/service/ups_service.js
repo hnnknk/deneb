@@ -3,9 +3,11 @@
 angular.module('myApp').factory('UpsService', ['$http', '$q', function($http, $q){
 
     var REST_SERVICE_URI = 'http://localhost:8080/components/ups/';
+    var REST_SERVICE_URI_RO = 'http://localhost:8080/components/ro/ups/';
 
     var factory = {
         fetchAllUpses: fetchAllUpses,
+        fetchAllUpsesRO: fetchAllUpsesRO,
         createUps: createUps,
         updateUps:updateUps,
         deleteUps:deleteUps
@@ -16,6 +18,21 @@ angular.module('myApp').factory('UpsService', ['$http', '$q', function($http, $q
     function fetchAllUpses() {
         var deferred = $q.defer();
         $http.get(REST_SERVICE_URI)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching Upses');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+    function fetchAllUpsesRO() {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI_RO)
             .then(
                 function (response) {
                     deferred.resolve(response.data);

@@ -3,9 +3,11 @@
 angular.module('myApp').factory('KeyboardService', ['$http', '$q', function($http, $q){
 
     var REST_SERVICE_URI = 'http://localhost:8080/components/keyboard/';
+    var REST_SERVICE_URI_RO = 'http://localhost:8080/components/ro/keyboard/';
 
     var factory = {
         fetchAllKeyboards: fetchAllKeyboards,
+        fetchAllKeyboardsRO: fetchAllKeyboardsRO,
         createKeyboard: createKeyboard,
         updateKeyboard:updateKeyboard,
         deleteKeyboard:deleteKeyboard
@@ -16,6 +18,21 @@ angular.module('myApp').factory('KeyboardService', ['$http', '$q', function($htt
     function fetchAllKeyboards() {
         var deferred = $q.defer();
         $http.get(REST_SERVICE_URI)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching Keyboards');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+    function fetchAllKeyboardsRO() {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI_RO)
             .then(
                 function (response) {
                     deferred.resolve(response.data);

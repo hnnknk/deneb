@@ -33,6 +33,15 @@ public class MonitorController {
         return new ResponseEntity<List<Monitor>>(monitors, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/components/ro/monitor/", method = RequestMethod.GET)
+    public ResponseEntity<List<Monitor>> listAllMonitorsRO() {
+        List<Monitor> monitors = monitorService.listAllMonitors();
+        if(monitors.isEmpty()){
+            return new ResponseEntity<List<Monitor>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Monitor>>(monitors, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/components/monitor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Monitor> getMonitor(@PathVariable("id") long id) {
         System.out.println("Fetching Monitor with id " + id);

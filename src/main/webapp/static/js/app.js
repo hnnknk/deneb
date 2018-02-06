@@ -33,6 +33,26 @@ App.config(function($routeProvider){
             templateUrl: 'static/views/notification.html'
 
         })
+        .when('/roMonitor',{
+
+            templateUrl: 'static/views/roMonitor.html'
+
+        })
+        .when('/roUps',{
+
+            templateUrl: 'static/views/roUps.html'
+
+        })
+        .when('/roMouse',{
+
+            templateUrl: 'static/views/roMouse.html'
+
+        })
+        .when('/roKeyboard',{
+
+            templateUrl: 'static/views/roKeyboard.html'
+
+        })
         .otherwise(
 
             { redirectTo: '/'}

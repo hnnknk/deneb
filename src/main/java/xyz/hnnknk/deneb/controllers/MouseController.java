@@ -33,6 +33,15 @@ public class MouseController {
         return new ResponseEntity<List<Mouse>>(mouses, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/components/ro/mouse/", method = RequestMethod.GET)
+    public ResponseEntity<List<Mouse>> listAllmousesRO() {
+        List<Mouse> mouses = mouseService.listAllMouses();
+        if(mouses.isEmpty()){
+            return new ResponseEntity<List<Mouse>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Mouse>>(mouses, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Mouse> getmouse(@PathVariable("id") long id) {
         System.out.println("Fetching mouse with id " + id);

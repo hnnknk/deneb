@@ -12,6 +12,6 @@
     <img src="/static/images/error401.jpg" alt="error401">
 </div>
 
-<script src="<c:url value='/static/js/others/redirectFromError.js' />"></script>
+
 </body>
 </html>

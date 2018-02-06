@@ -56,6 +56,7 @@
 <script src="<c:url value='/static/js/controller/mouse_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/notification_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/notification_controller.js' />"></script>
+<script src="<c:url value='/static/js/controller/ro_controller.js' />"></script>
 <script src="<c:url value='/static/js/others/errors.js' />"></script>
 </body>
 </html>

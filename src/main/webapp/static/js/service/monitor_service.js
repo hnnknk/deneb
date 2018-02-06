@@ -3,9 +3,11 @@
 angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http, $q){
 
     var REST_SERVICE_URI = 'http://localhost:8080/components/monitor/';
+    var REST_SERVICE_URI_RO = 'http://localhost:8080/components/ro/monitor/';
 
     var factory = {
         fetchAllMonitors: fetchAllMonitors,
+        fetchAllMonitorsRO: fetchAllMonitorsRO,
         createMonitor: createMonitor,
         updateMonitor:updateMonitor,
         deleteMonitor:deleteMonitor
@@ -24,6 +26,20 @@ angular.module('myApp').factory('MonitorService', ['$http', '$q', function($http
                     deferred.reject(errResponse);
                 }
             );
+        return deferred.promise;
+    }
+
+    function fetchAllMonitorsRO() {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI_RO).then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while fetching Monitors');
+                deferred.reject(errResponse);
+            }
+        );
         return deferred.promise;
     }
 
