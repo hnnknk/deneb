@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
     <link href="<c:url value='/static/css/error.css' />" rel="stylesheet"/>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="webjars/angularjs/1.6.8/angular.js"></script>
+    <script src="webjars/angularjs/1.6.8/angular-cookies.min.js"></script>
+    <script src="webjars/angularjs/1.6.8/angular-resource.min.js"></script>
+    <script src="webjars/angularjs/1.6.8/angular-route.min.js"></script>
+
+    <script src="<c:url value='/static/js/app.js' />"></script>
+    <script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
+    <script src="<c:url value='/static/js/interceptors/headerInterceptor.js' />"></script>
+    <script src="<c:url value='/static/js/controller/oauth_controller.js' />"></script>
+    <script src="<c:url value='/static/js/controller/navbar_controller.js' />"></script>
+    <script src="<c:url value='/static/js/service/user_service.js' />"></script>
+    <script src="<c:url value='/static/js/others/errors.js' />"></script>
 </head>
 <body ng-app="myApp" class="ng-cloak">
 
@@ -36,18 +50,7 @@
 
 <div ng-view></div>
 
-<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="webjars/angularjs/1.6.8/angular.js"></script>
-<script src="webjars/angularjs/1.6.8/angular-cookies.min.js"></script>
-<script src="webjars/angularjs/1.6.8/angular-resource.min.js"></script>
-<script src="webjars/angularjs/1.6.8/angular-route.min.js"></script>
-
-<script src="<c:url value='/static/js/app.js' />"></script>
-<script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
-<script src="<c:url value='/static/js/interceptors/headerInterceptor.js' />"></script>
-<script src="<c:url value='/static/js/controller/oauth_controller.js' />"></script>
-v<script src="<c:url value='/static/js/controller/navbar_controller.js' />"></script>
+<script src="<c:url value='/static/js/controller/ro_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/ups_service.js' />"></script>
@@ -58,8 +61,5 @@ v<script src="<c:url value='/static/js/controller/navbar_controller.js' />"></sc
 <script src="<c:url value='/static/js/controller/mouse_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/notification_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/notification_controller.js' />"></script>
-<script src="<c:url value='/static/js/controller/ro_controller.js' />"></script>
-<script src="<c:url value='/static/js/service/user_service.js' />"></script>
-<script src="<c:url value='/static/js/others/errors.js' />"></script>
 </body>
 </html>

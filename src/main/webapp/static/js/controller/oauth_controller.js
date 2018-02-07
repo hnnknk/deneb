@@ -4,8 +4,8 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http, $httpPara
 
     $scope.data = {
             grant_type:"password",
-            username: "bill",
-            password: "abc123",
+            username: "admin",
+            password: "password",
             client_id: "my-trusted-client",
         };
         $scope.encoded = btoa("my-trusted-client:secret");
