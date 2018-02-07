@@ -11,6 +11,9 @@ public class Notification {
     @Column(name = "noti_id")
     private long id;
 
+    @Column(name = "email")
+    private String email = "example@example.com";
+
     @Column(name = "noti_monitor")
     private boolean monitorCreated;
 
@@ -78,5 +81,11 @@ public class Notification {
         this.upsCreated = upsCreated;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

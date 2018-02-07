@@ -48,6 +48,7 @@ public class NotificationController {
             return new ResponseEntity<Notification>(HttpStatus.NOT_FOUND);
         }
 
+        currentnotification.setEmail(notification.getEmail());
         currentnotification.setUpsCreated(notification.getUpsCreated());
         currentnotification.setUserCreated(notification.getUserCreated());
         currentnotification.setKeyboardCreated(notification.getKeyboardCreated());

@@ -21,8 +21,6 @@ public class NotificationServiceImpl implements NotificationService{
     @Transactional
     @Override
     public void save(Notification notification) {
-        System.out.println(notification.getId());
-        System.out.println(notification.getMonitorCreated());
         notificationDAO.save(notification);
     }
 
@@ -58,16 +56,17 @@ public class NotificationServiceImpl implements NotificationService{
 
     public void checkNotifications(NotificationTypes notificationTypes, String name) {
         if(!listAllNots().isEmpty()) {
-            if(listAllNots().get(0).getMonitorCreated() && notificationTypes.equals(NotificationTypes.MONITOR)) {
-                emailService.send( name);
-            } else if(listAllNots().get(0).getKeyboardCreated() && notificationTypes.equals(NotificationTypes.KEYBOARD)) {
-                emailService.send(name);
-            } else if(listAllNots().get(0).getUpsCreated() && notificationTypes.equals(NotificationTypes.UPS)) {
-                emailService.send(name);
-            } else if(listAllNots().get(0).getMouseCreated() && notificationTypes.equals(NotificationTypes.MOUSE)) {
-                emailService.send(name);
-            } else if(listAllNots().get(0).getUserCreated() && notificationTypes.equals(NotificationTypes.USER)) {
-                emailService.send( name);
+            Notification not = listAllNots().get(0);
+            if(not.getMonitorCreated() && notificationTypes.equals(NotificationTypes.MONITOR)) {
+                emailService.send(name, not.getEmail());
+            } else if(not.getKeyboardCreated() && notificationTypes.equals(NotificationTypes.KEYBOARD)) {
+                emailService.send(name, not.getEmail());
+            } else if(not.getUpsCreated() && notificationTypes.equals(NotificationTypes.UPS)) {
+                emailService.send(name, not.getEmail());
+            } else if(not.getMouseCreated() && notificationTypes.equals(NotificationTypes.MOUSE)) {
+                emailService.send(name, not.getEmail());
+            } else if(not.getUserCreated() && notificationTypes.equals(NotificationTypes.USER)) {
+                emailService.send(name, not.getEmail());
             }
         }
     }

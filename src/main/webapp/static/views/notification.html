@@ -6,6 +6,20 @@
         <div class="formcontainer">
             <form ng-submit="ctrl_notification.submit()" name="myForm" class="form-horizontal">
                 <input type="hidden" ng-model="ctrl_notification.notification.id" />
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable">Адрес электронной почты</label>
+                        <div class="col-md-6">
+                            <input type="email" ng-model="ctrl_notification.notification.email" name="email" class="field form-control input-sm" placeholder="Введите адрес электронной почты" required/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.email.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.email.$error.email">Неверный адрес электронной почты</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable">При регистрации монитора</label>
@@ -75,7 +89,7 @@
 
                 <div class="row">
                     <div class="form-actions floatRight">
-                        <input type="submit"  value="Обновить" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <input type="submit"  value="Обновить" class="btn btn-primary btn-sm" ng-disabled="myForm.$pristine" ng-disabled="myForm.$invalid">
                     </div>
                 </div>
             </form>

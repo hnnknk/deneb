@@ -12,9 +12,9 @@ public class EmailServiceImpl implements EmailService{
     JavaMailSender javaMailSender;
 
 
-    public void send(String name) {
+    public void send(String name, String email) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("ur_shak@mail.ru");
+        message.setTo(email);
         message.setSubject("Уведомление о действиях в системе Deneb");
         message.setText(name + " успешно создан" );
         javaMailSender.send(message);
