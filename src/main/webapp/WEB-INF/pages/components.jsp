@@ -10,7 +10,7 @@
     <link href="<c:url value='/static/css/error.css' />" rel="stylesheet"/>
     <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="webjars/angularjs/1.6.8/angular.js"></script>
+    <script src="webjars/angularjs/1.6.8/angular.min.js"></script>
     <script src="webjars/angularjs/1.6.8/angular-cookies.min.js"></script>
     <script src="webjars/angularjs/1.6.8/angular-resource.min.js"></script>
     <script src="webjars/angularjs/1.6.8/angular-route.min.js"></script>
@@ -35,10 +35,14 @@
                 <a class="dropdown-toggle" data-toggle="dropdown">Компоненты
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#!monitor">Мониторы</a></li>
-                    <li><a href="#!mouse">Мышки</a></li>
-                    <li><a href="#!keyboard">Клавиатуры</a></li>
-                    <li><a href="#!ups">Ибп</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roMonitor">Мониторы</a></li>
+                    <li data-ng-if="islogged"><a href="#!monitor">Мониторы</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roMouse">Мышки</a></li>
+                    <li data-ng-if="islogged"><a href="#!mouse">Мышки</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roKeyboard">Клавиатуры</a></li>
+                    <li data-ng-if="islogged"><a href="#!keyboard">Клавиатуры</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roUps">Ибп</a></li>
+                    <li data-ng-if="islogged"><a href="#!ups">Ибп</a></li>
                 </ul>
             </li>
             <li data-ng-if="islogged"><a href="#!notification">Панель администратора</a></li>
