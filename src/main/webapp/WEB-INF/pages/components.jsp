@@ -5,7 +5,7 @@
     <title>Периферийные устройства</title>
     <base href="/">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
     <link href="<c:url value='/static/css/error.css' />" rel="stylesheet"/>
 </head>
@@ -36,13 +36,12 @@
 
 <div ng-view></div>
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
-<script src="https://code.angularjs.org/1.6.7/angular-cookies.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-resource.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-route.min.js"></script>
+<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="webjars/angularjs/1.6.8/angular.js"></script>
+<script src="webjars/angularjs/1.6.8/angular-cookies.min.js"></script>
+<script src="webjars/angularjs/1.6.8/angular-resource.min.js"></script>
+<script src="webjars/angularjs/1.6.8/angular-route.min.js"></script>
 
 <script src="<c:url value='/static/js/app.js' />"></script>
 <script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
