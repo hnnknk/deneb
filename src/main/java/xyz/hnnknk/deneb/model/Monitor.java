@@ -87,9 +87,7 @@ public class Monitor {
         if (!(obj instanceof Monitor))
             return false;
         Monitor other = (Monitor) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id.equals(other.id);
     }
 
     @Override

@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('MonitorController', ['$scope', 'MonitorService', function($scope, MonitorService) {
     var self = this;
-    self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.monitors=[];
 
     self.submit = submit;
@@ -90,12 +90,6 @@ angular.module('myApp').controller('MonitorController', ['$scope', 'MonitorServi
     function reset(){
         self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
         $scope.myForm.$setPristine();
-    }
-
-    function monitorExists() {
-        fetchAllMonitors;
-         $(".alert").removeClass("in").show();
-            $(".alert").delay(1000).addClass("in").fadeOut(4000);
     }
 
 }]);

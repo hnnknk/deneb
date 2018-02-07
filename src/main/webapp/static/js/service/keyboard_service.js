@@ -50,7 +50,7 @@ angular.module('myApp').factory('KeyboardService', ['$http', '$q', function($htt
         $http.post(REST_SERVICE_URI, keyboard)
             .then(
                 function (response) {
-                    handleSuccessCreate()
+                    handleSuccessCreate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
@@ -66,7 +66,7 @@ angular.module('myApp').factory('KeyboardService', ['$http', '$q', function($htt
         $http.put(REST_SERVICE_URI+id, keyboard)
             .then(
                 function (response) {
-                    handleSuccessUpdate()
+                    handleSuccessUpdate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){

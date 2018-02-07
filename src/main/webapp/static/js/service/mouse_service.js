@@ -66,7 +66,7 @@ angular.module('myApp').factory('MouseService', ['$http', '$q', function($http, 
         $http.put(REST_SERVICE_URI+id, mouse)
             .then(
                 function (response) {
-                    handleSuccessUpdate()
+                    handleSuccessUpdate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){

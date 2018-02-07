@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardService', function($scope, KeyboardService) {
     var self = this;
-    self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.keyboards=[];
 
     self.submit = submit;

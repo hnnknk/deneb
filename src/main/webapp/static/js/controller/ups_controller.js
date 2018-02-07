@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('UpsController', ['$scope', 'UpsService', function($scope, UpsService) {
     var self = this;
-    self.ups={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.ups={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.upses=[];
 
     self.submit = submit;

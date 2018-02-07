@@ -1,7 +1,6 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -88,9 +87,7 @@ public class Keyboard {
         if (!(obj instanceof Keyboard))
             return false;
         Keyboard other = (Keyboard) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id.equals(other.id);
     }
 
     @Override

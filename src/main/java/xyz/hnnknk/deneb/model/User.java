@@ -58,9 +58,7 @@ public class User {
         if (!(obj instanceof User))
             return false;
         User other = (User) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id.equals(other.id);
     }
 
     @Override

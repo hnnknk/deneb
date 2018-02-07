@@ -5,7 +5,7 @@ angular.module('myApp')
 
                 var defer = $q.defer();
 
-                if(rejection.status == 401){
+                if(rejection.status === 401){
                     console.dir(rejection);
                     console.log(rejection.config.url);
                     if(rejection.config.url.toString().includes("/components/monitor/")) {

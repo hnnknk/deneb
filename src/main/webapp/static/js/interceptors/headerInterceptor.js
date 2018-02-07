@@ -5,7 +5,7 @@ angular.module('myApp')
             'request': function(config) {
 
                 if(!window.location.href.toString().includes("login")) {
-                    console.log("HEADER")
+                    console.log("HEADER");
                     config.headers = config.headers || {};
                     config.headers.Authorization = 'Bearer ' + $cookies.get("access_token");
                 }

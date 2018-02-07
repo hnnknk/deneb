@@ -7,15 +7,15 @@ angular.module('myApp').controller('navCtrl', function($scope, $http, $httpParam
     var prep = {
         method:'POST',
         url: 'http://localhost:8080/oauth/check_token?token=' + $cookies.get("access_token"),
-    }
+    };
 
     check();
 
     function check() {
         $http(prep)
             .then(function (value) {
-                if(value.status == 200) {
-                    console.log("token is ok")
+                if(value.status === 200) {
+                    console.log("token is ok");
                     UserService.setS(true);
                     $rootScope.$broadcast('login-done');
                 }
@@ -30,7 +30,7 @@ angular.module('myApp').controller('navCtrl', function($scope, $http, $httpParam
     $scope.logout = function() {
         $cookies.remove("access_token");
         window.location.href='/';
-    }
+    };
 
     $rootScope.$on("login-done", function() {
         $scope.islogged = UserService.getS();

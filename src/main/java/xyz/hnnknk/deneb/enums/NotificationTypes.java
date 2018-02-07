@@ -5,5 +5,5 @@ public enum NotificationTypes {
     UPS,
     USER,
     KEYBOARD,
-    MOUSE;
+    MOUSE
 }

@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.UserDAO;
 import xyz.hnnknk.deneb.model.User;
 
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
 

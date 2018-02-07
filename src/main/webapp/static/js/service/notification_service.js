@@ -31,7 +31,7 @@ angular.module('myApp').factory('NotificationService', ['$http', '$q', function(
         $http.put(REST_SERVICE_URI+id, notification)
             .then(
                 function (response) {
-                    handleSuccessUpdate()
+                    handleSuccessUpdate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){

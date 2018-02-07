@@ -66,7 +66,7 @@ angular.module('myApp').factory('UpsService', ['$http', '$q', function($http, $q
         $http.put(REST_SERVICE_URI+id, monitor)
             .then(
                 function (response) {
-                    handleSuccessUpdate()
+                    handleSuccessUpdate();
                     deferred.resolve(response.data);
                 },
                 function(errResponse){

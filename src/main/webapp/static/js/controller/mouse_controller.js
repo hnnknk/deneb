@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('MouseController', ['$scope', 'MouseService', function($scope, MouseService) {
     var self = this;
-    self.mouse={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.mouse={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.mouses=[];
 
     self.submit = submit;

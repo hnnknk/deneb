@@ -1,7 +1,6 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -88,9 +87,7 @@ public class Mouse {
         if (!(obj instanceof Mouse))
             return false;
         Mouse other = (Mouse) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id.equals(other.id);
     }
 
     @Override

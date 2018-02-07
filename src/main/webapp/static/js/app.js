@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('myApp',['ngCookies','ngRoute','ngResource'])
+var App = angular.module('myApp',['ngCookies','ngRoute','ngResource']);
 
 
 App.config(['$httpProvider', function($httpProvider) {

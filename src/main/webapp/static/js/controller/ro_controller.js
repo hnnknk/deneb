@@ -2,16 +2,16 @@
 
 angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 'UpsService', 'MouseService', 'KeyboardService', function($scope, MonitorService, UpsService, MouseService, KeyboardService) {
     var self = this;
-    self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.monitors=[];
 
-    self.ups={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.ups={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.upses=[];
 
-    self.mouse={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.mouse={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.mouses=[];
 
-    self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''}
+    self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.keyboards=[];
 
     fetchAllMonitorsRO();
