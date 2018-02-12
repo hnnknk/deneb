@@ -1,12 +1,14 @@
 package xyz.hnnknk.deneb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.MotherBoardDAO;
 import xyz.hnnknk.deneb.model.MotherBoard;
 
 import java.util.List;
 
+@Service
 public class MotherBoardServiceImpl implements MotherBoardService{
 
     @Autowired

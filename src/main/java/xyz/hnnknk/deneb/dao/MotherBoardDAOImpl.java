@@ -2,11 +2,13 @@ package xyz.hnnknk.deneb.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import xyz.hnnknk.deneb.model.MotherBoard;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class MotherBoardDAOImpl implements MotherBoardDAO{
     @Autowired
     private SessionFactory sessionFactory;

@@ -1,0 +1,125 @@
+<!-- Hdd section -->
+<div id="hdd_div" class="generic-container" ng-controller="HddController as ctrl_hdd">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Регистрация жесткого диска</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchHdd" size="34"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="formcontainer">
+            <form ng-submit="ctrl_hdd.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl_hdd.hdd.id" />
+                
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Производитель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_hdd.hdd.manufacter" name="hdd_manufacter" class="field form-control input-sm" placeholder="Введите производителя жесткого диска" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.hdd_manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.hdd_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.hdd_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Модель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_hdd.hdd.model" name="hdd_model" class="field form-control input-sm" placeholder="Введите модель жесткого диска" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.hdd_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.hdd_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.hdd_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Серийный номер</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_hdd.hdd.serial" name="hdd_serial" class="field form-control input-sm" placeholder="Введите серийный номер жесткого диска" required ng-minlength="2" ng-maxlength="17"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.hdd_serial.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.hdd_serial.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.hdd_serial.$error.maxlength">Поле должно содержать не более 17 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Емкость</label>
+                        <div class="col-md-7">
+                            <input type="number" ng-model="ctrl_hdd.hdd.capacity" name="hdd_capacity" class="field form-control input-sm" placeholder="Введите емкость жесткого диска" required ng-minlength="2" ng-maxlength="6"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.hdd_capacity.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.hdd_capacity.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.hdd_capacity.$error.maxlength">Поле должно содержать не более 6 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Тип диска</label>
+                        <div class="col-md-7">
+                            <select class="field form-control input-sm"  name="hdd_hddtypes" ng-model="ctrl_hdd.hdd.hddtypes" ng-options="opt for opt in ['HDD','SSD']" required>
+                            </select>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.hdd_hddtypes.$error.required">Это поле необходимо заполнить</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl_hdd.hdd.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl_hdd.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Сбросить данные</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">Список жестких дисков</span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Производитель</th>
+                    <th>Модель</th>
+                    <th>Серийный номер</th>
+                    <th>Емкость</th>
+                    <th>Тип</th>
+                    <th width="25%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="h in ctrl_hdd.hdds | filter:searchHdd">
+                    <td><span ng-bind="h.manufacter"></span></td>
+                    <td><span ng-bind="h.model"></span></td>
+                    <td><span ng-bind="h.serial"></span></td>
+                    <td><span ng-bind="h.capacity"></span></td>
+                    <td><span ng-bind="h.hddtypes"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl_hdd.edit(h.id)" class="btn btn-success custom-width">Изменить</button>  <button type="button" class="btn btn-danger custom-width" ng-click="ctrl_hdd.remove(h.id)">Удалить</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

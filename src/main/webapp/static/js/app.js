@@ -33,6 +33,16 @@ App.config(function($routeProvider){
             templateUrl: 'static/views/notification.html'
 
         })
+        .when('/hdd',{
+
+            templateUrl: 'static/views/hdd.html'
+
+        })
+        .when('/roHdd',{
+
+            templateUrl: 'static/views/roHdd.html'
+
+        })
         .when('/roMonitor',{
 
             templateUrl: 'static/views/roMonitor.html'

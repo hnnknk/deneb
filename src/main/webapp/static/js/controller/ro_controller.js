@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 'UpsService', 'MouseService', 'KeyboardService', function($scope, MonitorService, UpsService, MouseService, KeyboardService) {
+angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 'UpsService', 'MouseService', 'KeyboardService', 'HddService',
+    function($scope, MonitorService, UpsService, MouseService, KeyboardService, HddService) {
+
     var self = this;
     self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.monitors=[];
@@ -14,10 +16,14 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
     self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''};
     self.keyboards=[];
 
+    self.hdd={id:null,manufacter:'',model:'',serial:'',capacity:'',hddtypes:''};
+    self.hdds=[];
+
     fetchAllMonitorsRO();
     fetchAllUpsesRO();
     fetchAllMousesRO();
     fetchAllKeyboardsRO();
+    fetchAllHddsRO();
 
 
     function fetchAllMonitorsRO(){
@@ -64,6 +70,18 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
                 },
                 function(errResponse){
                     console.error('Error while fetching Keyboards');
+                }
+            );
+    }
+
+    function fetchAllHddsRO(){
+        HddService.fetchAllHddsRO()
+            .then(
+                function(d) {
+                    self.hdds = d;
+                },
+                function(errResponse){
+                    console.error('Error while fetching Hdds');
                 }
             );
     }

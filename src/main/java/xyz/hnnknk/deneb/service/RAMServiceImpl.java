@@ -1,12 +1,14 @@
 package xyz.hnnknk.deneb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.RAMDAO;
 import xyz.hnnknk.deneb.model.RAM;
 
 import java.util.List;
 
+@Service
 public class RAMServiceImpl implements RAMService{
 
     @Autowired

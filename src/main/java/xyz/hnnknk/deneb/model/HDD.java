@@ -23,7 +23,7 @@ public class HDD {
     private String serial;
 
     @Column(name = "hdd_capacity")
-    private String capacity;
+    private Integer capacity;
 
     @Column(name = "hdd_type")
     private HddTypes hddTypes;
@@ -63,11 +63,11 @@ public class HDD {
         this.serial = serial;
     }
 
-    public String getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(String capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 

@@ -32,6 +32,14 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Системный блок
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li data-ng-if="!islogged"><a href="#!roHdd">Жесткие диски</a></li>
+                    <li data-ng-if="islogged"><a href="#!hdd">Жесткие диски</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">Компоненты
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -63,6 +71,8 @@
 <script src="<c:url value='/static/js/controller/keyboard_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/mouse_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/mouse_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/hdd_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/hdd_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/notification_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/notification_controller.js' />"></script>
 </body>
