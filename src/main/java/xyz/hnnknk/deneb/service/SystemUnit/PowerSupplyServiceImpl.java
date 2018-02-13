@@ -48,6 +48,16 @@ public class PowerSupplyServiceImpl implements SystemUnitService {
     @Transactional
     @Override
     public boolean isExists(SystemUnit systemUnit) {
-        return powerSupplyDAOImpl.isExists(systemUnit);
+
+        boolean result = false;
+
+        for(PowerSupply pow : listAll()) {
+            if (pow.getId().equals(systemUnit.getId())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

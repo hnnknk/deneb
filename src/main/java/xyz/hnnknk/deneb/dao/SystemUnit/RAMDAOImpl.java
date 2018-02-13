@@ -33,32 +33,15 @@ public class RAMDAOImpl implements SystemUnitDAO {
     @Override
     public RAM findById(long id) {
 
-        for(RAM r : listAll()) {
-            if (id == r.getId()) {
-                return r;
-            }
-        }
-        return null;
+        RAM r;
+        r = sessionFactory.getCurrentSession().get(RAM.class, id);
+
+        return r;
     }
 
     @Override
     public List<RAM> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<RAM> query = sessionFactory.getCurrentSession().createQuery("from RAM");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-        boolean result = false;
-
-        for(RAM r : listAll()) {
-            if (r.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

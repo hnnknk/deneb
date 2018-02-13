@@ -33,32 +33,15 @@ public class ProcessorDAOImpl implements SystemUnitDAO {
     @Override
     public Processor findById(long id) {
 
-        for(Processor proc : listAll()) {
-            if (id == proc.getId()) {
-                return proc;
-            }
-        }
-        return null;
+        Processor p;
+        p = sessionFactory.getCurrentSession().get(Processor.class, id);
+
+        return p;
     }
 
     @Override
     public List<Processor> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<Processor> query = sessionFactory.getCurrentSession().createQuery("from Processor");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-        boolean result = false;
-
-        for(Processor proc : listAll()) {
-            if (proc.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

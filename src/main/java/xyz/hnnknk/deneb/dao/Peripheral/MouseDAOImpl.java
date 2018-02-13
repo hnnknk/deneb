@@ -33,33 +33,16 @@ public class MouseDAOImpl implements PeripheralDAO {
     @Override
     public Mouse findById(long id) {
 
-        for(Mouse mou : listAll()) {
-            if (id == mou.getId()) {
-                return mou;
-            }
-        }
-        return null;
+        Mouse m;
+        m = sessionFactory.getCurrentSession().get(Mouse.class, id);
+
+        return m;
+
     }
 
     @Override
     public List<Mouse> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<Mouse> query = sessionFactory.getCurrentSession().createQuery("from Mouse");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(Peripheral peripheral) {
-
-        boolean result = false;
-
-        for (Mouse m : listAll()) {
-            if (m.getInvNumber().equals(peripheral.getInvNumber())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

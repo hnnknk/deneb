@@ -33,33 +33,16 @@ public class UpsDAOImpl implements PeripheralDAO {
     @Override
     public Ups findById(long id) {
 
-        for(Ups key : listAll()) {
-            if (id == key.getId()) {
-                return key;
-            }
-        }
-        return null;
+        Ups u;
+        u = sessionFactory.getCurrentSession().get(Ups.class, id);
+
+        return u;
+
     }
 
     @Override
     public List<Ups> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<Ups> query = sessionFactory.getCurrentSession().createQuery("from Ups");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(Peripheral peripheral) {
-
-        boolean result = false;
-
-        for(Ups u : listAll()) {
-            if (u.getInvNumber().equals(peripheral.getInvNumber())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

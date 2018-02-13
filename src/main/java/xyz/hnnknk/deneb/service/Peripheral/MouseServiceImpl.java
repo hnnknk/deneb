@@ -48,6 +48,15 @@ public class MouseServiceImpl implements PeripheralService {
     @Transactional
     @Override
     public boolean isExists(Peripheral peripheral) {
-        return mouseDAOImpl.isExists(peripheral);
+        boolean result = false;
+
+        for (Mouse m : listAll()) {
+            if (m.getInvNumber().equals(peripheral.getInvNumber())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

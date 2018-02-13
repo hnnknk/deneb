@@ -48,6 +48,16 @@ public class ProcessorServiceImpl implements SystemUnitService {
     @Transactional
     @Override
     public boolean isExists(SystemUnit systemUnit) {
-        return processorDAOImpl.isExists(systemUnit);
+
+        boolean result = false;
+
+        for(Processor proc : listAll()) {
+            if (proc.getId().equals(systemUnit.getId())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

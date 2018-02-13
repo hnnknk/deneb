@@ -13,6 +13,4 @@ public interface PeripheralDAO<T extends Peripheral> {
     T findById(long id);
 
     List<T> listAll();
-
-    boolean isExists(T t);
 }

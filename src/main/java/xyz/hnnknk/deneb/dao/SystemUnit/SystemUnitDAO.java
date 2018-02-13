@@ -13,6 +13,4 @@ public interface SystemUnitDAO<T extends SystemUnit> {
     T findById(long id);
 
     List<T> listAll();
-
-    boolean isExists(T t);
 }

@@ -48,6 +48,15 @@ public class MotherBoardServiceImpl implements SystemUnitService{
     @Transactional
     @Override
     public boolean isExists(SystemUnit systemUnit) {
-        return motherBoardDAOImpl.isExists(systemUnit);
+        boolean result = false;
+
+        for(MotherBoard m : listAll()) {
+            if (m.getId().equals(systemUnit.getId())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

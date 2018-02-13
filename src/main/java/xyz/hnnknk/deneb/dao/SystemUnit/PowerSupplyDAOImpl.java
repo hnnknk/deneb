@@ -33,32 +33,15 @@ public class PowerSupplyDAOImpl implements SystemUnitDAO {
     @Override
     public PowerSupply findById(long id) {
 
-        for(PowerSupply pow : listAll()) {
-            if (id == pow.getId()) {
-                return pow;
-            }
-        }
-        return null;
+        PowerSupply p;
+        p = sessionFactory.getCurrentSession().get(PowerSupply.class, id);
+
+        return p;
     }
 
     @Override
     public List<PowerSupply> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<PowerSupply> query = sessionFactory.getCurrentSession().createQuery("from PowerSupply");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-        boolean result = false;
-
-        for(PowerSupply pow : listAll()) {
-            if (pow.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

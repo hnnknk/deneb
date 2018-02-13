@@ -33,32 +33,15 @@ public class KeyboardDAOImpl implements PeripheralDAO {
     @Override
     public Keyboard findById(long id) {
 
-        for(Keyboard key : listAll()) {
-            if (id == key.getId()) {
-                return key;
-            }
-        }
-        return null;
+        Keyboard k;
+        k = sessionFactory.getCurrentSession().get(Keyboard.class, id);
+
+        return k;
     }
 
     @Override
     public List<Keyboard> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<Keyboard> query = sessionFactory.getCurrentSession().createQuery("from Keyboard");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(Peripheral peripheral) {
-        boolean result = false;
-
-        for(Keyboard k : listAll()) {
-            if (k.getInvNumber().equals(peripheral.getInvNumber())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

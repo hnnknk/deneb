@@ -33,33 +33,15 @@ public class MonitorDAOImpl implements PeripheralDAO {
     @Override
     public Monitor findById(long id) {
 
-        for(Monitor mon : listAll()) {
-            if (id == mon.getId()) {
-                return mon;
-            }
-        }
-        return null;
+        Monitor m;
+        m = sessionFactory.getCurrentSession().get(Monitor.class, id);
+
+        return  m;
     }
 
     @Override
     public List<Monitor> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<Monitor> query = sessionFactory.getCurrentSession().createQuery("from Monitor");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(Peripheral peripheral) {
-
-        boolean result = false;
-
-        for(Monitor mon : listAll()) {
-            if (mon.getInvNumber().equals(peripheral.getInvNumber())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

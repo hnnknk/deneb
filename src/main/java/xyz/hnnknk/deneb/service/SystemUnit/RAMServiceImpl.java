@@ -48,6 +48,16 @@ public class RAMServiceImpl implements SystemUnitService {
     @Transactional
     @Override
     public boolean isExists(SystemUnit systemUnit) {
-        return RAMDAOImpl.isExists(systemUnit);
+
+        boolean result = false;
+
+        for(RAM r : listAll()) {
+            if (r.getId().equals(systemUnit.getId())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

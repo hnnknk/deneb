@@ -1,7 +1,6 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "keyboard")

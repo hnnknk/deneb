@@ -48,7 +48,17 @@ public class UpsServiceImpl implements PeripheralService {
     @Transactional
     @Override
     public boolean isExists(Peripheral peripheral) {
-        return upsDAOImpl.isExists(peripheral);
+
+        boolean result = false;
+
+        for(Ups u : listAll()) {
+            if (u.getInvNumber().equals(peripheral.getInvNumber())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }
 

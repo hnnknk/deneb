@@ -35,9 +35,7 @@ public class KeyboardServiceImpl implements PeripheralService {
 
     @Transactional
     @Override
-    public Keyboard findById(long id) {
-        return (Keyboard) keyboardDAOImpl.findById(id);
-    }
+    public Keyboard findById(long id) { return (Keyboard) keyboardDAOImpl.findById(id); }
 
     @Transactional
     @Override
@@ -48,6 +46,15 @@ public class KeyboardServiceImpl implements PeripheralService {
     @Transactional
     @Override
     public boolean isExists(Peripheral peripheral) {
-        return keyboardDAOImpl.isExists(peripheral);
+        boolean result = false;
+
+        for(Keyboard k : listAll()) {
+            if (k.getInvNumber().equals(peripheral.getInvNumber())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

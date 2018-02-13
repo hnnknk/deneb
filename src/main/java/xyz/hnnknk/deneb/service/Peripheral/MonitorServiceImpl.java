@@ -35,19 +35,25 @@ public class MonitorServiceImpl implements PeripheralService {
 
     @Transactional
     @Override
-    public Monitor findById(long id) {
-        return (Monitor) monitorDAOImpl.findById(id);
-    }
+    public Monitor findById(long id) { return (Monitor) monitorDAOImpl.findById(id);}
 
     @Transactional
     @Override
-    public List<Monitor> listAll() {
-        return monitorDAOImpl.listAll();
-    }
+    public List<Monitor> listAll() { return monitorDAOImpl.listAll(); }
 
     @Transactional
     @Override
     public boolean isExists(Peripheral peripheral) {
-        return monitorDAOImpl.isExists(peripheral);
+
+        boolean result = false;
+
+        for(Monitor mon : listAll()) {
+            if (mon.getInvNumber().equals(peripheral.getInvNumber())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

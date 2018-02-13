@@ -33,32 +33,16 @@ public class HDDDAOImpl implements SystemUnitDAO {
     @Override
     public HDD findById(long id) {
 
-        for(HDD h : listAll()) {
-            if (id == h.getId()) {
-                return h;
-            }
-        }
-        return null;
+        HDD h;
+        h = sessionFactory.getCurrentSession().get(HDD.class, id);
+
+        return h;
     }
 
     @Override
     public List<HDD> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<HDD> query = sessionFactory.getCurrentSession().createQuery("from HDD");
         return query.getResultList();
     }
 
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-        boolean result = false;
-
-        for(HDD h : listAll()) {
-            if (h.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
 }

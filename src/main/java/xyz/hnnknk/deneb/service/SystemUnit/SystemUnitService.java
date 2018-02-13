@@ -1,6 +1,5 @@
 package xyz.hnnknk.deneb.service.SystemUnit;
 
-import xyz.hnnknk.deneb.model.HDD;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import java.util.List;

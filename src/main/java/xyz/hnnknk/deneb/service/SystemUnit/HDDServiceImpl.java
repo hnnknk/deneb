@@ -48,6 +48,16 @@ public class HDDServiceImpl implements SystemUnitService {
     @Transactional
     @Override
     public boolean isExists(SystemUnit systemUnit) {
-        return HDDDAOImpl.isExists(systemUnit);
+
+        boolean result = false;
+
+        for(HDD h : listAll()) {
+            if (h.getId().equals(systemUnit.getId())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }

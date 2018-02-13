@@ -33,32 +33,15 @@ public class MotherBoardDAOImpl implements SystemUnitDAO {
     @Override
     public MotherBoard findById(long id) {
 
-        for(MotherBoard mot : listAll()) {
-            if (id == mot.getId()) {
-                return mot;
-            }
-        }
-        return null;
+        MotherBoard m;
+        m = sessionFactory.getCurrentSession().get(MotherBoard.class, id);
+
+        return m;
     }
 
     @Override
     public List<MotherBoard> listAll() {
-        @SuppressWarnings("unchecked")
         TypedQuery<MotherBoard> query = sessionFactory.getCurrentSession().createQuery("from MotherBoard");
         return query.getResultList();
-    }
-
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-        boolean result = false;
-
-        for(MotherBoard m : listAll()) {
-            if (m.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }
