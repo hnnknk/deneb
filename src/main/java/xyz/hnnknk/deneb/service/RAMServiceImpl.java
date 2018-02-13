@@ -1,9 +1,10 @@
 package xyz.hnnknk.deneb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.RAMDAO;
+import xyz.hnnknk.deneb.dao.SystemUnitDAO;
 import xyz.hnnknk.deneb.model.RAM;
 
 import java.util.List;
@@ -12,41 +13,41 @@ import java.util.List;
 public class RAMServiceImpl implements RAMService{
 
     @Autowired
-    RAMDAO ramDAO;
+    SystemUnitDAO RAMDAOImpl;
 
     @Transactional
     @Override
     public void save(RAM ram) {
-        ramDAO.save(ram);
+        RAMDAOImpl.save(ram);
     }
 
     @Transactional
     @Override
     public void update(RAM ram) {
-        ramDAO.update(ram);
+        RAMDAOImpl.update(ram);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
-        ramDAO.delete(id);
+        RAMDAOImpl.delete(id);
     }
 
     @Transactional
     @Override
     public RAM findById(long id) {
-        return ramDAO.findById(id);
+        return (RAM) RAMDAOImpl.findById(id);
     }
 
     @Transactional
     @Override
     public List<RAM> listAllRams() {
-        return ramDAO.listAllRams();
+        return RAMDAOImpl.listAll();
     }
 
     @Transactional
     @Override
     public boolean isRamExists(RAM ram) {
-        return ramDAO.isRamExists(ram);
+        return RAMDAOImpl.isExists(ram);
     }
 }

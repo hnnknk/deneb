@@ -3,50 +3,51 @@ package xyz.hnnknk.deneb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.HDDDAO;
+import xyz.hnnknk.deneb.dao.SystemUnitDAO;
 import xyz.hnnknk.deneb.model.HDD;
+import xyz.hnnknk.deneb.model.SystemUnit;
 
 import java.util.List;
 
 @Service
-public class HDDServiceImpl implements HDDService{
+public class HDDServiceImpl implements SystemUnitService {
 
     @Autowired
-    HDDDAO hddDAO;
+    SystemUnitDAO HDDDAOImpl;
 
     @Transactional
     @Override
-    public void save(HDD hdd) {
-        hddDAO.save(hdd);
+    public void save(SystemUnit systemUnit) {
+        HDDDAOImpl.save(systemUnit);
     }
 
     @Transactional
     @Override
-    public void update(HDD hdd) {
-        hddDAO.update(hdd);
+    public void update(SystemUnit systemUnit) {
+        HDDDAOImpl.update(systemUnit);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
-        hddDAO.delete(id);
+        HDDDAOImpl.delete(id);
     }
 
     @Transactional
     @Override
     public HDD findById(long id) {
-        return hddDAO.findById(id);
+        return (HDD) HDDDAOImpl.findById(id);
     }
 
     @Transactional
     @Override
-    public List<HDD> listAllHdds() {
-        return hddDAO.listAllHdds();
+    public List<HDD> listAll() {
+        return HDDDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isHddExists(HDD hdd) {
-        return hddDAO.isHddExists(hdd);
+    public boolean isExists(SystemUnit systemUnit) {
+        return HDDDAOImpl.isExists(systemUnit);
     }
 }

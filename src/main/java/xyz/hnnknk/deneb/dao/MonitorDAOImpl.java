@@ -4,24 +4,25 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xyz.hnnknk.deneb.model.Monitor;
+import xyz.hnnknk.deneb.model.Peripheral;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class MonitorDAOImpl implements MonitorDAO {
+public class MonitorDAOImpl implements PeripheralDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(Monitor monitor) {
-        sessionFactory.getCurrentSession().save(monitor);
+    public void save(Peripheral peripheral) {
+        sessionFactory.getCurrentSession().save(peripheral);
     }
 
     @Override
-    public void update(Monitor monitor) {
-        sessionFactory.getCurrentSession().update(monitor);
+    public void update(Peripheral peripheral) {
+        sessionFactory.getCurrentSession().update(peripheral);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class MonitorDAOImpl implements MonitorDAO {
     @Override
     public Monitor findById(long id) {
 
-        for(Monitor mon : listAllMonitors()) {
+        for(Monitor mon : listAll()) {
             if (id == mon.getId()) {
                 return mon;
             }
@@ -41,19 +42,19 @@ public class MonitorDAOImpl implements MonitorDAO {
     }
 
     @Override
-    public List<Monitor> listAllMonitors() {
+    public List<Monitor> listAll() {
         @SuppressWarnings("unchecked")
         TypedQuery<Monitor> query = sessionFactory.getCurrentSession().createQuery("from Monitor");
         return query.getResultList();
     }
 
     @Override
-    public boolean isMonitorExists(Monitor monitor) {
+    public boolean isExists(Peripheral peripheral) {
 
         boolean result = false;
 
-        for(Monitor mon : listAllMonitors()) {
-            if (mon.getInvNumber().equals(monitor.getInvNumber())) {
+        for(Monitor mon : listAll()) {
+            if (mon.getInvNumber().equals(peripheral.getInvNumber())) {
                 result = true;
                 break;
             }

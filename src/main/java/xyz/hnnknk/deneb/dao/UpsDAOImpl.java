@@ -3,25 +3,26 @@ package xyz.hnnknk.deneb.dao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import xyz.hnnknk.deneb.model.Peripheral;
 import xyz.hnnknk.deneb.model.Ups;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class UpsDAOImpl implements UpsDAO {
+public class UpsDAOImpl implements PeripheralDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(Ups ups) {
-        sessionFactory.getCurrentSession().save(ups);
+    public void save(Peripheral peripheral) {
+        sessionFactory.getCurrentSession().save(peripheral);
     }
 
     @Override
-    public void update(Ups ups) {
-        sessionFactory.getCurrentSession().update(ups);
+    public void update(Peripheral peripheral) {
+        sessionFactory.getCurrentSession().update(peripheral);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class UpsDAOImpl implements UpsDAO {
     @Override
     public Ups findById(long id) {
 
-        for(Ups key : listAllUpses()) {
+        for(Ups key : listAll()) {
             if (id == key.getId()) {
                 return key;
             }
@@ -41,19 +42,19 @@ public class UpsDAOImpl implements UpsDAO {
     }
 
     @Override
-    public List<Ups> listAllUpses() {
+    public List<Ups> listAll() {
         @SuppressWarnings("unchecked")
         TypedQuery<Ups> query = sessionFactory.getCurrentSession().createQuery("from Ups");
         return query.getResultList();
     }
 
     @Override
-    public boolean isUpsExists(Ups ups) {
+    public boolean isExists(Peripheral peripheral) {
 
         boolean result = false;
 
-        for(Ups u : listAllUpses()) {
-            if (u.getInvNumber().equals(ups.getInvNumber())) {
+        for(Ups u : listAll()) {
+            if (u.getInvNumber().equals(peripheral.getInvNumber())) {
                 result = true;
                 break;
             }

@@ -3,7 +3,7 @@ package xyz.hnnknk.deneb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.MotherBoardDAO;
+import xyz.hnnknk.deneb.dao.SystemUnitDAO;
 import xyz.hnnknk.deneb.model.MotherBoard;
 
 import java.util.List;
@@ -12,41 +12,41 @@ import java.util.List;
 public class MotherBoardServiceImpl implements MotherBoardService{
 
     @Autowired
-    MotherBoardDAO motherBoardDAO;
+    SystemUnitDAO motherBoardDAOImpl;
 
     @Transactional
     @Override
     public void save(MotherBoard motherBoard) {
-        motherBoardDAO.save(motherBoard);
+        motherBoardDAOImpl.save(motherBoard);
     }
 
     @Transactional
     @Override
     public void update(MotherBoard motherBoard) {
-        motherBoardDAO.update(motherBoard);
+        motherBoardDAOImpl.update(motherBoard);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
-        motherBoardDAO.delete(id);
+        motherBoardDAOImpl.delete(id);
     }
 
     @Transactional
     @Override
     public MotherBoard findById(long id) {
-        return motherBoardDAO.findById(id);
+        return (MotherBoard) motherBoardDAOImpl.findById(id);
     }
 
     @Transactional
     @Override
     public List<MotherBoard> listAllMotherBoards() {
-        return motherBoardDAO.listAllMotherBoards();
+        return motherBoardDAOImpl.listAll();
     }
 
     @Transactional
     @Override
     public boolean isMotherBoardExists(MotherBoard motherBoard) {
-        return motherBoardDAO.isMotherBoardExists(motherBoard);
+        return motherBoardDAOImpl.isExists(motherBoard);
     }
 }

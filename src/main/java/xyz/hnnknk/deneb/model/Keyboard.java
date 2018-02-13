@@ -5,77 +5,13 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "keyboard")
-public class Keyboard {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "keyboard_id")
-    private Long id;
-
-    @Size(min = 1)
-    @Column(name = "keyboard_invnumber")
-    private String invNumber;
-
-    @Size(min = 2, max = 10)
-    @Column(name = "keyboard_manufacter")
-    private String manufacter;
-
-    @Size(min = 2, max = 10)
-    @Column(name = "keyboard_model")
-    private String model;
-
-    @Size(min = 2, max = 17)
-    @Column(name = "keyboard_serial")
-    private String serial;
+public class Keyboard extends Peripheral{
 
     public Keyboard() {
     }
 
-    public Keyboard(String invNumber, String manufacter, String model, String serial) {
-        this.invNumber = invNumber;
-        this.manufacter = manufacter;
-        this.model = model;
-        this.serial = serial;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getInvNumber() {
-        return invNumber;
-    }
-
-    public void setInvNumber(String invNumber) {
-        this.invNumber = invNumber;
-    }
-
-    public String getManufacter() {
-        return manufacter;
-    }
-
-    public void setManufacter(String manufacter) {
-        this.manufacter = manufacter;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getSerial() {
-        return serial;
-    }
-
-    public void setSerial(String serial) {
-        this.serial = serial;
+    public Keyboard (String invNumber, String manufacter, String model, String serial) {
+        super(invNumber, manufacter, model, serial);
     }
 
     @Override
@@ -87,12 +23,12 @@ public class Keyboard {
         if (!(obj instanceof Keyboard))
             return false;
         Keyboard other = (Keyboard) obj;
-        return id.equals(other.id);
+        return this.getId().equals(other.getId());
     }
 
     @Override
     public String toString() {
-        return "Keyboard [id=" + id + ", inventory number=" + invNumber + ", manufacter="
-                + manufacter + ", model=" + model + ", serial number=" + serial + "]";
+        return "Keyboard [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacter="
+                + this.getManufacter() + ", model=" + this.getModel() + ", serial number=" + this.getModel() + "]";
     }
 }

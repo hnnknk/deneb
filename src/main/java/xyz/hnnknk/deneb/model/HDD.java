@@ -6,53 +6,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "hdd")
-public class HDD {
+public class HDD extends SystemUnit {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "hdd_id")
-    private Long id;
-
-    @Column(name = "hdd_manufacter")
-    private String manufacter;
-
-    @Column(name = "hdd_model")
-    private String model;
-
-    @Column(name = "hdd_serial")
+    @Column
     private String serial;
 
-    @Column(name = "hdd_capacity")
+    @Column
     private Integer capacity;
 
-    @Column(name = "hdd_type")
+    @Column
     private HddTypes hddTypes;
 
     public HDD() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getManufacter() {
-        return manufacter;
-    }
-
-    public void setManufacter(String manufacter) {
-        this.manufacter = manufacter;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getSerial() {

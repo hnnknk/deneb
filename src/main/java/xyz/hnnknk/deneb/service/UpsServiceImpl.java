@@ -3,7 +3,7 @@ package xyz.hnnknk.deneb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.UpsDAO;
+import xyz.hnnknk.deneb.dao.PeripheralDAO;
 import xyz.hnnknk.deneb.model.Ups;
 
 import java.util.List;
@@ -12,42 +12,42 @@ import java.util.List;
 public class UpsServiceImpl implements UpsService {
 
     @Autowired
-    UpsDAO upsDAO;
+    PeripheralDAO upsDAOImpl;
 
     @Transactional
     @Override
     public void save(Ups ups) {
-        upsDAO.save(ups);
+        upsDAOImpl.save(ups);
     }
 
     @Transactional
     @Override
     public void update(Ups ups) {
-        upsDAO.update(ups);
+        upsDAOImpl.update(ups);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
-        upsDAO.delete(id);
+        upsDAOImpl.delete(id);
     }
 
     @Transactional
     @Override
     public Ups findById(long id) {
-        return upsDAO.findById(id);
+        return (Ups) upsDAOImpl.findById(id);
     }
 
     @Transactional
     @Override
     public List<Ups> listAllUpses() {
-        return upsDAO.listAllUpses();
+        return upsDAOImpl.listAll();
     }
 
     @Transactional
     @Override
     public boolean isUpsExists(Ups ups) {
-        return upsDAO.isUpsExists(ups);
+        return upsDAOImpl.isExists(ups);
     }
 }
 

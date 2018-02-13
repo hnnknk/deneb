@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import xyz.hnnknk.deneb.config.WebConfig;
-import xyz.hnnknk.deneb.dao.MonitorDAO;
+import xyz.hnnknk.deneb.dao.PeripheralDAO;
 import xyz.hnnknk.deneb.model.Monitor;
 import xyz.hnnknk.deneb.service.MonitorServiceImpl;
 
@@ -25,7 +25,7 @@ public class MonitorServiceTest {
     private MonitorServiceImpl monitorService;
 
     @Mock
-    private MonitorDAO monitorDAO;
+    private PeripheralDAO monitorDAOImpl;
 
     @Before
     public void setup() {
@@ -35,7 +35,7 @@ public class MonitorServiceTest {
         mon.setModel("170v");
         mon.setManufacter("Philips");
         mon.setInvNumber("144");
-        Mockito.when(monitorDAO.findById(1L)).thenReturn(mon);
+        Mockito.when(monitorDAOImpl.findById(1L)).thenReturn(mon);
     }
 
     @Test
