@@ -16,9 +16,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.model.Monitor;
-import xyz.hnnknk.deneb.service.MonitorService;
+import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.servlet.ServletContext;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -35,7 +37,7 @@ public class MonitorControllerIntegrationTest {
     private WebApplicationContext wac;
 
     @Autowired
-    private MonitorService monitorService;
+    private PeripheralService monitorServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -45,10 +47,12 @@ public class MonitorControllerIntegrationTest {
     @Before
     public void setup()  {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.monitorService.save(new Monitor("144", "Philips", "170v", "3Hg45ks86Gr"));
-        this.monitorService.save(new Monitor("155", "Philips", "170v", "783G6r45TNe"));
+        this.monitorServiceImpl.save(new Monitor("144", "Philips", "170v", "3Hg45ks86Gr"));
+        this.monitorServiceImpl.save(new Monitor("155", "Philips", "170v", "783G6r45TNe"));
 
-        for(Monitor m : this.monitorService.listAllMonitors()) {
+        List<Monitor> list = this.monitorServiceImpl.listAll();
+
+        for(Monitor m : list) {
             if(m.getInvNumber().equals("144")) {
                 firstId = m.getId();
             } else if (m.getInvNumber().equals("155")) {

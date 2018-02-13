@@ -16,9 +16,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.model.Ups;
-import xyz.hnnknk.deneb.service.UpsService;
+import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.servlet.ServletContext;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -35,7 +37,7 @@ public class UpsControllerIntegrationTest {
     private WebApplicationContext wac;
 
     @Autowired
-    private UpsService upsService;
+    private PeripheralService upsServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -45,10 +47,12 @@ public class UpsControllerIntegrationTest {
     @Before
     public void setup()  {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.upsService.save(new Ups("133", "APC", "CS500", "3Hg45ks86Gr"));
-        this.upsService.save(new Ups("118", "APC", "CS500", "8Hg4DF54s4r"));
+        this.upsServiceImpl.save(new Ups("133", "APC", "CS500", "3Hg45ks86Gr"));
+        this.upsServiceImpl.save(new Ups("118", "APC", "CS500", "8Hg4DF54s4r"));
 
-        for(Ups u : this.upsService.listAllUpses()) {
+        List<Ups> list = this.upsServiceImpl.listAll();
+
+        for(Ups u : list) {
             if(u.getInvNumber().equals("133")) {
                 firstId = u.getId();
             } else if (u.getInvNumber().equals("118")) {

@@ -1,16 +1,16 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.SystemUnit;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.PowerSupply;
+import xyz.hnnknk.deneb.model.HDD;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class PowerSupplyDAOImpl implements SystemUnitDAO {
+public class HDDDAOImpl implements SystemUnitDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -31,20 +31,20 @@ public class PowerSupplyDAOImpl implements SystemUnitDAO {
     }
 
     @Override
-    public PowerSupply findById(long id) {
+    public HDD findById(long id) {
 
-        for(PowerSupply pow : listAll()) {
-            if (id == pow.getId()) {
-                return pow;
+        for(HDD h : listAll()) {
+            if (id == h.getId()) {
+                return h;
             }
         }
         return null;
     }
 
     @Override
-    public List<PowerSupply> listAll() {
+    public List<HDD> listAll() {
         @SuppressWarnings("unchecked")
-        TypedQuery<PowerSupply> query = sessionFactory.getCurrentSession().createQuery("from PowerSupply");
+        TypedQuery<HDD> query = sessionFactory.getCurrentSession().createQuery("from HDD");
         return query.getResultList();
     }
 
@@ -52,8 +52,8 @@ public class PowerSupplyDAOImpl implements SystemUnitDAO {
     public boolean isExists(SystemUnit systemUnit) {
         boolean result = false;
 
-        for(PowerSupply pow : listAll()) {
-            if (pow.getId().equals(systemUnit.getId())) {
+        for(HDD h : listAll()) {
+            if (h.getId().equals(systemUnit.getId())) {
                 result = true;
                 break;
             }

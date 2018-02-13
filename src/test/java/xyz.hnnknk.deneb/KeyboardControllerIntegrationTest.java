@@ -16,9 +16,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.model.Keyboard;
-import xyz.hnnknk.deneb.service.KeyboardService;
+import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.servlet.ServletContext;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -35,7 +37,7 @@ public class KeyboardControllerIntegrationTest {
     private WebApplicationContext wac;
 
     @Autowired
-    private KeyboardService keyboardService;
+    private PeripheralService keyboardServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -45,10 +47,11 @@ public class KeyboardControllerIntegrationTest {
     @Before
     public void setup()  {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.keyboardService.save(new Keyboard("144", "BTC", "6301c", "3Hg45ks86Gr"));
-        this.keyboardService.save(new Keyboard("155", "Logitech", "K120", "783G6r45TNe"));
+        this.keyboardServiceImpl.save(new Keyboard("144", "BTC", "6301c", "3Hg45ks86Gr"));
+        this.keyboardServiceImpl.save(new Keyboard("155", "Logitech", "K120", "783G6r45TNe"));
 
-        for(Keyboard k : this.keyboardService.listAllKeyboards()) {
+        List<Keyboard> list = this.keyboardServiceImpl.listAll();
+        for(Keyboard k : list) {
             if(k.getInvNumber().equals("144")) {
                 firstId = k.getId();
             } else if (k.getInvNumber().equals("155")) {

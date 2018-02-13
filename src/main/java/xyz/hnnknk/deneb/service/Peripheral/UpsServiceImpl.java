@@ -1,29 +1,30 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.Peripheral;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.PeripheralDAO;
+import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
+import xyz.hnnknk.deneb.model.Peripheral;
 import xyz.hnnknk.deneb.model.Ups;
 
 import java.util.List;
 
 @Service
-public class UpsServiceImpl implements UpsService {
+public class UpsServiceImpl implements PeripheralService {
 
     @Autowired
     PeripheralDAO upsDAOImpl;
 
     @Transactional
     @Override
-    public void save(Ups ups) {
-        upsDAOImpl.save(ups);
+    public void save(Peripheral peripheral) {
+        upsDAOImpl.save(peripheral);
     }
 
     @Transactional
     @Override
-    public void update(Ups ups) {
-        upsDAOImpl.update(ups);
+    public void update(Peripheral peripheral) {
+        upsDAOImpl.update(peripheral);
     }
 
     @Transactional
@@ -40,14 +41,14 @@ public class UpsServiceImpl implements UpsService {
 
     @Transactional
     @Override
-    public List<Ups> listAllUpses() {
+    public List<Ups> listAll() {
         return upsDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isUpsExists(Ups ups) {
-        return upsDAOImpl.isExists(ups);
+    public boolean isExists(Peripheral peripheral) {
+        return upsDAOImpl.isExists(peripheral);
     }
 }
 

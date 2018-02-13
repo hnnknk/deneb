@@ -1,16 +1,16 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.SystemUnit;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.MotherBoard;
+import xyz.hnnknk.deneb.model.PowerSupply;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class MotherBoardDAOImpl implements SystemUnitDAO {
+public class PowerSupplyDAOImpl implements SystemUnitDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -31,20 +31,20 @@ public class MotherBoardDAOImpl implements SystemUnitDAO {
     }
 
     @Override
-    public MotherBoard findById(long id) {
+    public PowerSupply findById(long id) {
 
-        for(MotherBoard mot : listAll()) {
-            if (id == mot.getId()) {
-                return mot;
+        for(PowerSupply pow : listAll()) {
+            if (id == pow.getId()) {
+                return pow;
             }
         }
         return null;
     }
 
     @Override
-    public List<MotherBoard> listAll() {
+    public List<PowerSupply> listAll() {
         @SuppressWarnings("unchecked")
-        TypedQuery<MotherBoard> query = sessionFactory.getCurrentSession().createQuery("from MotherBoard");
+        TypedQuery<PowerSupply> query = sessionFactory.getCurrentSession().createQuery("from PowerSupply");
         return query.getResultList();
     }
 
@@ -52,8 +52,8 @@ public class MotherBoardDAOImpl implements SystemUnitDAO {
     public boolean isExists(SystemUnit systemUnit) {
         boolean result = false;
 
-        for(MotherBoard m : listAll()) {
-            if (m.getId().equals(systemUnit.getId())) {
+        for(PowerSupply pow : listAll()) {
+            if (pow.getId().equals(systemUnit.getId())) {
                 result = true;
                 break;
             }

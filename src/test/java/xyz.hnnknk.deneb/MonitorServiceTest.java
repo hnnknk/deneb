@@ -12,9 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import xyz.hnnknk.deneb.config.WebConfig;
-import xyz.hnnknk.deneb.dao.PeripheralDAO;
+import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
 import xyz.hnnknk.deneb.model.Monitor;
-import xyz.hnnknk.deneb.service.MonitorServiceImpl;
+import xyz.hnnknk.deneb.service.Peripheral.MonitorServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})

@@ -1,29 +1,30 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.Peripheral;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.PeripheralDAO;
+import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
 import xyz.hnnknk.deneb.model.Mouse;
+import xyz.hnnknk.deneb.model.Peripheral;
 
 import java.util.List;
 
 @Service
-public class MouseServiceImpl implements MouseService {
+public class MouseServiceImpl implements PeripheralService {
 
     @Autowired
     PeripheralDAO mouseDAOImpl;
 
     @Transactional
     @Override
-    public void save(Mouse mouse) {
-        mouseDAOImpl.save(mouse);
+    public void save(Peripheral peripheral) {
+        mouseDAOImpl.save(peripheral);
     }
 
     @Transactional
     @Override
-    public void update(Mouse mouse) {
-        mouseDAOImpl.update(mouse);
+    public void update(Peripheral peripheral) {
+        mouseDAOImpl.update(peripheral);
     }
 
     @Transactional
@@ -40,13 +41,13 @@ public class MouseServiceImpl implements MouseService {
 
     @Transactional
     @Override
-    public List<Mouse> listAllMouses() {
+    public List<Mouse> listAll() {
         return mouseDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isMouseExists(Mouse mouse) {
-        return mouseDAOImpl.isExists(mouse);
+    public boolean isExists(Peripheral peripheral) {
+        return mouseDAOImpl.isExists(peripheral);
     }
 }

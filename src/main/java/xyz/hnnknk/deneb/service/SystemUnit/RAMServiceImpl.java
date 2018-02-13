@@ -1,53 +1,53 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.SystemUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.SystemUnitDAO;
-import xyz.hnnknk.deneb.model.HDD;
+import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
+import xyz.hnnknk.deneb.model.RAM;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import java.util.List;
 
 @Service
-public class HDDServiceImpl implements SystemUnitService {
+public class RAMServiceImpl implements SystemUnitService {
 
     @Autowired
-    SystemUnitDAO HDDDAOImpl;
+    SystemUnitDAO RAMDAOImpl;
 
     @Transactional
     @Override
     public void save(SystemUnit systemUnit) {
-        HDDDAOImpl.save(systemUnit);
+        RAMDAOImpl.save(systemUnit);
     }
 
     @Transactional
     @Override
     public void update(SystemUnit systemUnit) {
-        HDDDAOImpl.update(systemUnit);
+        RAMDAOImpl.update(systemUnit);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
-        HDDDAOImpl.delete(id);
+        RAMDAOImpl.delete(id);
     }
 
     @Transactional
     @Override
-    public HDD findById(long id) {
-        return (HDD) HDDDAOImpl.findById(id);
+    public RAM findById(long id) {
+        return (RAM) RAMDAOImpl.findById(id);
     }
 
     @Transactional
     @Override
-    public List<HDD> listAll() {
-        return HDDDAOImpl.listAll();
+    public List<RAM> listAll() {
+        return RAMDAOImpl.listAll();
     }
 
     @Transactional
     @Override
     public boolean isExists(SystemUnit systemUnit) {
-        return HDDDAOImpl.isExists(systemUnit);
+        return RAMDAOImpl.isExists(systemUnit);
     }
 }

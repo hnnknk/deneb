@@ -1,29 +1,30 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.SystemUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.SystemUnitDAO;
+import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
 import xyz.hnnknk.deneb.model.Processor;
+import xyz.hnnknk.deneb.model.SystemUnit;
 
 import java.util.List;
 
 @Service
-public class ProcessorServiceImpl implements ProcessorService{
+public class ProcessorServiceImpl implements SystemUnitService {
 
     @Autowired
     SystemUnitDAO processorDAOImpl;
 
     @Transactional
     @Override
-    public void save(Processor processor) {
-        processorDAOImpl.save(processor);
+    public void save(SystemUnit systemUnit) {
+        processorDAOImpl.save(systemUnit);
     }
 
     @Transactional
     @Override
-    public void update(Processor processor) {
-        processorDAOImpl.update(processor);
+    public void update(SystemUnit systemUnit) {
+        processorDAOImpl.update(systemUnit);
     }
 
     @Transactional
@@ -40,13 +41,13 @@ public class ProcessorServiceImpl implements ProcessorService{
 
     @Transactional
     @Override
-    public List<Processor> listAllProcessors() {
+    public List<Processor> listAll() {
         return processorDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isProcessorExists(Processor processor) {
-        return processorDAOImpl.isExists(processor);
+    public boolean isExists(SystemUnit systemUnit) {
+        return processorDAOImpl.isExists(systemUnit);
     }
 }

@@ -1,30 +1,30 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.SystemUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.SystemUnitDAO;
+import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
 import xyz.hnnknk.deneb.model.PowerSupply;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import java.util.List;
 
 @Service
-public class PowerSupplyServiceImpl implements PowerSupplyService {
+public class PowerSupplyServiceImpl implements SystemUnitService {
 
     @Autowired
     SystemUnitDAO powerSupplyDAOImpl;
 
     @Transactional
     @Override
-    public void save(PowerSupply powerSupply) {
-        powerSupplyDAOImpl.save(powerSupply);
+    public void save(SystemUnit systemUnit) {
+        powerSupplyDAOImpl.save(systemUnit);
     }
 
     @Transactional
     @Override
-    public void update(PowerSupply powerSupply) {
-        powerSupplyDAOImpl.update(powerSupply);
+    public void update(SystemUnit systemUnit) {
+        powerSupplyDAOImpl.update(systemUnit);
     }
 
     @Transactional
@@ -41,13 +41,13 @@ public class PowerSupplyServiceImpl implements PowerSupplyService {
 
     @Transactional
     @Override
-    public List<PowerSupply> listAllPowerSupplies() {
+    public List<PowerSupply> listAll() {
         return powerSupplyDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isPowerSupplyExists(PowerSupply powerSupply) {
-        return powerSupplyDAOImpl.isExists(powerSupply);
+    public boolean isExists(SystemUnit systemUnit) {
+        return powerSupplyDAOImpl.isExists(systemUnit);
     }
 }

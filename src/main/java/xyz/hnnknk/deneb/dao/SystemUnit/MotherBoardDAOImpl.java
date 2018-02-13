@@ -1,16 +1,16 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.SystemUnit;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.Processor;
+import xyz.hnnknk.deneb.model.MotherBoard;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class ProcessorDAOImpl implements SystemUnitDAO {
+public class MotherBoardDAOImpl implements SystemUnitDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -31,20 +31,20 @@ public class ProcessorDAOImpl implements SystemUnitDAO {
     }
 
     @Override
-    public Processor findById(long id) {
+    public MotherBoard findById(long id) {
 
-        for(Processor proc : listAll()) {
-            if (id == proc.getId()) {
-                return proc;
+        for(MotherBoard mot : listAll()) {
+            if (id == mot.getId()) {
+                return mot;
             }
         }
         return null;
     }
 
     @Override
-    public List<Processor> listAll() {
+    public List<MotherBoard> listAll() {
         @SuppressWarnings("unchecked")
-        TypedQuery<Processor> query = sessionFactory.getCurrentSession().createQuery("from Processor");
+        TypedQuery<MotherBoard> query = sessionFactory.getCurrentSession().createQuery("from MotherBoard");
         return query.getResultList();
     }
 
@@ -52,8 +52,8 @@ public class ProcessorDAOImpl implements SystemUnitDAO {
     public boolean isExists(SystemUnit systemUnit) {
         boolean result = false;
 
-        for(Processor proc : listAll()) {
-            if (proc.getId().equals(systemUnit.getId())) {
+        for(MotherBoard m : listAll()) {
+            if (m.getId().equals(systemUnit.getId())) {
                 result = true;
                 break;
             }

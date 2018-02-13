@@ -1,11 +1,10 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.Peripheral;
 
-import xyz.hnnknk.deneb.model.HDD;
-import xyz.hnnknk.deneb.model.SystemUnit;
+import xyz.hnnknk.deneb.model.Peripheral;
 
 import java.util.List;
 
-public interface SystemUnitService<T extends SystemUnit> {
+public interface PeripheralService<T extends Peripheral> {
 
     void save(T t);
     void update(T t);

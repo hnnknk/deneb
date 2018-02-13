@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.model.HDD;
-import xyz.hnnknk.deneb.service.SystemUnitService;
+import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,11 +17,11 @@ import java.util.List;
 public class HDDController {
 
     @Autowired
-    SystemUnitService hddService;
+    SystemUnitService HDDServiceImpl;
 
     @RequestMapping(value = "/sysunit/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHdds() {
-        List<HDD> hdds = hddService.listAll();
+        List<HDD> hdds = HDDServiceImpl.listAll();
         if(hdds.isEmpty()){
             return new ResponseEntity<List<HDD>>(HttpStatus.NO_CONTENT);
         }
@@ -30,7 +30,7 @@ public class HDDController {
 
     @RequestMapping(value = "/sysunit/ro/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHddsRO() {
-        List<HDD> hdds = hddService.listAll();
+        List<HDD> hdds = HDDServiceImpl.listAll();
         if(hdds.isEmpty()){
             return new ResponseEntity<List<HDD>>(HttpStatus.NO_CONTENT);
         }
@@ -40,7 +40,7 @@ public class HDDController {
     @RequestMapping(value = "/sysunit/hdd/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HDD> getHDD(@PathVariable("id") long id) {
         System.out.println("Fetching HDD with id " + id);
-        HDD hdd = (HDD) hddService.findById(id);
+        HDD hdd = (HDD) HDDServiceImpl.findById(id);
         if (hdd == null) {
             System.out.println("HDD with id " + id + " not found");
             return new ResponseEntity<HDD>(HttpStatus.NOT_FOUND);
@@ -52,12 +52,12 @@ public class HDDController {
     public ResponseEntity<Void> createHDD(@Valid @RequestBody HDD hdd, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + hdd.toString());
 
-        if (hddService.isExists(hdd)) {
+        if (HDDServiceImpl.isExists(hdd)) {
             System.out.println("A " + hdd.toString() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
-        hddService.save(hdd);
+        HDDServiceImpl.save(hdd);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/sysunit/hdd/{id}").buildAndExpand(hdd.getId()).toUri());
@@ -68,7 +68,7 @@ public class HDDController {
     public ResponseEntity<HDD> updateHDD(@PathVariable("id") long id,@Valid @RequestBody HDD hdd) {
         System.out.println("Updating " + hdd.toString());
 
-        HDD currentHDD = (HDD) hddService.findById(id);
+        HDD currentHDD = (HDD) HDDServiceImpl.findById(id);
 
         if (currentHDD==null) {
             System.out.println("HDD with id " + id + " not found");
@@ -81,7 +81,7 @@ public class HDDController {
         currentHDD.setCapacity(hdd.getCapacity());
         currentHDD.setHddTypes(hdd.getHddTypes());
 
-        hddService.update(currentHDD);
+        HDDServiceImpl.update(currentHDD);
         return new ResponseEntity<HDD>(currentHDD, HttpStatus.OK);
     }
 
@@ -89,13 +89,13 @@ public class HDDController {
     public ResponseEntity<HDD> deleteHDD(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting HDD with id " + id);
 
-        HDD hdd = (HDD) hddService.findById(id);
+        HDD hdd = (HDD) HDDServiceImpl.findById(id);
         if (hdd == null) {
             System.out.println("Unable to delete. HDD with id " + id + " not found");
             return new ResponseEntity<HDD>(HttpStatus.NOT_FOUND);
         }
 
-        hddService.delete(id);
+        HDDServiceImpl.delete(id);
         return new ResponseEntity<HDD>(HttpStatus.NO_CONTENT);
     }
 }

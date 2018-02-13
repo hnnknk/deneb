@@ -1,29 +1,30 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.Peripheral;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.PeripheralDAO;
+import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
 import xyz.hnnknk.deneb.model.Monitor;
+import xyz.hnnknk.deneb.model.Peripheral;
 
 import java.util.List;
 
 @Service
-public class MonitorServiceImpl implements MonitorService {
+public class MonitorServiceImpl implements PeripheralService {
 
     @Autowired
     PeripheralDAO monitorDAOImpl;
 
     @Transactional
     @Override
-    public void save(Monitor monitor) {
-        monitorDAOImpl.save(monitor);
+    public void save(Peripheral peripheral) {
+        monitorDAOImpl.save(peripheral);
     }
 
     @Transactional
     @Override
-    public void update(Monitor monitor) {
-        monitorDAOImpl.update(monitor);
+    public void update(Peripheral peripheral) {
+        monitorDAOImpl.update(peripheral);
     }
 
     @Transactional
@@ -40,13 +41,13 @@ public class MonitorServiceImpl implements MonitorService {
 
     @Transactional
     @Override
-    public List<Monitor> listAllMonitors() {
+    public List<Monitor> listAll() {
         return monitorDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isMonitorExists(Monitor monitor) {
-        return monitorDAOImpl.isExists(monitor);
+    public boolean isExists(Peripheral peripheral) {
+        return monitorDAOImpl.isExists(peripheral);
     }
 }

@@ -1,4 +1,4 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.Peripheral;
 
 import xyz.hnnknk.deneb.model.Peripheral;
 

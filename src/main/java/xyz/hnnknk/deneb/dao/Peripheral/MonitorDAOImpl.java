@@ -1,4 +1,4 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.Peripheral;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

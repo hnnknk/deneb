@@ -1,16 +1,16 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.SystemUnit;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.RAM;
+import xyz.hnnknk.deneb.model.Processor;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class RAMDAOImpl implements SystemUnitDAO {
+public class ProcessorDAOImpl implements SystemUnitDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -31,20 +31,20 @@ public class RAMDAOImpl implements SystemUnitDAO {
     }
 
     @Override
-    public RAM findById(long id) {
+    public Processor findById(long id) {
 
-        for(RAM r : listAll()) {
-            if (id == r.getId()) {
-                return r;
+        for(Processor proc : listAll()) {
+            if (id == proc.getId()) {
+                return proc;
             }
         }
         return null;
     }
 
     @Override
-    public List<RAM> listAll() {
+    public List<Processor> listAll() {
         @SuppressWarnings("unchecked")
-        TypedQuery<RAM> query = sessionFactory.getCurrentSession().createQuery("from RAM");
+        TypedQuery<Processor> query = sessionFactory.getCurrentSession().createQuery("from Processor");
         return query.getResultList();
     }
 
@@ -52,8 +52,8 @@ public class RAMDAOImpl implements SystemUnitDAO {
     public boolean isExists(SystemUnit systemUnit) {
         boolean result = false;
 
-        for(RAM r : listAll()) {
-            if (r.getId().equals(systemUnit.getId())) {
+        for(Processor proc : listAll()) {
+            if (proc.getId().equals(systemUnit.getId())) {
                 result = true;
                 break;
             }

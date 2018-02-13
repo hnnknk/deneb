@@ -1,29 +1,30 @@
-package xyz.hnnknk.deneb.service;
+package xyz.hnnknk.deneb.service.Peripheral;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.hnnknk.deneb.dao.PeripheralDAO;
+import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
 import xyz.hnnknk.deneb.model.Keyboard;
+import xyz.hnnknk.deneb.model.Peripheral;
 
 import java.util.List;
 
 @Service
-public class KeyboardServiceImpl implements KeyboardService {
+public class KeyboardServiceImpl implements PeripheralService {
 
     @Autowired
     PeripheralDAO keyboardDAOImpl;
 
     @Transactional
     @Override
-    public void save(Keyboard keyboard) {
-        keyboardDAOImpl.save(keyboard);
+    public void save(Peripheral peripheral) {
+        keyboardDAOImpl.save(peripheral);
     }
 
     @Transactional
     @Override
-    public void update(Keyboard keyboard) {
-        keyboardDAOImpl.update(keyboard);
+    public void update(Peripheral peripheral) {
+        keyboardDAOImpl.update(peripheral);
     }
 
     @Transactional
@@ -40,13 +41,13 @@ public class KeyboardServiceImpl implements KeyboardService {
 
     @Transactional
     @Override
-    public List<Keyboard> listAllKeyboards() {
+    public List<Keyboard> listAll() {
         return keyboardDAOImpl.listAll();
     }
 
     @Transactional
     @Override
-    public boolean isKeyboardExists(Keyboard keyboard) {
-        return keyboardDAOImpl.isExists(keyboard);
+    public boolean isExists(Peripheral peripheral) {
+        return keyboardDAOImpl.isExists(peripheral);
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.enums.NotificationTypes;
 import xyz.hnnknk.deneb.model.Keyboard;
-import xyz.hnnknk.deneb.service.KeyboardService;
 import xyz.hnnknk.deneb.service.NotificationService;
+import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
 public class KeyboardController {
 
     @Autowired
-    KeyboardService keyboardService;
+    PeripheralService keyboardServiceImpl;
 
     @Autowired
     NotificationService notificationService;
 
     @RequestMapping(value = "/components/keyboard/", method = RequestMethod.GET)
     public ResponseEntity<List<Keyboard>> listAllKeyboards() {
-        List<Keyboard> keyboards = keyboardService.listAllKeyboards();
+        List<Keyboard> keyboards = keyboardServiceImpl.listAll();
         if(keyboards.isEmpty()){
             return new ResponseEntity<List<Keyboard>>(HttpStatus.NO_CONTENT);
         }
@@ -35,7 +35,7 @@ public class KeyboardController {
 
     @RequestMapping(value = "/components/ro/keyboard/", method = RequestMethod.GET)
     public ResponseEntity<List<Keyboard>> listAllKeyboardsRO() {
-        List<Keyboard> keyboards = keyboardService.listAllKeyboards();
+        List<Keyboard> keyboards = keyboardServiceImpl.listAll();
         if(keyboards.isEmpty()){
             return new ResponseEntity<List<Keyboard>>(HttpStatus.NO_CONTENT);
         }
@@ -45,7 +45,7 @@ public class KeyboardController {
     @RequestMapping(value = "/components/keyboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Keyboard> getKeyboard(@PathVariable("id") long id) {
         System.out.println("Fetching Keyboard with id " + id);
-        Keyboard keyboard = keyboardService.findById(id);
+        Keyboard keyboard = (Keyboard) keyboardServiceImpl.findById(id);
         if (keyboard == null) {
             System.out.println("Keyboard with id " + id + " not found");
             return new ResponseEntity<Keyboard>(HttpStatus.NOT_FOUND);
@@ -57,14 +57,14 @@ public class KeyboardController {
     public ResponseEntity<Void> createKeyboard(@Valid @RequestBody Keyboard keyboard, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + keyboard.toString());
 
-        if (keyboardService.isKeyboardExists(keyboard)) {
+        if (keyboardServiceImpl.isExists(keyboard)) {
             System.out.println("A " + keyboard.toString() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
         notificationService.checkNotifications(NotificationTypes.KEYBOARD, keyboard.toString());
 
-        keyboardService.save(keyboard);
+        keyboardServiceImpl.save(keyboard);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/components/keyboard/{id}").buildAndExpand(keyboard.getId()).toUri());
@@ -75,7 +75,7 @@ public class KeyboardController {
     public ResponseEntity<Keyboard> updateKeyboard(@PathVariable("id") long id,@Valid @RequestBody Keyboard keyboard) {
         System.out.println("Updating " + keyboard.toString());
 
-        Keyboard currentKeyboard = keyboardService.findById(id);
+        Keyboard currentKeyboard = (Keyboard) keyboardServiceImpl.findById(id);
 
         if (currentKeyboard==null) {
             System.out.println("Keyboard with id " + id + " not found");
@@ -87,7 +87,7 @@ public class KeyboardController {
         currentKeyboard.setModel(keyboard.getModel());
         currentKeyboard.setSerial(keyboard.getSerial());
 
-        keyboardService.update(currentKeyboard);
+        keyboardServiceImpl.update(currentKeyboard);
         return new ResponseEntity<Keyboard>(currentKeyboard, HttpStatus.OK);
     }
 
@@ -95,13 +95,13 @@ public class KeyboardController {
     public ResponseEntity<Keyboard> deleteKeyboard(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting Keyboard with id " + id);
 
-        Keyboard keyboard = keyboardService.findById(id);
+        Keyboard keyboard = (Keyboard) keyboardServiceImpl.findById(id);
         if (keyboard == null) {
             System.out.println("Unable to delete. Keyboard with id " + id + " not found");
             return new ResponseEntity<Keyboard>(HttpStatus.NOT_FOUND);
         }
 
-        keyboardService.delete(id);
+        keyboardServiceImpl.delete(id);
         return new ResponseEntity<Keyboard>(HttpStatus.NO_CONTENT);
     }
 }

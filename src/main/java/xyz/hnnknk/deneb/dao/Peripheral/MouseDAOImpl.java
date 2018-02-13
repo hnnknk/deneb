@@ -1,19 +1,19 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.Peripheral;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import xyz.hnnknk.deneb.model.Mouse;
 import xyz.hnnknk.deneb.model.Peripheral;
-import xyz.hnnknk.deneb.model.Ups;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class UpsDAOImpl implements PeripheralDAO {
+public class MouseDAOImpl implements PeripheralDAO {
 
     @Autowired
-    private SessionFactory sessionFactory;
+    SessionFactory sessionFactory;
 
     @Override
     public void save(Peripheral peripheral) {
@@ -31,20 +31,20 @@ public class UpsDAOImpl implements PeripheralDAO {
     }
 
     @Override
-    public Ups findById(long id) {
+    public Mouse findById(long id) {
 
-        for(Ups key : listAll()) {
-            if (id == key.getId()) {
-                return key;
+        for(Mouse mou : listAll()) {
+            if (id == mou.getId()) {
+                return mou;
             }
         }
         return null;
     }
 
     @Override
-    public List<Ups> listAll() {
+    public List<Mouse> listAll() {
         @SuppressWarnings("unchecked")
-        TypedQuery<Ups> query = sessionFactory.getCurrentSession().createQuery("from Ups");
+        TypedQuery<Mouse> query = sessionFactory.getCurrentSession().createQuery("from Mouse");
         return query.getResultList();
     }
 
@@ -53,8 +53,8 @@ public class UpsDAOImpl implements PeripheralDAO {
 
         boolean result = false;
 
-        for(Ups u : listAll()) {
-            if (u.getInvNumber().equals(peripheral.getInvNumber())) {
+        for (Mouse m : listAll()) {
+            if (m.getInvNumber().equals(peripheral.getInvNumber())) {
                 result = true;
                 break;
             }

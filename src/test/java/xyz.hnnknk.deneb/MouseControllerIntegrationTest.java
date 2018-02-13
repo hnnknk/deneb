@@ -16,9 +16,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.model.Mouse;
-import xyz.hnnknk.deneb.service.MouseService;
+import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.servlet.ServletContext;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -35,7 +37,7 @@ public class MouseControllerIntegrationTest {
     private WebApplicationContext wac;
 
     @Autowired
-    private MouseService mouseService;
+    private PeripheralService mouseServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -45,10 +47,11 @@ public class MouseControllerIntegrationTest {
     @Before
     public void setup()  {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        this.mouseService.save(new Mouse("133", "A4Tech", "X-718F", "3Hg45ks86Gr"));
-        this.mouseService.save(new Mouse("118", "Logitech", "B100", "8Hg4DF54s4r"));
+        this.mouseServiceImpl.save(new Mouse("133", "A4Tech", "X-718F", "3Hg45ks86Gr"));
+        this.mouseServiceImpl.save(new Mouse("118", "Logitech", "B100", "8Hg4DF54s4r"));
 
-        for(Mouse m : this.mouseService.listAllMouses()) {
+        List<Mouse> list = this.mouseServiceImpl.listAll();
+        for(Mouse m : list) {
             if(m.getInvNumber().equals("133")) {
                 firstId = m.getId();
             } else if (m.getInvNumber().equals("118")) {

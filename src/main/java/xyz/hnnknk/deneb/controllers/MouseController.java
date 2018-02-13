@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.enums.NotificationTypes;
 import xyz.hnnknk.deneb.model.Mouse;
-import xyz.hnnknk.deneb.service.MouseService;
+import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
 public class MouseController {
 
     @Autowired
-    MouseService mouseService;
+    PeripheralService mouseServiceImpl;
 
     @Autowired
     NotificationService notificationService;
 
     @RequestMapping(value = "/components/mouse/", method = RequestMethod.GET)
     public ResponseEntity<List<Mouse>> listAllmouses() {
-        List<Mouse> mouses = mouseService.listAllMouses();
+        List<Mouse> mouses = mouseServiceImpl.listAll();
         if(mouses.isEmpty()){
             return new ResponseEntity<List<Mouse>>(HttpStatus.NO_CONTENT);
         }
@@ -35,7 +35,7 @@ public class MouseController {
 
     @RequestMapping(value = "/components/ro/mouse/", method = RequestMethod.GET)
     public ResponseEntity<List<Mouse>> listAllmousesRO() {
-        List<Mouse> mouses = mouseService.listAllMouses();
+        List<Mouse> mouses = mouseServiceImpl.listAll();
         if(mouses.isEmpty()){
             return new ResponseEntity<List<Mouse>>(HttpStatus.NO_CONTENT);
         }
@@ -45,7 +45,7 @@ public class MouseController {
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Mouse> getmouse(@PathVariable("id") long id) {
         System.out.println("Fetching mouse with id " + id);
-        Mouse mouse = mouseService.findById(id);
+        Mouse mouse = (Mouse) mouseServiceImpl.findById(id);
         if (mouse == null) {
             System.out.println("mouse with id " + id + " not found");
             return new ResponseEntity<Mouse>(HttpStatus.NOT_FOUND);
@@ -57,14 +57,14 @@ public class MouseController {
     public ResponseEntity<Void> createmouse(@Valid @RequestBody Mouse mouse, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + mouse.toString());
 
-        if (mouseService.isMouseExists(mouse)) {
+        if (mouseServiceImpl.isExists(mouse)) {
             System.out.println("A " + mouse.toString() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
         notificationService.checkNotifications(NotificationTypes.MOUSE, mouse.toString());
 
-        mouseService.save(mouse);
+        mouseServiceImpl.save(mouse);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/components/mouse/{id}").buildAndExpand(mouse.getId()).toUri());
@@ -75,7 +75,7 @@ public class MouseController {
     public ResponseEntity<Mouse> updatemouse(@PathVariable("id") long id,@Valid @RequestBody Mouse mouse) {
         System.out.println("Updating " + mouse.toString());
 
-        Mouse currentmouse = mouseService.findById(id);
+        Mouse currentmouse = (Mouse) mouseServiceImpl.findById(id);
 
         if (currentmouse==null) {
             System.out.println("mouse with id " + id + " not found");
@@ -87,7 +87,7 @@ public class MouseController {
         currentmouse.setModel(mouse.getModel());
         currentmouse.setSerial(mouse.getSerial());
 
-        mouseService.update(currentmouse);
+        mouseServiceImpl.update(currentmouse);
         return new ResponseEntity<Mouse>(currentmouse, HttpStatus.OK);
     }
 
@@ -95,13 +95,13 @@ public class MouseController {
     public ResponseEntity<Mouse> deletemouse(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting mouse with id " + id);
 
-        Mouse mouse = mouseService.findById(id);
+        Mouse mouse = (Mouse) mouseServiceImpl.findById(id);
         if (mouse == null) {
             System.out.println("Unable to delete. mouse with id " + id + " not found");
             return new ResponseEntity<Mouse>(HttpStatus.NOT_FOUND);
         }
 
-        mouseService.delete(id);
+        mouseServiceImpl.delete(id);
         return new ResponseEntity<Mouse>(HttpStatus.NO_CONTENT);
     }
 }

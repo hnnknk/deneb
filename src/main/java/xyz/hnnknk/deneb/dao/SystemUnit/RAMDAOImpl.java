@@ -1,16 +1,16 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.SystemUnit;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.HDD;
+import xyz.hnnknk.deneb.model.RAM;
 import xyz.hnnknk.deneb.model.SystemUnit;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class HDDDAOImpl implements SystemUnitDAO {
+public class RAMDAOImpl implements SystemUnitDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -31,20 +31,20 @@ public class HDDDAOImpl implements SystemUnitDAO {
     }
 
     @Override
-    public HDD findById(long id) {
+    public RAM findById(long id) {
 
-        for(HDD h : listAll()) {
-            if (id == h.getId()) {
-                return h;
+        for(RAM r : listAll()) {
+            if (id == r.getId()) {
+                return r;
             }
         }
         return null;
     }
 
     @Override
-    public List<HDD> listAll() {
+    public List<RAM> listAll() {
         @SuppressWarnings("unchecked")
-        TypedQuery<HDD> query = sessionFactory.getCurrentSession().createQuery("from HDD");
+        TypedQuery<RAM> query = sessionFactory.getCurrentSession().createQuery("from RAM");
         return query.getResultList();
     }
 
@@ -52,8 +52,8 @@ public class HDDDAOImpl implements SystemUnitDAO {
     public boolean isExists(SystemUnit systemUnit) {
         boolean result = false;
 
-        for(HDD h : listAll()) {
-            if (h.getId().equals(systemUnit.getId())) {
+        for(RAM r : listAll()) {
+            if (r.getId().equals(systemUnit.getId())) {
                 result = true;
                 break;
             }

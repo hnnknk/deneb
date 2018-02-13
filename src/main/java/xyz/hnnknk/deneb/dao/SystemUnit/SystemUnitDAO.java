@@ -1,4 +1,4 @@
-package xyz.hnnknk.deneb.dao;
+package xyz.hnnknk.deneb.dao.SystemUnit;
 
 import xyz.hnnknk.deneb.model.SystemUnit;
 
