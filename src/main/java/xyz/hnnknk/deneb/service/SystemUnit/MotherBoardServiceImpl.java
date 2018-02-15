@@ -4,20 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
-import xyz.hnnknk.deneb.model.MotherBoard;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.SystemUnit;
+import xyz.hnnknk.deneb.model.MotherBoard;
 
 import java.util.List;
 
 @Service
-public class MotherBoardServiceImpl implements SystemUnitService{
+public class MotherBoardServiceImpl implements SystemUnitService {
 
     @Autowired
     SystemUnitDAO motherBoardDAOImpl;
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) {
+    public void save(SystemUnit systemUnit) throws EntityExistsException {
+        for(MotherBoard r : listAll()) {
+            if (r.getId().equals(systemUnit.getId())) {
+                throw new EntityExistsException("A motherBoard with invNumber "+ systemUnit.getId() +" already exists!");
+            }
+        }
         motherBoardDAOImpl.save(systemUnit);
     }
 
@@ -35,7 +42,11 @@ public class MotherBoardServiceImpl implements SystemUnitService{
 
     @Transactional
     @Override
-    public MotherBoard findById(long id) {
+    public MotherBoard findById(long id) throws EntityNotFoundException {
+
+        if(motherBoardDAOImpl.findById(id) == null) {
+            throw new EntityNotFoundException("A motherBoard with " + id + " not found!");
+        }
         return (MotherBoard) motherBoardDAOImpl.findById(id);
     }
 
@@ -44,19 +55,5 @@ public class MotherBoardServiceImpl implements SystemUnitService{
     public List<MotherBoard> listAll() {
         return motherBoardDAOImpl.listAll();
     }
-
-    @Transactional
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-        boolean result = false;
-
-        for(MotherBoard m : listAll()) {
-            if (m.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
 }
+

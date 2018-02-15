@@ -1,4 +1,4 @@
-package xyz.hnnknk.deneb.unit;
+package xyz.hnnknk.deneb.unit.service;
 
 import org.junit.Assert;
 import org.junit.Before;

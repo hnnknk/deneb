@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
-import xyz.hnnknk.deneb.model.RAM;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.SystemUnit;
+import xyz.hnnknk.deneb.model.RAM;
 
 import java.util.List;
 
@@ -17,7 +19,12 @@ public class RAMServiceImpl implements SystemUnitService {
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) {
+    public void save(SystemUnit systemUnit) throws EntityExistsException {
+        for(RAM r : listAll()) {
+            if (r.getId().equals(systemUnit.getId())) {
+                throw new EntityExistsException("A ram memory with invNumber "+ systemUnit.getId() +" already exists!");
+            }
+        }
         RAMDAOImpl.save(systemUnit);
     }
 
@@ -35,7 +42,11 @@ public class RAMServiceImpl implements SystemUnitService {
 
     @Transactional
     @Override
-    public RAM findById(long id) {
+    public RAM findById(long id) throws EntityNotFoundException {
+
+        if(RAMDAOImpl.findById(id) == null) {
+            throw new EntityNotFoundException("A ram memory with " + id + " not found!");
+        }
         return (RAM) RAMDAOImpl.findById(id);
     }
 
@@ -44,20 +55,5 @@ public class RAMServiceImpl implements SystemUnitService {
     public List<RAM> listAll() {
         return RAMDAOImpl.listAll();
     }
-
-    @Transactional
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-
-        boolean result = false;
-
-        for(RAM r : listAll()) {
-            if (r.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
 }
+

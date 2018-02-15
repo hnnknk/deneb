@@ -1,7 +1,5 @@
 package xyz.hnnknk.deneb.model;
 
-import xyz.hnnknk.deneb.enums.HddTypes;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +13,7 @@ public class HDD extends SystemUnit {
     private Integer capacity;
 
     @Column
-    private HddTypes hddTypes;
+    private String hddType;
 
     public HDD() {
     }
@@ -36,11 +34,17 @@ public class HDD extends SystemUnit {
         this.capacity = capacity;
     }
 
-    public HddTypes getHddTypes() {
-        return hddTypes;
+    public String getHddType() {
+        return hddType;
     }
 
-    public void setHddTypes(HddTypes hddTypes) {
-        this.hddTypes = hddTypes;
+    public void setHddType(String hddType) {
+        this.hddType = hddType;
+    }
+
+    @Override
+    public String toString() {
+        return "Hdd [id=" + this.getId() + ", manufacter=" + this.getManufacter() + ", model=" + this.getModel()
+                + ", serial number=" + this.getSerial() + ", capacity=" + this.getCapacity() + ", hddType=" + this.getHddType() + "]";
     }
 }

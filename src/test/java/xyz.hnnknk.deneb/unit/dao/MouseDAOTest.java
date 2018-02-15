@@ -1,4 +1,4 @@
-package xyz.hnnknk.deneb.unit;
+package xyz.hnnknk.deneb.unit.dao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
-import xyz.hnnknk.deneb.model.Keyboard;
+import xyz.hnnknk.deneb.model.Mouse;
 
 import java.util.List;
 
@@ -21,41 +21,43 @@ import static org.hamcrest.Matchers.*;
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
 @Transactional
-public class KeyboardDAOTest {
+public class MouseDAOTest {
 
     @Autowired
-    PeripheralDAO keyboardDAOImpl;
+    PeripheralDAO mouseDAOImpl;
 
-    private Keyboard key;
-    private Keyboard key2;
+    private Mouse mouse;
+    private Mouse mouse2;
 
     @Before
     public void setup() {
-        this.key = new Keyboard("144","BTC","6301C","1n5dHrR85Ye");
-        keyboardDAOImpl.save(key);
-        this.key2 = new Keyboard("123","Logitech","B-100","1n5dHrR85Ye");
-        keyboardDAOImpl.save(key2);
+        clear();
+        this.mouse = new Mouse("144","A4tech","x7","1n5dHrR85Ye");
+        mouseDAOImpl.save(mouse);
+        this.mouse2 = new Mouse("123","Logitech","B-100","1n5dHrR85Ye");
+        mouseDAOImpl.save(mouse2);
     }
 
     public void clear() {
-        List<Keyboard> l = keyboardDAOImpl.listAll();
-        for(Keyboard m : l) {
-            keyboardDAOImpl.delete(m.getId());
+        List<Mouse> l = mouseDAOImpl.listAll();
+        for(Mouse m : l) {
+            mouseDAOImpl.delete(m.getId());
         }
     }
 
     @Test
     public void listAllSuccess() {
-        List<Keyboard> list = keyboardDAOImpl.listAll();
+
+        List<Mouse> list = mouseDAOImpl.listAll();
         assertThat(list, not(empty()));
         assertThat(list, hasSize(2));
-        assertThat(list, hasItems(key, key2));
+        assertThat(list, hasItems(mouse, mouse2));
     }
 
     @Test
     public void listAllIsEmpty() {
         clear();
-        List<Keyboard> list = keyboardDAOImpl.listAll();
+        List<Mouse> list = mouseDAOImpl.listAll();
         assertThat(list, empty());
     }
 }

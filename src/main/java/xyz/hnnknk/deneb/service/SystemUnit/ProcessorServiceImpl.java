@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
-import xyz.hnnknk.deneb.model.Processor;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.SystemUnit;
+import xyz.hnnknk.deneb.model.Processor;
 
 import java.util.List;
 
@@ -17,7 +19,12 @@ public class ProcessorServiceImpl implements SystemUnitService {
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) {
+    public void save(SystemUnit systemUnit) throws EntityExistsException {
+        for(Processor r : listAll()) {
+            if (r.getId().equals(systemUnit.getId())) {
+                throw new EntityExistsException("A processor with invNumber "+ systemUnit.getId() +" already exists!");
+            }
+        }
         processorDAOImpl.save(systemUnit);
     }
 
@@ -35,7 +42,11 @@ public class ProcessorServiceImpl implements SystemUnitService {
 
     @Transactional
     @Override
-    public Processor findById(long id) {
+    public Processor findById(long id) throws EntityNotFoundException {
+
+        if(processorDAOImpl.findById(id) == null) {
+            throw new EntityNotFoundException("A processor with " + id + " not found!");
+        }
         return (Processor) processorDAOImpl.findById(id);
     }
 
@@ -44,20 +55,5 @@ public class ProcessorServiceImpl implements SystemUnitService {
     public List<Processor> listAll() {
         return processorDAOImpl.listAll();
     }
-
-    @Transactional
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-
-        boolean result = false;
-
-        for(Processor proc : listAll()) {
-            if (proc.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
 }
+

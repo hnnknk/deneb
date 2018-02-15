@@ -1,4 +1,4 @@
-package xyz.hnnknk.deneb.unit;
+package xyz.hnnknk.deneb.unit.dao;
 
 import org.junit.Before;
 import org.junit.Test;

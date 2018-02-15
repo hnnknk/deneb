@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
-import xyz.hnnknk.deneb.model.HDD;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.SystemUnit;
+import xyz.hnnknk.deneb.model.HDD;
 
 import java.util.List;
 
@@ -17,7 +19,12 @@ public class HDDServiceImpl implements SystemUnitService {
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) {
+    public void save(SystemUnit systemUnit) throws EntityExistsException {
+        for(HDD h : listAll()) {
+            if (h.getId().equals(systemUnit.getId())) {
+                throw new EntityExistsException("A hdd with invNumber "+ systemUnit.getId() +" already exists!");
+            }
+        }
         HDDDAOImpl.save(systemUnit);
     }
 
@@ -35,7 +42,11 @@ public class HDDServiceImpl implements SystemUnitService {
 
     @Transactional
     @Override
-    public HDD findById(long id) {
+    public HDD findById(long id) throws EntityNotFoundException {
+
+        if(HDDDAOImpl.findById(id) == null) {
+            throw new EntityNotFoundException("A hdd with " + id + " not found!");
+        }
         return (HDD) HDDDAOImpl.findById(id);
     }
 
@@ -44,20 +55,5 @@ public class HDDServiceImpl implements SystemUnitService {
     public List<HDD> listAll() {
         return HDDDAOImpl.listAll();
     }
-
-    @Transactional
-    @Override
-    public boolean isExists(SystemUnit systemUnit) {
-
-        boolean result = false;
-
-        for(HDD h : listAll()) {
-            if (h.getId().equals(systemUnit.getId())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
 }
+
