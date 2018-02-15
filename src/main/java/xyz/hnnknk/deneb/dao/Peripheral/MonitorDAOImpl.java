@@ -32,11 +32,7 @@ public class MonitorDAOImpl implements PeripheralDAO {
 
     @Override
     public Monitor findById(long id) {
-
-        Monitor m;
-        m = sessionFactory.getCurrentSession().get(Monitor.class, id);
-
-        return  m;
+        return  sessionFactory.getCurrentSession().get(Monitor.class, id);
     }
 
     @Override

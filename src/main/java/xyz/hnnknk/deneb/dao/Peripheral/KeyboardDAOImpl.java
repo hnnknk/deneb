@@ -32,11 +32,7 @@ public class KeyboardDAOImpl implements PeripheralDAO {
 
     @Override
     public Keyboard findById(long id) {
-
-        Keyboard k;
-        k = sessionFactory.getCurrentSession().get(Keyboard.class, id);
-
-        return k;
+        return sessionFactory.getCurrentSession().get(Keyboard.class, id);
     }
 
     @Override

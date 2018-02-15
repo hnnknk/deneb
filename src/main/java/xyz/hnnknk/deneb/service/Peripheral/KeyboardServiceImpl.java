@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.Keyboard;
 import xyz.hnnknk.deneb.model.Peripheral;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -17,7 +20,13 @@ public class KeyboardServiceImpl implements PeripheralService {
 
     @Transactional
     @Override
-    public void save(Peripheral peripheral) {
+    public void save(Peripheral peripheral) throws EntityExistsException {
+
+        for(Keyboard k : listAll()) {
+            if (k.getInvNumber().equals(peripheral.getInvNumber())) {
+                throw new EntityExistsException("A keyboard with " + peripheral.getInvNumber() + " already exists!");
+            }
+        }
         keyboardDAOImpl.save(peripheral);
     }
 
@@ -35,26 +44,17 @@ public class KeyboardServiceImpl implements PeripheralService {
 
     @Transactional
     @Override
-    public Keyboard findById(long id) { return (Keyboard) keyboardDAOImpl.findById(id); }
+    public Keyboard findById(long id) throws EntityNotFoundException {
+
+        if(keyboardDAOImpl.findById(id) == null) {
+            throw new EntityNotFoundException("A keyboard with " + id + " not found!");
+        }
+        return (Keyboard) keyboardDAOImpl.findById(id);
+    }
 
     @Transactional
     @Override
     public List<Keyboard> listAll() {
         return keyboardDAOImpl.listAll();
-    }
-
-    @Transactional
-    @Override
-    public boolean isExists(Peripheral peripheral) {
-        boolean result = false;
-
-        for(Keyboard k : listAll()) {
-            if (k.getInvNumber().equals(peripheral.getInvNumber())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

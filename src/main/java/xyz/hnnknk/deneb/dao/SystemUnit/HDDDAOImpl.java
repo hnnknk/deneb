@@ -32,11 +32,7 @@ public class HDDDAOImpl implements SystemUnitDAO {
 
     @Override
     public HDD findById(long id) {
-
-        HDD h;
-        h = sessionFactory.getCurrentSession().get(HDD.class, id);
-
-        return h;
+        return sessionFactory.getCurrentSession().get(HDD.class, id);
     }
 
     @Override

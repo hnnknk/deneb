@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.enums.NotificationTypes;
 import xyz.hnnknk.deneb.model.Monitor;
@@ -45,62 +47,66 @@ public class MonitorController {
     @RequestMapping(value = "/components/monitor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Monitor> getMonitor(@PathVariable("id") long id) {
         System.out.println("Fetching Monitor with id " + id);
-        Monitor monitor = (Monitor) monitorServiceImpl.findById(id);
-        if (monitor == null) {
-            System.out.println("Monitor with id " + id + " not found");
+
+        try {
+            Monitor monitor = (Monitor) monitorServiceImpl.findById(id);
+
+            return new ResponseEntity<Monitor>(monitor, HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<Monitor>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Monitor>(monitor, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/monitor/", method = RequestMethod.POST)
     public ResponseEntity<Void> createMonitor(@Valid @RequestBody Monitor monitor, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + monitor.toString());
 
-        if (monitorServiceImpl.isExists(monitor)) {
-            System.out.println("A " + monitor.toString() + " already exist");
+        try {
+            monitorServiceImpl.save(monitor);
+            notificationService.checkNotifications(NotificationTypes.MONITOR, monitor.toString());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(ucBuilder.path("/components/monitor/{id}").buildAndExpand(monitor.getId()).toUri());
+            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        } catch (EntityExistsException e ) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
-
-        notificationService.checkNotifications(NotificationTypes.MONITOR, monitor.toString());
-
-        monitorServiceImpl.save(monitor);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/components/monitor/{id}").buildAndExpand(monitor.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/components/monitor/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Monitor> updateMonitor(@PathVariable("id") long id,@Valid @RequestBody Monitor monitor) {
         System.out.println("Updating " + monitor.toString());
 
-        Monitor currentMonitor = (Monitor) monitorServiceImpl.findById(id);
+        try {
+            Monitor currentMonitor = (Monitor) monitorServiceImpl.findById(id);
+            currentMonitor.setInvNumber(monitor.getInvNumber());
+            currentMonitor.setManufacter(monitor.getManufacter());
+            currentMonitor.setModel(monitor.getModel());
+            currentMonitor.setSerial(monitor.getSerial());
 
-        if (currentMonitor==null) {
-            System.out.println("Monitor with id " + id + " not found");
+            monitorServiceImpl.update(currentMonitor);
+            return new ResponseEntity<Monitor>(currentMonitor, HttpStatus.OK);
+
+        } catch (EntityNotFoundException e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<Monitor>(HttpStatus.NOT_FOUND);
         }
-
-        currentMonitor.setInvNumber(monitor.getInvNumber());
-        currentMonitor.setManufacter(monitor.getManufacter());
-        currentMonitor.setModel(monitor.getModel());
-        currentMonitor.setSerial(monitor.getSerial());
-
-        monitorServiceImpl.update(currentMonitor);
-        return new ResponseEntity<Monitor>(currentMonitor, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/monitor/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Monitor> deleteMonitor(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting Monitor with id " + id);
 
-        Monitor monitor = (Monitor) monitorServiceImpl.findById(id);
-        if (monitor == null) {
-            System.out.println("Unable to delete. Monitor with id " + id + " not found");
+        try {
+            monitorServiceImpl.findById(id);
+
+            monitorServiceImpl.delete(id);
+            return new ResponseEntity<Monitor>(HttpStatus.NO_CONTENT);
+        } catch (EntityNotFoundException e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<Monitor>(HttpStatus.NOT_FOUND);
         }
-
-        monitorServiceImpl.delete(id);
-        return new ResponseEntity<Monitor>(HttpStatus.NO_CONTENT);
     }
 }

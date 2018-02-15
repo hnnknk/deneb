@@ -32,11 +32,7 @@ public class RAMDAOImpl implements SystemUnitDAO {
 
     @Override
     public RAM findById(long id) {
-
-        RAM r;
-        r = sessionFactory.getCurrentSession().get(RAM.class, id);
-
-        return r;
+        return sessionFactory.getCurrentSession().get(RAM.class, id);
     }
 
     @Override

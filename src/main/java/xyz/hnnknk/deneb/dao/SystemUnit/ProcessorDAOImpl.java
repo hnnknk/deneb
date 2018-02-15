@@ -32,11 +32,7 @@ public class ProcessorDAOImpl implements SystemUnitDAO {
 
     @Override
     public Processor findById(long id) {
-
-        Processor p;
-        p = sessionFactory.getCurrentSession().get(Processor.class, id);
-
-        return p;
+        return sessionFactory.getCurrentSession().get(Processor.class, id);
     }
 
     @Override

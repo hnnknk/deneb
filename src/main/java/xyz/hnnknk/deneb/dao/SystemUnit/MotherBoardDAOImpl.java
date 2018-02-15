@@ -32,11 +32,7 @@ public class MotherBoardDAOImpl implements SystemUnitDAO {
 
     @Override
     public MotherBoard findById(long id) {
-
-        MotherBoard m;
-        m = sessionFactory.getCurrentSession().get(MotherBoard.class, id);
-
-        return m;
+        return sessionFactory.getCurrentSession().get(MotherBoard.class, id);
     }
 
     @Override

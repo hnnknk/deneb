@@ -32,11 +32,7 @@ public class PowerSupplyDAOImpl implements SystemUnitDAO {
 
     @Override
     public PowerSupply findById(long id) {
-
-        PowerSupply p;
-        p = sessionFactory.getCurrentSession().get(PowerSupply.class, id);
-
-        return p;
+        return sessionFactory.getCurrentSession().get(PowerSupply.class, id);
     }
 
     @Override

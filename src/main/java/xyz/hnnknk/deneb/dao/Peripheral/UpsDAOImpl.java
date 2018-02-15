@@ -32,12 +32,7 @@ public class UpsDAOImpl implements PeripheralDAO {
 
     @Override
     public Ups findById(long id) {
-
-        Ups u;
-        u = sessionFactory.getCurrentSession().get(Ups.class, id);
-
-        return u;
-
+        return sessionFactory.getCurrentSession().get(Ups.class, id);
     }
 
     @Override

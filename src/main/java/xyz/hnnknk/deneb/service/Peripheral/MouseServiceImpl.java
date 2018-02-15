@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
+import xyz.hnnknk.deneb.exceptions.EntityExistsException;
+import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.Mouse;
 import xyz.hnnknk.deneb.model.Peripheral;
 
@@ -17,7 +19,13 @@ public class MouseServiceImpl implements PeripheralService {
 
     @Transactional
     @Override
-    public void save(Peripheral peripheral) {
+    public void save(Peripheral peripheral) throws EntityExistsException {
+
+        for (Mouse m : listAll()) {
+            if (m.getInvNumber().equals(peripheral.getInvNumber())) {
+                throw new EntityExistsException("A mouse with invNumber "+ peripheral.getInvNumber() +" already exists!");
+            }
+        }
         mouseDAOImpl.save(peripheral);
     }
 
@@ -35,7 +43,11 @@ public class MouseServiceImpl implements PeripheralService {
 
     @Transactional
     @Override
-    public Mouse findById(long id) {
+    public Mouse findById(long id) throws EntityNotFoundException {
+
+        if(mouseDAOImpl.findById(id) == null) {
+            throw new EntityNotFoundException("A mouse with " + id + " not found!");
+        }
         return (Mouse) mouseDAOImpl.findById(id);
     }
 
@@ -43,20 +55,5 @@ public class MouseServiceImpl implements PeripheralService {
     @Override
     public List<Mouse> listAll() {
         return mouseDAOImpl.listAll();
-    }
-
-    @Transactional
-    @Override
-    public boolean isExists(Peripheral peripheral) {
-        boolean result = false;
-
-        for (Mouse m : listAll()) {
-            if (m.getInvNumber().equals(peripheral.getInvNumber())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
     }
 }

@@ -32,12 +32,7 @@ public class MouseDAOImpl implements PeripheralDAO {
 
     @Override
     public Mouse findById(long id) {
-
-        Mouse m;
-        m = sessionFactory.getCurrentSession().get(Mouse.class, id);
-
-        return m;
-
+        return sessionFactory.getCurrentSession().get(Mouse.class, id);
     }
 
     @Override
