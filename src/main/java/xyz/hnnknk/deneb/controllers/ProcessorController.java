@@ -31,7 +31,7 @@ public class ProcessorController {
         return new ResponseEntity<List<Processor>>(processores, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunits/ro/processor/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/ro/processor/", method = RequestMethod.GET)
     public ResponseEntity<List<Processor>> listAllProcessoresRO() {
         List<Processor> processores = processorServiceImpl.listAll();
         if(processores.isEmpty()){

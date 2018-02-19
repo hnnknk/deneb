@@ -1,0 +1,27 @@
+<!-- Processor section -->
+<div id="hdd_div" class="generic-container" ng-controller="ROController as ctrl">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">Список процессоров</span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Производитель</th>
+                    <th>Модель</th>
+                    <th>Скорость</th>
+                    <th>Количество ядер</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="h in ctrl.processors">
+                    <td><span ng-bind="h.manufacter"></span></td>
+                    <td><span ng-bind="h.model"></span></td>
+                    <td><span ng-bind="h.speed"></span></td>
+                    <td><span ng-bind="h.numberOfCores"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

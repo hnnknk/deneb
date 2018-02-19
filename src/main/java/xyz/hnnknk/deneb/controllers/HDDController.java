@@ -31,7 +31,7 @@ public class HDDController {
         return new ResponseEntity<List<HDD>>(hddes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunits/ro/hdd/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/ro/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHDDesRO() {
         List<HDD> hddes = HDDServiceImpl.listAll();
         if(hddes.isEmpty()){

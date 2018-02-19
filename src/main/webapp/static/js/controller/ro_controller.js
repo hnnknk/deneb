@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 'UpsService', 'MouseService', 'KeyboardService', 'HddService',
-    function($scope, MonitorService, UpsService, MouseService, KeyboardService, HddService) {
+    'RamService', 'ProcessorService', 'MotherBoardService', 'PowerSupplyService',
+    function($scope, MonitorService, UpsService, MouseService, KeyboardService, HddService, RamService,
+             ProcessorService, MotherBoardService, PowerSupplyService) {
 
     var self = this;
     self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
@@ -19,11 +21,28 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
     self.hdd={id:null,manufacter:'',model:'',serial:'',capacity:'',hddtypes:''};
     self.hdds=[];
 
+    self.motherboard={id:null,manufacter:'',model:'',socket:''};
+    self.motherboards=[];
+
+    self.powersupply={id:null,manufacter:'',model:'',power:''};
+    self.powersupplies=[];
+
+    self.processor={id:null,manufacter:'',model:'',speed:'',numberOfCores:''};
+    self.processors=[];
+
+    self.ram={id:null,manufacter:'',model:'',capacity:''};
+    self.rams=[];
+
     fetchAllMonitorsRO();
     fetchAllUpsesRO();
     fetchAllMousesRO();
     fetchAllKeyboardsRO();
     fetchAllHddsRO();
+
+    fetchAllRamsRO();
+    fetchAllProcessorsRO();
+    fetchAllPowerSuppliesRO();
+    fetchAllMotherBoardsRO();
 
 
     function fetchAllMonitorsRO(){
@@ -85,4 +104,53 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
                 }
             );
     }
+
+    function fetchAllRamsRO(){
+        RamService.fetchAllRamsRO()
+            .then(
+                function(d) {
+                    self.rams = d;
+                },
+                function(errResponse){
+                    console.error('Error while fetching Rams');
+                }
+            );
+    }
+
+    function fetchAllProcessorsRO(){
+        ProcessorService.fetchAllProcessorsRO()
+            .then(
+                function(d) {
+                    self.processors = d;
+                },
+                function(errResponse){
+                    console.error('Error while fetching Processors');
+                }
+            );
+    }
+
+    function fetchAllMotherBoardsRO(){
+        MotherBoardService.fetchAllMotherboardsRO()
+            .then(
+                function(d) {
+                    self.motherboards = d;
+                },
+                function(errResponse){
+                    console.error('Error while fetching MotherBoards');
+                }
+            );
+    }
+
+    function fetchAllPowerSuppliesRO(){
+        PowerSupplyService.fetchAllPowerSuppliesRO()
+            .then(
+                function(d) {
+                    self.powersupplies = d;
+                },
+                function(errResponse){
+                    console.error('Error while fetching PowerSupplies');
+                }
+            );
+    }
+
 }]);

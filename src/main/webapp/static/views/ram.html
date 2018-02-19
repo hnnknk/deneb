@@ -1,0 +1,95 @@
+<!-- Ram section -->
+<div id="ram_div" class="generic-container" ng-controller="RamController as ctrl_ram">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Регистрация оперативной памяти</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchRam" size="34"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="formcontainer">
+            <form ng-submit="ctrl_ram.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl_ram.ram.id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Производитель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ram.ram.manufacter" name="ram_manufacter" class="field form-control input-sm" placeholder="Введите производителя памяти" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ram_manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ram_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ram_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Модель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ram.ram.model" name="ram_model" class="field form-control input-sm" placeholder="Введите модель памяти" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ram_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ram_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ram_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Объем</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_ram.ram.capacity" name="ram_capacity" class="field form-control input-sm" placeholder="Введите объем памяти" required ng-minlength="2" ng-maxlength="17"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.ram_capacity.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ram_capacity.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ram_capacity.$error.maxlength">Поле должно содержать не более 17 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl_ram.ram.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl_ram.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Сбросить данные</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">Список оперативной памяти</span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Производитель</th>
+                    <th>Модель</th>
+                    <th>Объем</th>
+                    <th width="25%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="r in ctrl_ram.rams | filter:searchRam">
+                    <td><span ng-bind="r.manufacter"></span></td>
+                    <td><span ng-bind="r.model"></span></td>
+                    <td><span ng-bind="r.capacity"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl_ram.edit(r.id)" class="btn btn-success custom-width">Изменить</button>  <button type="button" ng-click="ctrl_ram.remove(r.id)" class="btn btn-danger custom-width">Удалить</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

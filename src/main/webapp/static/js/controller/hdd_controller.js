@@ -10,8 +10,6 @@ angular.module('myApp').controller('HddController', ['$scope', 'HddService', fun
     self.remove = remove;
     self.reset = reset;
 
-    var name = 'hdd';
-
     fetchAllHdds();
 
     function fetchAllHdds(){

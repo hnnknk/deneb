@@ -22,7 +22,7 @@ public class MotherBoardController {
     @Autowired
     SystemUnitService motherBoardServiceImpl;
 
-    @RequestMapping(value = "/sysunit/motherBoard/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/motherboard/", method = RequestMethod.GET)
     public ResponseEntity<List<MotherBoard>> listAllMotherBoardes() {
         List<MotherBoard> motherBoardes = motherBoardServiceImpl.listAll();
         if(motherBoardes.isEmpty()){
@@ -31,7 +31,7 @@ public class MotherBoardController {
         return new ResponseEntity<List<MotherBoard>>(motherBoardes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunits/ro/motherBoard/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/ro/motherboard/", method = RequestMethod.GET)
     public ResponseEntity<List<MotherBoard>> listAllMotherBoardesRO() {
         List<MotherBoard> motherBoardes = motherBoardServiceImpl.listAll();
         if(motherBoardes.isEmpty()){
@@ -40,7 +40,7 @@ public class MotherBoardController {
         return new ResponseEntity<List<MotherBoard>>(motherBoardes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunit/motherBoard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sysunit/motherboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MotherBoard> getMotherBoard(@PathVariable("id") long id) {
         System.out.println("Fetching motherBoard with id " + id);
 
@@ -53,7 +53,7 @@ public class MotherBoardController {
         }
     }
 
-    @RequestMapping(value = "/sysunit/motherBoard/", method = RequestMethod.POST)
+    @RequestMapping(value = "/sysunit/motherboard/", method = RequestMethod.POST)
     public ResponseEntity<Void> createMotherBoard(@Valid @RequestBody MotherBoard motherBoard, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + motherBoard.toString());
 
@@ -61,7 +61,7 @@ public class MotherBoardController {
             motherBoardServiceImpl.save(motherBoard);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(ucBuilder.path("/sysunit/motherBoard/{id}").buildAndExpand(motherBoard.getId()).toUri());
+            headers.setLocation(ucBuilder.path("/sysunit/motherboard/{id}").buildAndExpand(motherBoard.getId()).toUri());
             return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
@@ -69,7 +69,7 @@ public class MotherBoardController {
         }
     }
 
-    @RequestMapping(value = "/sysunit/motherBoard/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/sysunit/motherboard/{id}", method = RequestMethod.PUT)
     public ResponseEntity<MotherBoard> updateMotherBoard(@PathVariable("id") long id,@Valid @RequestBody MotherBoard motherBoard) {
         System.out.println("Updating " + motherBoard.toString());
 
@@ -87,7 +87,7 @@ public class MotherBoardController {
         }
     }
 
-    @RequestMapping(value = "/sysunit/motherBoard/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/sysunit/motherboard/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<MotherBoard> deleteMotherBoard(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting MotherBoard with id " + id);
 

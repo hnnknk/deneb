@@ -38,6 +38,26 @@ App.config(function($routeProvider){
             templateUrl: 'static/views/hdd.html'
 
         })
+        .when('/ram',{
+
+            templateUrl: 'static/views/ram.html'
+
+        })
+        .when('/motherboard',{
+
+            templateUrl: 'static/views/motherboard.html'
+
+        })
+        .when('/powersupply',{
+
+            templateUrl: 'static/views/powersupply.html'
+
+        })
+        .when('/processor',{
+
+            templateUrl: 'static/views/processor.html'
+
+        })
         .when('/roHdd',{
 
             templateUrl: 'static/views/roHdd.html'
@@ -61,6 +81,26 @@ App.config(function($routeProvider){
         .when('/roKeyboard',{
 
             templateUrl: 'static/views/roKeyboard.html'
+
+        })
+        .when('/roRam',{
+
+            templateUrl: 'static/views/roRam.html'
+
+        })
+        .when('/roProcessor',{
+
+            templateUrl: 'static/views/roProcessor.html'
+
+        })
+        .when('/roMotherboard',{
+
+            templateUrl: 'static/views/roMotherboard.html'
+
+        })
+        .when('/roPowersupply',{
+
+            templateUrl: 'static/views/roPowersupply.html'
 
         })
         .when('/login',{

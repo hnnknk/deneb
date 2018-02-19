@@ -23,7 +23,7 @@ public class PowerSupplyController {
     SystemUnitService powerSupplyServiceImpl;
 
 
-    @RequestMapping(value = "/sysunit/powerSupply/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/powersupply/", method = RequestMethod.GET)
     public ResponseEntity<List<PowerSupply>> listAllPowerSupplyes() {
         List<PowerSupply> powerSupplyes = powerSupplyServiceImpl.listAll();
         if(powerSupplyes.isEmpty()){
@@ -32,7 +32,7 @@ public class PowerSupplyController {
         return new ResponseEntity<List<PowerSupply>>(powerSupplyes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunits/ro/powerSupply/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/ro/powersupply/", method = RequestMethod.GET)
     public ResponseEntity<List<PowerSupply>> listAllPowerSupplyesRO() {
         List<PowerSupply> powerSupplyes = powerSupplyServiceImpl.listAll();
         if(powerSupplyes.isEmpty()){
@@ -41,7 +41,7 @@ public class PowerSupplyController {
         return new ResponseEntity<List<PowerSupply>>(powerSupplyes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunit/powerSupply/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sysunit/powersupply/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PowerSupply> getPowerSupply(@PathVariable("id") long id) {
         System.out.println("Fetching powerSupply with id " + id);
 
@@ -54,7 +54,7 @@ public class PowerSupplyController {
         }
     }
 
-    @RequestMapping(value = "/sysunit/powerSupply/", method = RequestMethod.POST)
+    @RequestMapping(value = "/sysunit/powersupply/", method = RequestMethod.POST)
     public ResponseEntity<Void> createPowerSupply(@Valid @RequestBody PowerSupply powerSupply, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + powerSupply.toString());
 
@@ -62,7 +62,7 @@ public class PowerSupplyController {
             powerSupplyServiceImpl.save(powerSupply);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(ucBuilder.path("/sysunit/powerSupply/{id}").buildAndExpand(powerSupply.getId()).toUri());
+            headers.setLocation(ucBuilder.path("/sysunit/powersupply/{id}").buildAndExpand(powerSupply.getId()).toUri());
             return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
@@ -70,7 +70,7 @@ public class PowerSupplyController {
         }
     }
 
-    @RequestMapping(value = "/sysunit/powerSupply/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/sysunit/powersupply/{id}", method = RequestMethod.PUT)
     public ResponseEntity<PowerSupply> updatePowerSupply(@PathVariable("id") long id,@Valid @RequestBody PowerSupply powerSupply) {
         System.out.println("Updating " + powerSupply.toString());
 
@@ -88,7 +88,7 @@ public class PowerSupplyController {
         }
     }
 
-    @RequestMapping(value = "/sysunit/powerSupply/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/sysunit/powersupply/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<PowerSupply> deletePowerSupply(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting PowerSupply with id " + id);
 

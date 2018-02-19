@@ -31,7 +31,7 @@ public class RAMController {
         return new ResponseEntity<List<RAM>>(rames, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sysunits/ro/ram/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysunit/ro/ram/", method = RequestMethod.GET)
     public ResponseEntity<List<RAM>> listAllRAMesRO() {
         List<RAM> rames = RAMServiceImpl.listAll();
         if(rames.isEmpty()){

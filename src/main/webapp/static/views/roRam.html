@@ -1,0 +1,25 @@
+<!-- Ram section -->
+<div id="hdd_div" class="generic-container" ng-controller="ROController as ctrl">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">Список оперативной памяти</span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Производитель</th>
+                    <th>Модель</th>
+                    <th>Объем</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="h in ctrl.rams">
+                    <td><span ng-bind="h.manufacter"></span></td>
+                    <td><span ng-bind="h.model"></span></td>
+                    <td><span ng-bind="h.capacity"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

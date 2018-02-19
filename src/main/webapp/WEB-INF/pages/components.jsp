@@ -37,6 +37,14 @@
                 <ul class="dropdown-menu">
                     <li data-ng-if="!islogged"><a href="#!roHdd">Жесткие диски</a></li>
                     <li data-ng-if="islogged"><a href="#!hdd">Жесткие диски</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roRam">Оперативная память</a></li>
+                    <li data-ng-if="islogged"><a href="#!ram">Оперативная память</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roMotherboard">Материнские платы</a></li>
+                    <li data-ng-if="islogged"><a href="#!motherboard">Материнские платы</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roProcessor">Процессоры</a></li>
+                    <li data-ng-if="islogged"><a href="#!processor">Процессоры</a></li>
+                    <li data-ng-if="!islogged"><a href="#!roPowersupply">Блоки питания</a></li>
+                    <li data-ng-if="islogged"><a href="#!powersupply">Блоки питания</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -75,5 +83,14 @@
 <script src="<c:url value='/static/js/controller/hdd_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/notification_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/notification_controller.js' />"></script>
+
+<script src="<c:url value='/static/js/service/ram_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/ram_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/processor_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/processor_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/motherboard_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/powersupply_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/powersupply_controller.js' />"></script>
 </body>
 </html>
