@@ -58,49 +58,9 @@ App.config(function($routeProvider){
             templateUrl: 'static/views/processor.html'
 
         })
-        .when('/roHdd',{
+        .when('/ro:param',{
 
-            templateUrl: 'static/views/roHdd.html'
-
-        })
-        .when('/roMonitor',{
-
-            templateUrl: 'static/views/roMonitor.html'
-
-        })
-        .when('/roUps',{
-
-            templateUrl: 'static/views/roUps.html'
-
-        })
-        .when('/roMouse',{
-
-            templateUrl: 'static/views/roMouse.html'
-
-        })
-        .when('/roKeyboard',{
-
-            templateUrl: 'static/views/roKeyboard.html'
-
-        })
-        .when('/roRam',{
-
-            templateUrl: 'static/views/roRam.html'
-
-        })
-        .when('/roProcessor',{
-
-            templateUrl: 'static/views/roProcessor.html'
-
-        })
-        .when('/roMotherboard',{
-
-            templateUrl: 'static/views/roMotherboard.html'
-
-        })
-        .when('/roPowersupply',{
-
-            templateUrl: 'static/views/roPowersupply.html'
+            templateUrl: 'static/views/ro.html'
 
         })
         .when('/login',{

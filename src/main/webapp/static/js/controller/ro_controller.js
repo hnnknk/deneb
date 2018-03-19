@@ -1,55 +1,89 @@
 'use strict';
 
-angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 'UpsService', 'MouseService', 'KeyboardService', 'HddService',
+angular.module('myApp').controller('ROController', ['$scope', '$routeParams', 'MonitorService', 'UpsService', 'MouseService', 'KeyboardService', 'HddService',
     'RamService', 'ProcessorService', 'MotherBoardService', 'PowerSupplyService',
-    function($scope, MonitorService, UpsService, MouseService, KeyboardService, HddService, RamService,
+    function($scope, $routeParams, MonitorService, UpsService, MouseService, KeyboardService, HddService, RamService,
              ProcessorService, MotherBoardService, PowerSupplyService) {
 
     var self = this;
     self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    self.monitors=[];
+    var monTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
     self.ups={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    self.upses=[];
+    var uTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
     self.mouse={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    self.mouses=[];
+    var mTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
     self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    self.keyboards=[];
+    var kTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
     self.hdd={id:null,manufacter:'',model:'',serial:'',capacity:'',hddtypes:''};
-    self.hdds=[];
+    var hTitles=['Производитель', 'Модель', 'Серийный номер', 'Емкость', "Тип диска"];
 
     self.motherboard={id:null,manufacter:'',model:'',socket:''};
-    self.motherboards=[];
+    var motTitles=['Производитель', 'Модель', 'Сокет'];
 
     self.powersupply={id:null,manufacter:'',model:'',power:''};
-    self.powersupplies=[];
+    var powTitles=['Производитель', 'Модель', 'Мощность'];
 
     self.processor={id:null,manufacter:'',model:'',speed:'',numberOfCores:''};
-    self.processors=[];
+    var pTitles=['Производитель', 'Модель', 'Скорость', 'Кол-во ядер'];
 
     self.ram={id:null,manufacter:'',model:'',capacity:''};
-    self.rams=[];
+    var rTitles=['Производитель', 'Модель', 'Емкость'];
 
-    fetchAllMonitorsRO();
-    fetchAllUpsesRO();
-    fetchAllMousesRO();
-    fetchAllKeyboardsRO();
-    fetchAllHddsRO();
+    self.mainTitle = '';
+    self.titles = [];
+    self.items = [];
 
-    fetchAllRamsRO();
-    fetchAllProcessorsRO();
-    fetchAllPowerSuppliesRO();
-    fetchAllMotherBoardsRO();
+    setup();
 
+    function setup() {
+        if($routeParams.param === 'Mouse') {
+            self.titles = mTitles;
+            self.mainTitle = 'Список мышек';
+            fetchAllMousesRO();
+        } else if ($routeParams.param === 'Keyboard') {
+            self.titles = kTitles;
+            self.mainTitle = 'Список клавиатур';
+            fetchAllKeyboardsRO();
+        } else if ($routeParams.param === 'Monitor') {
+            self.titles = monTitles;
+            self.mainTitle = 'Список мониторов';
+            fetchAllMonitorsRO();
+        } else if ($routeParams.param === 'Ups') {
+            self.titles = uTitles;
+            self.mainTitle = 'Список ИБП';
+            fetchAllUpsesRO();
+        } else if ($routeParams.param === 'Hdd') {
+            self.titles = hTitles;
+            self.mainTitle = 'Список жестких дисков';
+            fetchAllHddsRO();
+        } else if ($routeParams.param === 'Ram') {
+            self.titles = rTitles;
+            self.mainTitle = 'Список оперативной памяти';
+            fetchAllRamsRO();
+        } else if ($routeParams.param === 'Processor') {
+            self.titles = pTitles;
+            self.mainTitle = 'Список процессоров';
+            fetchAllProcessorsRO();
+        } else if ($routeParams.param === 'Motherboard') {
+            self.titles = motTitles;
+            self.mainTitle = 'Список материнских плат';
+            fetchAllMotherBoardsRO();
+        } else if ($routeParams.param === 'Powersupply') {
+            self.titles = powTitles;
+            self.mainTitle = 'Список блоков питания';
+            fetchAllPowerSuppliesRO();
+        }
+    }
 
     function fetchAllMonitorsRO(){
         MonitorService.fetchAllMonitorsRO()
             .then(
                 function(d) {
-                    self.monitors = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Monitors');
@@ -61,7 +95,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         UpsService.fetchAllUpsesRO()
             .then(
                 function(d) {
-                    self.upses = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Upses');
@@ -73,7 +107,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         MouseService.fetchAllMousesRO()
             .then(
                 function(d) {
-                    self.mouses = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Mouses');
@@ -85,7 +119,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         KeyboardService.fetchAllKeyboardsRO()
             .then(
                 function(d) {
-                    self.keyboards = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Keyboards');
@@ -97,7 +131,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         HddService.fetchAllHddsRO()
             .then(
                 function(d) {
-                    self.hdds = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Hdds');
@@ -109,7 +143,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         RamService.fetchAllRamsRO()
             .then(
                 function(d) {
-                    self.rams = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Rams');
@@ -121,7 +155,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         ProcessorService.fetchAllProcessorsRO()
             .then(
                 function(d) {
-                    self.processors = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching Processors');
@@ -133,7 +167,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         MotherBoardService.fetchAllMotherboardsRO()
             .then(
                 function(d) {
-                    self.motherboards = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching MotherBoards');
@@ -145,7 +179,7 @@ angular.module('myApp').controller('ROController', ['$scope', 'MonitorService', 
         PowerSupplyService.fetchAllPowerSuppliesRO()
             .then(
                 function(d) {
-                    self.powersupplies = d;
+                    self.items = d;
                 },
                 function(errResponse){
                     console.error('Error while fetching PowerSupplies');

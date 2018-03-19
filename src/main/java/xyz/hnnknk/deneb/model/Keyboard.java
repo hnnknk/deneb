@@ -9,7 +9,7 @@ public class Keyboard extends Peripheral{
     public Keyboard() {
     }
 
-    public Keyboard (String invNumber, String manufacter, String model, String serial) {
+    public Keyboard(String invNumber, String manufacter, String model, String serial) {
         super(invNumber, manufacter, model, serial);
     }
 
