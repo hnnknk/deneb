@@ -6,32 +6,32 @@ angular.module('myApp').controller('ROController', ['$scope', '$routeParams', 'M
              ProcessorService, MotherBoardService, PowerSupplyService) {
 
     var self = this;
-    self.monitor={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    var monTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
+    self.monitor = {id:null, invNumber:'', manufacter:'', model:'', serial:''};
+    var monTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.ups={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    var uTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
+    self.ups = {id:null, invNumber:'' ,manufacter:'', model:'', serial:''};
+    var uTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.mouse={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    var mTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
+    self.mouse = {id:null, invNumber:'', manufacter:'', model:'', serial:''};
+    var mTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''};
-    var kTitles=['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
+    self.keyboard = {id:null, invNumber:'', manufacter:'', model:'', serial:''};
+    var kTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.hdd={id:null,manufacter:'',model:'',serial:'',capacity:'',hddtypes:''};
-    var hTitles=['Производитель', 'Модель', 'Серийный номер', 'Емкость', "Тип диска"];
+    self.hdd = {id:null, manufacter:'', model:'', serial:'', capacity:'', hddtypes:''};
+    var hTitles = ['Производитель', 'Модель', 'Серийный номер', 'Емкость', "Тип диска"];
 
-    self.motherboard={id:null,manufacter:'',model:'',socket:''};
-    var motTitles=['Производитель', 'Модель', 'Сокет'];
+    self.motherboard = {id:null, manufacter:'', model:'', socket:''};
+    var motTitles = ['Производитель', 'Модель', 'Сокет'];
 
-    self.powersupply={id:null,manufacter:'',model:'',power:''};
-    var powTitles=['Производитель', 'Модель', 'Мощность'];
+    self.powersupply = {id:null, manufacter:'', model:'', power:''};
+    var powTitles = ['Производитель', 'Модель', 'Мощность'];
 
-    self.processor={id:null,manufacter:'',model:'',speed:'',numberOfCores:''};
-    var pTitles=['Производитель', 'Модель', 'Скорость', 'Кол-во ядер'];
+    self.processor = {id:null, manufacter:'', model:'', speed:'', numberOfCores:''};
+    var pTitles = ['Производитель', 'Модель', 'Скорость', 'Кол-во ядер'];
 
-    self.ram={id:null,manufacter:'',model:'',capacity:''};
-    var rTitles=['Производитель', 'Модель', 'Емкость'];
+    self.ram = {id:null, manufacter:'', model:'', capacity:''};
+    var rTitles = ['Производитель', 'Модель', 'Емкость'];
 
     self.mainTitle = '';
     self.titles = [];
@@ -40,42 +40,54 @@ angular.module('myApp').controller('ROController', ['$scope', '$routeParams', 'M
     setup();
 
     function setup() {
-        if($routeParams.param === 'Mouse') {
-            self.titles = mTitles;
-            self.mainTitle = 'Список мышек';
-            fetchAllMousesRO();
-        } else if ($routeParams.param === 'Keyboard') {
-            self.titles = kTitles;
-            self.mainTitle = 'Список клавиатур';
-            fetchAllKeyboardsRO();
-        } else if ($routeParams.param === 'Monitor') {
-            self.titles = monTitles;
-            self.mainTitle = 'Список мониторов';
-            fetchAllMonitorsRO();
-        } else if ($routeParams.param === 'Ups') {
-            self.titles = uTitles;
-            self.mainTitle = 'Список ИБП';
-            fetchAllUpsesRO();
-        } else if ($routeParams.param === 'Hdd') {
-            self.titles = hTitles;
-            self.mainTitle = 'Список жестких дисков';
-            fetchAllHddsRO();
-        } else if ($routeParams.param === 'Ram') {
-            self.titles = rTitles;
-            self.mainTitle = 'Список оперативной памяти';
-            fetchAllRamsRO();
-        } else if ($routeParams.param === 'Processor') {
-            self.titles = pTitles;
-            self.mainTitle = 'Список процессоров';
-            fetchAllProcessorsRO();
-        } else if ($routeParams.param === 'Motherboard') {
-            self.titles = motTitles;
-            self.mainTitle = 'Список материнских плат';
-            fetchAllMotherBoardsRO();
-        } else if ($routeParams.param === 'Powersupply') {
-            self.titles = powTitles;
-            self.mainTitle = 'Список блоков питания';
-            fetchAllPowerSuppliesRO();
+        switch ($routeParams.param) {
+            case ('Mouse'):
+                self.titles = mTitles;
+                self.mainTitle = 'Список мышек';
+                fetchAllMousesRO();
+                break;
+            case ('Keyboard'):
+                self.titles = kTitles;
+                self.mainTitle = 'Список клавиатур';
+                fetchAllKeyboardsRO();
+                break;
+            case ('Monitor'):
+                self.titles = monTitles;
+                self.mainTitle = 'Список мониторов';
+                fetchAllMonitorsRO();
+                break;
+            case ('Ups'):
+                self.titles = uTitles;
+                self.mainTitle = 'Список ИБП';
+                fetchAllUpsesRO();
+                break;
+            case ('Hdd'):
+                self.titles = hTitles;
+                self.mainTitle = 'Список жестких дисков';
+                fetchAllHddsRO();
+                break;
+            case ('Ram'):
+                self.titles = rTitles;
+                self.mainTitle = 'Список оперативной памяти';
+                fetchAllRamsRO();
+                break;
+            case ('Processor'):
+                self.titles = pTitles;
+                self.mainTitle = 'Список процессоров';
+                fetchAllProcessorsRO();
+                break;
+            case ('Motherboard'):
+                self.titles = motTitles;
+                self.mainTitle = 'Список материнских плат';
+                fetchAllMotherBoardsRO();
+                break;
+            case ('Powersupply'):
+                self.titles = powTitles;
+                self.mainTitle = 'Список блоков питания';
+                fetchAllPowerSuppliesRO();
+                break;
+            default:
+                break;
         }
     }
 
