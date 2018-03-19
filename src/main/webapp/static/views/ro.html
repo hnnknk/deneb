@@ -11,6 +11,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in ctrl.items">
+                    <!-- remove id from list -->
                     <td ng-repeat="value in item" ng-if ="$index > 0"><span ng-bind="value"></span></td>
                 </tr>
                 </tbody>
