@@ -89,7 +89,7 @@
 <script src="<c:url value='/static/js/service/processor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/processor_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/motherboard_service.js' />"></script>
-<script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>
+<script src="<c:url value='/static/js/controller/motherboard_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/powersupply_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/powersupply_controller.js' />"></script>
 </body>

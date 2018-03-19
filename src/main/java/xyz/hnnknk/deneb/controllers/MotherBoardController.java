@@ -14,6 +14,8 @@ import xyz.hnnknk.deneb.model.MotherBoard;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -43,13 +45,14 @@ public class MotherBoardController {
     @RequestMapping(value = "/sysunit/motherboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MotherBoard> getMotherBoard(@PathVariable("id") long id) {
         System.out.println("Fetching motherBoard with id " + id);
-
+        
         try {
             MotherBoard motherBoard = (MotherBoard) motherBoardServiceImpl.findById(id);
             return new ResponseEntity<MotherBoard>(motherBoard, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<MotherBoard>(HttpStatus.NOT_FOUND);
+
         }
     }
 

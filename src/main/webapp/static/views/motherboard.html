@@ -1,10 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!-- Motherboard section -->
+<div id="motherboard_div" class="generic-container" ng-controller="MotherBoardController as ctrl_motherboard">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Регистрация материнской платы</span></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="floatRight">
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchMotherboard" size="34"/>
+                </div>
+            </div>
+        </div>
 
-</body>
-</html>
+        <div class="formcontainer">
+            <form ng-submit="ctrl_motherboard.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl_motherboard.motherboard.id" />
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Производитель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_motherboard.motherboard.manufacter" name="motherboard_manufacter" class="field form-control input-sm" placeholder="Введите производителя материнской платы" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.motherboard_manufacter.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.motherboard_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.motherboard_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Модель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_motherboard.motherboard.model" name="motherboard_model" class="field form-control input-sm" placeholder="Введите модель материнской платы" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.motherboard_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.motherboard_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.motherboard_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Сокет</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl_motherboard.motherboard.socket" name="motherboard_socket" class="field form-control input-sm" placeholder="Введите сокет материнской платы" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.motherboard_socket.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.motherboard_socket.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.motherboard_socket.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl_motherboard.motherboard.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl_motherboard.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Сбросить данные</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">Список материнских плат</span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Производитель</th>
+                    <th>Модель</th>
+                    <th>Сокет</th>
+                    <th width="25%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="m in ctrl_motherboard.motherboards | filter:searchMotherboard">
+                    <td><span ng-bind="m.manufacter"></span></td>
+                    <td><span ng-bind="m.model"></span></td>
+                    <td><span ng-bind="m.socket"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl_motherboard.edit(m.id)" class="btn btn-success custom-width">Изменить</button>  <button type="button" class="btn btn-danger custom-width" ng-click="ctrl_motherboard.remove(m.id)">Удалить</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
