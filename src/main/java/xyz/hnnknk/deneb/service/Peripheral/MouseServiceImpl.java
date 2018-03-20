@@ -10,29 +10,30 @@ import xyz.hnnknk.deneb.model.Mouse;
 import xyz.hnnknk.deneb.model.Peripheral;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class MouseServiceImpl implements PeripheralService {
+public class MouseServiceImpl implements PeripheralService<Mouse> {
 
     @Autowired
-    PeripheralDAO mouseDAOImpl;
+    PeripheralDAO<Mouse> mouseDAOImpl;
 
     @Transactional
     @Override
-    public void save(Peripheral peripheral) throws EntityExistsException {
+    public void save(Mouse mouse) throws EntityExistsException {
 
         for (Mouse m : listAll()) {
-            if (m.getInvNumber().equals(peripheral.getInvNumber())) {
-                throw new EntityExistsException("A mouse with invNumber "+ peripheral.getInvNumber() +" already exists!");
+            if (Objects.equals(m, mouse)) {
+                throw new EntityExistsException("A "+ mouse.toString() +" already exists!");
             }
         }
-        mouseDAOImpl.save(peripheral);
+        mouseDAOImpl.save(mouse);
     }
 
     @Transactional
     @Override
-    public void update(Peripheral peripheral) {
-        mouseDAOImpl.update(peripheral);
+    public void update(Mouse mouse) {
+        mouseDAOImpl.update(mouse);
     }
 
     @Transactional
@@ -48,7 +49,7 @@ public class MouseServiceImpl implements PeripheralService {
         if(mouseDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("A mouse with " + id + " not found!");
         }
-        return (Mouse) mouseDAOImpl.findById(id);
+        return mouseDAOImpl.findById(id);
     }
 
     @Transactional

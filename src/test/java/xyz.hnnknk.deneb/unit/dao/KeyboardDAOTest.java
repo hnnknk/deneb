@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.*;
 public class KeyboardDAOTest {
 
     @Autowired
-    PeripheralDAO keyboardDAOImpl;
+    PeripheralDAO<Keyboard> keyboardDAOImpl;
 
     private Keyboard key;
     private Keyboard key2;

@@ -20,6 +20,9 @@ import xyz.hnnknk.deneb.service.Peripheral.MonitorServiceImpl;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
@@ -29,27 +32,27 @@ public class MonitorServiceTest {
     private MonitorServiceImpl monitorService;
 
     @Mock
-    private PeripheralDAO monitorDAOImpl;
+    private PeripheralDAO<Monitor> monitorDAOImpl;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         Monitor mon = new Monitor("144","Philips","170v","1n5dHrR85Ye");
-        ArrayList<Monitor> monitors = new ArrayList<Monitor>();
+        ArrayList<Monitor> monitors = new ArrayList<>();
         monitors.add(mon);
 
-        Mockito.when(monitorDAOImpl.listAll()).thenReturn(monitors);
-        Mockito.when(monitorDAOImpl.findById(1L)).thenReturn(mon);
+        when(monitorDAOImpl.listAll()).thenReturn(monitors);
+        when(monitorDAOImpl.findById(1L)).thenReturn(mon);
     }
 
     @Test
     public void findByIdReturnSuccess() throws EntityNotFoundException {
         Monitor m = monitorService.findById(1L);
-        Assert.assertNotNull(m);
-        Assert.assertEquals("1n5dHrR85Ye", m.getSerial());
-        Assert.assertEquals("170v", m.getModel());
-        Assert.assertEquals("Philips", m.getManufacter());
-        Assert.assertEquals("144", m.getInvNumber());
+        assertNotNull(m);
+        assertEquals("1n5dHrR85Ye", m.getSerial());
+        assertEquals("170v", m.getModel());
+        assertEquals("Philips", m.getManufacter());
+        assertEquals("144", m.getInvNumber());
     }
 
     @Test (expected = EntityNotFoundException.class)
@@ -72,20 +75,20 @@ public class MonitorServiceTest {
     @Test
     public void listAllReturnSuccess() {
         ArrayList<Monitor> monitors = (ArrayList<Monitor>) monitorService.listAll();
-        Assert.assertNotNull(monitors);
-        Assert.assertNotNull(monitors.get(0));
-        Assert.assertEquals("144", monitors.get(0).getInvNumber());
+        assertNotNull(monitors);
+        assertNotNull(monitors.get(0));
+        assertEquals("144", monitors.get(0).getInvNumber());
     }
 
     @Test
     public void listAllReturnEmpty() {
-        Mockito.reset(monitorDAOImpl);
+        reset(monitorDAOImpl);
         ArrayList<Monitor> mons = new ArrayList<Monitor>();
-        Mockito.when(monitorDAOImpl.listAll()).thenReturn(mons);
+        when(monitorDAOImpl.listAll()).thenReturn(mons);
 
         ArrayList<Monitor> monitors = (ArrayList<Monitor>) monitorService.listAll();
-        Assert.assertNotNull(monitors);
-        Assert.assertTrue(monitors.isEmpty());
+        assertNotNull(monitors);
+        assertTrue(monitors.isEmpty());
     }
 
 }

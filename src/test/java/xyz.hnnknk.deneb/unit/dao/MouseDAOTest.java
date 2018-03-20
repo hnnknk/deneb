@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.*;
 public class MouseDAOTest {
 
     @Autowired
-    PeripheralDAO mouseDAOImpl;
+    PeripheralDAO<Mouse> mouseDAOImpl;
 
     private Mouse mouse;
     private Mouse mouse2;

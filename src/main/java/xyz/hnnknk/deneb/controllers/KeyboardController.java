@@ -21,7 +21,7 @@ import java.util.List;
 public class KeyboardController {
 
     @Autowired
-    PeripheralService keyboardServiceImpl;
+    PeripheralService<Keyboard> keyboardServiceImpl;
 
     @Autowired
     NotificationService notificationService;
@@ -30,18 +30,18 @@ public class KeyboardController {
     public ResponseEntity<List<Keyboard>> listAllKeyboards() {
         List<Keyboard> keyboards = keyboardServiceImpl.listAll();
         if(keyboards.isEmpty()){
-            return new ResponseEntity<List<Keyboard>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Keyboard>>(keyboards, HttpStatus.OK);
+        return new ResponseEntity<>(keyboards, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/ro/keyboard/", method = RequestMethod.GET)
     public ResponseEntity<List<Keyboard>> listAllKeyboardsRO() {
         List<Keyboard> keyboards = keyboardServiceImpl.listAll();
         if(keyboards.isEmpty()){
-            return new ResponseEntity<List<Keyboard>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Keyboard>>(keyboards, HttpStatus.OK);
+        return new ResponseEntity<>(keyboards, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/keyboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,12 +49,12 @@ public class KeyboardController {
         System.out.println("Fetching Keyboard with id " + id);
 
         try {
-            Keyboard keyboard = (Keyboard) keyboardServiceImpl.findById(id);
+            Keyboard keyboard = keyboardServiceImpl.findById(id);
 
-            return new ResponseEntity<Keyboard>(keyboard, HttpStatus.OK);
+            return new ResponseEntity<>(keyboard, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Keyboard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -68,10 +68,10 @@ public class KeyboardController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/components/keyboard/{id}").buildAndExpand(keyboard.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -80,18 +80,18 @@ public class KeyboardController {
         System.out.println("Updating " + keyboard.toString());
 
         try {
-            Keyboard currentKeyboard = (Keyboard) keyboardServiceImpl.findById(id);
+            Keyboard currentKeyboard = keyboardServiceImpl.findById(id);
             currentKeyboard.setInvNumber(keyboard.getInvNumber());
             currentKeyboard.setManufacter(keyboard.getManufacter());
             currentKeyboard.setModel(keyboard.getModel());
             currentKeyboard.setSerial(keyboard.getSerial());
 
             keyboardServiceImpl.update(currentKeyboard);
-            return new ResponseEntity<Keyboard>(currentKeyboard, HttpStatus.OK);
+            return new ResponseEntity<>(currentKeyboard, HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Keyboard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -103,10 +103,10 @@ public class KeyboardController {
             keyboardServiceImpl.findById(id);
 
             keyboardServiceImpl.delete(id);
-            return new ResponseEntity<Keyboard>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Keyboard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

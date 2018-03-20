@@ -10,28 +10,29 @@ import xyz.hnnknk.deneb.model.Peripheral;
 import xyz.hnnknk.deneb.model.Ups;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class UpsServiceImpl implements PeripheralService {
+public class UpsServiceImpl implements PeripheralService<Ups> {
 
     @Autowired
-    PeripheralDAO upsDAOImpl;
+    PeripheralDAO<Ups> upsDAOImpl;
 
     @Transactional
     @Override
-    public void save(Peripheral peripheral) throws EntityExistsException {
+    public void save(Ups ups) throws EntityExistsException {
         for(Ups u : listAll()) {
-            if (u.getInvNumber().equals(peripheral.getInvNumber())) {
-                throw new EntityExistsException("An ups with invNumber "+ peripheral.getInvNumber() +" already exists!");
+            if (Objects.equals(u, ups)) {
+                throw new EntityExistsException("An "+ ups.toString() +" already exists!");
             }
         }
-        upsDAOImpl.save(peripheral);
+        upsDAOImpl.save(ups);
     }
 
     @Transactional
     @Override
-    public void update(Peripheral peripheral) {
-        upsDAOImpl.update(peripheral);
+    public void update(Ups ups) {
+        upsDAOImpl.update(ups);
     }
 
     @Transactional
@@ -44,10 +45,10 @@ public class UpsServiceImpl implements PeripheralService {
     @Override
     public Ups findById(long id) throws EntityNotFoundException {
 
-        if(upsDAOImpl.findById(id) == null) {
+        if (upsDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("An ups with " + id + " not found!");
         }
-        return (Ups) upsDAOImpl.findById(id);
+        return upsDAOImpl.findById(id);
     }
 
     @Transactional

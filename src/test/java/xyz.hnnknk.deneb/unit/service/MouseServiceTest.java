@@ -29,7 +29,7 @@ public class MouseServiceTest {
     private MouseServiceImpl mouseService;
 
     @Mock
-    private PeripheralDAO mouseDAOImpl;
+    private PeripheralDAO<Mouse> mouseDAOImpl;
 
     @Before
     public void setup() {
@@ -80,7 +80,7 @@ public class MouseServiceTest {
     @Test
     public void listAllReturnEmpty() {
         Mockito.reset(mouseDAOImpl);
-        ArrayList<Mouse> mous = new ArrayList<Mouse>();
+        ArrayList<Mouse> mous = new ArrayList<>();
         Mockito.when(mouseDAOImpl.listAll()).thenReturn(mous);
 
         ArrayList<Mouse> mouses = (ArrayList<Mouse>) mouseService.listAll();

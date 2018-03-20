@@ -1,6 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "mouse")
@@ -14,15 +15,17 @@ public class Mouse extends Peripheral {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Mouse))
-            return false;
-        Mouse other = (Mouse) obj;
-        return this.getId().equals(other.getId());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mouse mouse = (Mouse) o;
+        return Objects.equals(getInvNumber(), mouse.getInvNumber());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getInvNumber());
     }
 
     @Override

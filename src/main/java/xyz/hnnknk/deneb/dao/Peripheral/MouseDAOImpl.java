@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class MouseDAOImpl implements PeripheralDAO {
+public class MouseDAOImpl implements PeripheralDAO<Mouse> {
 
     @Autowired
     SessionFactory sessionFactory;
 
     @Override
-    public void save(Peripheral peripheral) {
-        sessionFactory.getCurrentSession().save(peripheral);
+    public void save(Mouse mouse) {
+        sessionFactory.getCurrentSession().save(mouse);
     }
 
     @Override
-    public void update(Peripheral peripheral) {
-        sessionFactory.getCurrentSession().update(peripheral);
+    public void update(Mouse mouse) {
+        sessionFactory.getCurrentSession().update(mouse);
     }
 
     @Override

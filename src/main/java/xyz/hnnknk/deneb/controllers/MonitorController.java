@@ -21,7 +21,7 @@ import java.util.List;
 public class MonitorController {
 
     @Autowired
-    PeripheralService monitorServiceImpl;
+    PeripheralService<Monitor> monitorServiceImpl;
 
     @Autowired
     NotificationService notificationService;
@@ -30,18 +30,18 @@ public class MonitorController {
     public ResponseEntity<List<Monitor>> listAllMonitors() {
         List<Monitor> monitors = monitorServiceImpl.listAll();
         if(monitors.isEmpty()){
-            return new ResponseEntity<List<Monitor>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Monitor>>(monitors, HttpStatus.OK);
+        return new ResponseEntity<>(monitors, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/ro/monitor/", method = RequestMethod.GET)
     public ResponseEntity<List<Monitor>> listAllMonitorsRO() {
         List<Monitor> monitors = monitorServiceImpl.listAll();
         if(monitors.isEmpty()){
-            return new ResponseEntity<List<Monitor>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Monitor>>(monitors, HttpStatus.OK);
+        return new ResponseEntity<>(monitors, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/monitor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,12 +49,12 @@ public class MonitorController {
         System.out.println("Fetching Monitor with id " + id);
 
         try {
-            Monitor monitor = (Monitor) monitorServiceImpl.findById(id);
+            Monitor monitor = monitorServiceImpl.findById(id);
 
-            return new ResponseEntity<Monitor>(monitor, HttpStatus.OK);
+            return new ResponseEntity<>(monitor, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Monitor>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -68,10 +68,10 @@ public class MonitorController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/components/monitor/{id}").buildAndExpand(monitor.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e ) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -80,18 +80,18 @@ public class MonitorController {
         System.out.println("Updating " + monitor.toString());
 
         try {
-            Monitor currentMonitor = (Monitor) monitorServiceImpl.findById(id);
+            Monitor currentMonitor = monitorServiceImpl.findById(id);
             currentMonitor.setInvNumber(monitor.getInvNumber());
             currentMonitor.setManufacter(monitor.getManufacter());
             currentMonitor.setModel(monitor.getModel());
             currentMonitor.setSerial(monitor.getSerial());
 
             monitorServiceImpl.update(currentMonitor);
-            return new ResponseEntity<Monitor>(currentMonitor, HttpStatus.OK);
+            return new ResponseEntity<>(currentMonitor, HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Monitor>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -103,10 +103,10 @@ public class MonitorController {
             monitorServiceImpl.findById(id);
 
             monitorServiceImpl.delete(id);
-            return new ResponseEntity<Monitor>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Monitor>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

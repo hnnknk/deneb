@@ -21,7 +21,7 @@ import java.util.List;
 public class MouseController {
 
     @Autowired
-    PeripheralService mouseServiceImpl;
+    PeripheralService<Mouse> mouseServiceImpl;
 
     @Autowired
     NotificationService notificationService;
@@ -30,18 +30,18 @@ public class MouseController {
     public ResponseEntity<List<Mouse>> listAllmouses() {
         List<Mouse> mouses = mouseServiceImpl.listAll();
         if(mouses.isEmpty()){
-            return new ResponseEntity<List<Mouse>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Mouse>>(mouses, HttpStatus.OK);
+        return new ResponseEntity<>(mouses, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/ro/mouse/", method = RequestMethod.GET)
     public ResponseEntity<List<Mouse>> listAllmousesRO() {
         List<Mouse> mouses = mouseServiceImpl.listAll();
         if(mouses.isEmpty()){
-            return new ResponseEntity<List<Mouse>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Mouse>>(mouses, HttpStatus.OK);
+        return new ResponseEntity<>(mouses, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,12 +49,12 @@ public class MouseController {
         System.out.println("Fetching mouse with id " + id);
 
         try {
-            Mouse mouse = (Mouse) mouseServiceImpl.findById(id);
+            Mouse mouse = mouseServiceImpl.findById(id);
 
-            return new ResponseEntity<Mouse>(mouse, HttpStatus.OK);
+            return new ResponseEntity<>(mouse, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Mouse>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -68,11 +68,11 @@ public class MouseController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/components/mouse/{id}").buildAndExpand(mouse.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
 
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -81,17 +81,17 @@ public class MouseController {
         System.out.println("Updating " + mouse.toString());
 
         try {
-            Mouse currentmouse = (Mouse) mouseServiceImpl.findById(id);
+            Mouse currentmouse = mouseServiceImpl.findById(id);
             currentmouse.setInvNumber(mouse.getInvNumber());
             currentmouse.setManufacter(mouse.getManufacter());
             currentmouse.setModel(mouse.getModel());
             currentmouse.setSerial(mouse.getSerial());
 
             mouseServiceImpl.update(currentmouse);
-            return new ResponseEntity<Mouse>(currentmouse, HttpStatus.OK);
+            return new ResponseEntity<>(currentmouse, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Mouse>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -103,11 +103,11 @@ public class MouseController {
             mouseServiceImpl.findById(id);
 
             mouseServiceImpl.delete(id);
-            return new ResponseEntity<Mouse>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Mouse>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

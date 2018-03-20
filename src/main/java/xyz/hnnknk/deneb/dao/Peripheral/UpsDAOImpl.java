@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class UpsDAOImpl implements PeripheralDAO {
+public class UpsDAOImpl implements PeripheralDAO<Ups> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(Peripheral peripheral) {
-        sessionFactory.getCurrentSession().save(peripheral);
+    public void save(Ups ups) {
+        sessionFactory.getCurrentSession().save(ups);
     }
 
     @Override
-    public void update(Peripheral peripheral) {
-        sessionFactory.getCurrentSession().update(peripheral);
+    public void update(Ups ups) {
+        sessionFactory.getCurrentSession().update(ups);
     }
 
     @Override

@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.*;
 public class UpsDAOTest {
 
     @Autowired
-    PeripheralDAO upsDAOImpl;
+    PeripheralDAO<Ups> upsDAOImpl;
 
     private Ups ups;
     private Ups ups2;

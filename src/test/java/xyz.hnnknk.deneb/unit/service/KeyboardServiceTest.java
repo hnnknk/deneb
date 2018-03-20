@@ -20,6 +20,9 @@ import xyz.hnnknk.deneb.service.Peripheral.KeyboardServiceImpl;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
@@ -29,27 +32,27 @@ public class KeyboardServiceTest {
     private KeyboardServiceImpl keyboardService;
 
     @Mock
-    private PeripheralDAO keyboardDAOImpl;
+    private PeripheralDAO<Keyboard> keyboardDAOImpl;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         Keyboard key = new Keyboard("144","BTC","6301C","1n5dHrR85Ye");
-        ArrayList<Keyboard> keyboards = new ArrayList<Keyboard>();
+        ArrayList<Keyboard> keyboards = new ArrayList<>();
         keyboards.add(key);
 
-        Mockito.when(keyboardDAOImpl.listAll()).thenReturn(keyboards);
-        Mockito.when(keyboardDAOImpl.findById(1L)).thenReturn(key);
+        when(keyboardDAOImpl.listAll()).thenReturn(keyboards);
+        when(keyboardDAOImpl.findById(1L)).thenReturn(key);
     }
 
     @Test
     public void findByIdReturnSuccess() throws EntityNotFoundException {
         Keyboard k = keyboardService.findById(1L);
-        Assert.assertNotNull(k);
-        Assert.assertEquals("1n5dHrR85Ye", k.getSerial());
-        Assert.assertEquals("6301C", k.getModel());
-        Assert.assertEquals("BTC", k.getManufacter());
-        Assert.assertEquals("144", k.getInvNumber());
+        assertNotNull(k);
+        assertEquals("1n5dHrR85Ye", k.getSerial());
+        assertEquals("6301C", k.getModel());
+        assertEquals("BTC", k.getManufacter());
+        assertEquals("144", k.getInvNumber());
     }
 
     @Test (expected = EntityNotFoundException.class)
@@ -72,20 +75,20 @@ public class KeyboardServiceTest {
     @Test
     public void listAllReturnSuccess() {
         ArrayList<Keyboard> keyboards = (ArrayList<Keyboard>) keyboardService.listAll();
-        Assert.assertNotNull(keyboards);
-        Assert.assertNotNull(keyboards.get(0));
-        Assert.assertEquals("144", keyboards.get(0).getInvNumber());
+        assertNotNull(keyboards);
+        assertNotNull(keyboards.get(0));
+        assertEquals("144", keyboards.get(0).getInvNumber());
     }
 
     @Test
     public void listAllReturnEmpty() {
-        Mockito.reset(keyboardDAOImpl);
-        ArrayList<Keyboard> keys = new ArrayList<Keyboard>();
-        Mockito.when(keyboardDAOImpl.listAll()).thenReturn(keys);
+        reset(keyboardDAOImpl);
+        ArrayList<Keyboard> keys = new ArrayList<>();
+        when(keyboardDAOImpl.listAll()).thenReturn(keys);
 
         ArrayList<Keyboard> keyboards = (ArrayList<Keyboard>) keyboardService.listAll();
-        Assert.assertNotNull(keyboards);
-        Assert.assertTrue(keyboards.isEmpty());
+        assertNotNull(keyboards);
+        assertTrue(keyboards.isEmpty());
     }
 
 }

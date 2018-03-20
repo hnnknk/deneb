@@ -11,29 +11,30 @@ import xyz.hnnknk.deneb.model.Peripheral;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class KeyboardServiceImpl implements PeripheralService {
+public class KeyboardServiceImpl implements PeripheralService<Keyboard> {
 
     @Autowired
-    PeripheralDAO keyboardDAOImpl;
+    PeripheralDAO<Keyboard> keyboardDAOImpl;
 
     @Transactional
     @Override
-    public void save(Peripheral peripheral) throws EntityExistsException {
+    public void save(Keyboard keyboard) throws EntityExistsException {
 
         for(Keyboard k : listAll()) {
-            if (k.getInvNumber().equals(peripheral.getInvNumber())) {
-                throw new EntityExistsException("A keyboard with " + peripheral.getInvNumber() + " already exists!");
+            if (Objects.equals(k, keyboard)) {
+                throw new EntityExistsException("A " + keyboard.toString() + " already exists!");
             }
         }
-        keyboardDAOImpl.save(peripheral);
+        keyboardDAOImpl.save(keyboard);
     }
 
     @Transactional
     @Override
-    public void update(Peripheral peripheral) {
-        keyboardDAOImpl.update(peripheral);
+    public void update(Keyboard keyboard) {
+        keyboardDAOImpl.update(keyboard);
     }
 
     @Transactional
@@ -49,7 +50,7 @@ public class KeyboardServiceImpl implements PeripheralService {
         if(keyboardDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("A keyboard with " + id + " not found!");
         }
-        return (Keyboard) keyboardDAOImpl.findById(id);
+        return keyboardDAOImpl.findById(id);
     }
 
     @Transactional

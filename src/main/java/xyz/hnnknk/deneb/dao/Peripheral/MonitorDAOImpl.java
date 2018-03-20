@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class MonitorDAOImpl implements PeripheralDAO {
+public class MonitorDAOImpl implements PeripheralDAO<Monitor> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(Peripheral peripheral) {
-        sessionFactory.getCurrentSession().save(peripheral);
+    public void save(Monitor monitor) {
+        sessionFactory.getCurrentSession().save(monitor);
     }
 
     @Override
-    public void update(Peripheral peripheral) {
-        sessionFactory.getCurrentSession().update(peripheral);
+    public void update(Monitor monitor) {
+        sessionFactory.getCurrentSession().update(monitor);
     }
 
     @Override

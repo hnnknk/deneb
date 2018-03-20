@@ -29,13 +29,13 @@ public class UpsServiceTest {
     private UpsServiceImpl upsService;
 
     @Mock
-    private PeripheralDAO upsDAOImpl;
+    private PeripheralDAO<Ups> upsDAOImpl;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         Ups ups = new Ups("144","APC","BC500","1n5dHrR85Ye");
-        ArrayList<Ups> upses = new ArrayList<Ups>();
+        ArrayList<Ups> upses = new ArrayList<>();
         upses.add(ups);
 
         Mockito.when(upsDAOImpl.listAll()).thenReturn(upses);
@@ -80,7 +80,7 @@ public class UpsServiceTest {
     @Test
     public void listAllReturnEmpty() {
         Mockito.reset(upsDAOImpl);
-        ArrayList<Ups> us = new ArrayList<Ups>();
+        ArrayList<Ups> us = new ArrayList<>();
         Mockito.when(upsDAOImpl.listAll()).thenReturn(us);
 
         ArrayList<Ups> upses = (ArrayList<Ups>) upsService.listAll();

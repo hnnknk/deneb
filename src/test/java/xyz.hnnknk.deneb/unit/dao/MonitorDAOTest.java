@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.*;
 public class MonitorDAOTest {
 
     @Autowired
-    PeripheralDAO monitorDAOImpl;
+    PeripheralDAO<Monitor> monitorDAOImpl;
 
     private Monitor mon;
     private Monitor mon2;

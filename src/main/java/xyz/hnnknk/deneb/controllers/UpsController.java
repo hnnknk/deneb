@@ -21,7 +21,7 @@ import java.util.List;
 public class UpsController {
 
     @Autowired
-    PeripheralService upsServiceImpl;
+    PeripheralService<Ups> upsServiceImpl;
 
     @Autowired
     NotificationService notificationService;
@@ -30,18 +30,18 @@ public class UpsController {
     public ResponseEntity<List<Ups>> listAllUpses() {
         List<Ups> upses = upsServiceImpl.listAll();
         if(upses.isEmpty()){
-            return new ResponseEntity<List<Ups>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Ups>>(upses, HttpStatus.OK);
+        return new ResponseEntity<>(upses, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/ro/ups/", method = RequestMethod.GET)
     public ResponseEntity<List<Ups>> listAllUpsesRO() {
         List<Ups> upses = upsServiceImpl.listAll();
         if(upses.isEmpty()){
-            return new ResponseEntity<List<Ups>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Ups>>(upses, HttpStatus.OK);
+        return new ResponseEntity<>(upses, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/ups/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,11 +49,11 @@ public class UpsController {
         System.out.println("Fetching ups with id " + id);
 
         try {
-            Ups ups = (Ups) upsServiceImpl.findById(id);
-            return new ResponseEntity<Ups>(ups, HttpStatus.OK);
+            Ups ups = upsServiceImpl.findById(id);
+            return new ResponseEntity<>(ups, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Ups>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -67,10 +67,10 @@ public class UpsController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/components/ups/{id}").buildAndExpand(ups.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -79,17 +79,17 @@ public class UpsController {
         System.out.println("Updating " + ups.toString());
 
         try {
-            Ups currentUps = (Ups) upsServiceImpl.findById(id);
+            Ups currentUps = upsServiceImpl.findById(id);
             currentUps.setInvNumber(ups.getInvNumber());
             currentUps.setManufacter(ups.getManufacter());
             currentUps.setModel(ups.getModel());
             currentUps.setSerial(ups.getSerial());
 
             upsServiceImpl.update(currentUps);
-            return new ResponseEntity<Ups>(currentUps, HttpStatus.OK);
+            return new ResponseEntity<>(currentUps, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Ups>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -101,10 +101,10 @@ public class UpsController {
             upsServiceImpl.findById(id);
 
             upsServiceImpl.delete(id);
-            return new ResponseEntity<Ups>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Ups>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
