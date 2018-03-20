@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class HDDDAOImpl implements SystemUnitDAO {
+public class HDDDAOImpl implements SystemUnitDAO<HDD> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().save(systemUnit);
+    public void save(HDD hdd) {
+        sessionFactory.getCurrentSession().save(hdd);
     }
 
     @Override
-    public void update(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().update(systemUnit);
+    public void update(HDD hdd) {
+        sessionFactory.getCurrentSession().update(hdd);
     }
 
     @Override

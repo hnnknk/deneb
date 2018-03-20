@@ -18,11 +18,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_processor.processor.manufacter" name="processor_manufacter" class="field form-control input-sm" placeholder="Введите производителя процессора" required ng-minlength="2" ng-maxlength="10"/>
+                            <input type="text" ng-model="ctrl_processor.processor.manufacturer" name="processor_manufacturer" class="field form-control input-sm" placeholder="Введите производителя процессора" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.processor_manufacter.$error.required">Это поле необходимо заполнить</span>
-                                <span ng-show="myForm.processor_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
-                                <span ng-show="myForm.processor_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                                <span ng-show="myForm.processor_manufacturer.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.processor_manufacturer.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.processor_manufacturer.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in ctrl_processor.processors | filter:searchProcessor">
-                    <td><span ng-bind="p.manufacter"></span></td>
+                    <td><span ng-bind="p.manufacturer"></span></td>
                     <td><span ng-bind="p.model"></span></td>
                     <td><span ng-bind="p.speed"></span></td>
                     <td><span ng-bind="p.numberOfCores"></span></td>

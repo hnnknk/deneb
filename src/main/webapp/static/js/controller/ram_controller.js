@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('RamController', ['$scope', 'RamService', function($scope, RamService) {
     var self = this;
-    self.ram={id:null,manufacter:'',model:'',capacity:''};
+    self.ram={id:null,manufacturer:'',model:'',capacity:''};
     self.rams=[];
 
     self.submit = submit;
@@ -90,7 +90,7 @@ angular.module('myApp').controller('RamController', ['$scope', 'RamService', fun
 
 
     function reset(){
-        self.ram={id:null,manufacter:'',model:'',capacity:''};
+        self.ram={id:null,manufacturer:'',model:'',capacity:''};
         $scope.myForm.$setPristine();
     }
 

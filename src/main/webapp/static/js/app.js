@@ -10,7 +10,7 @@ App.config(['$httpProvider', function($httpProvider) {
 App.config(function($routeProvider){
     $routeProvider
         .when('/ro:param',{
-            
+
             templateUrl: 'static/views/ro.html'
 
         })

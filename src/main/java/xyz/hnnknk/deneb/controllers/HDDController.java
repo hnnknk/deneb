@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.model.HDD;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
@@ -20,24 +19,24 @@ import java.util.List;
 public class HDDController {
 
     @Autowired
-    SystemUnitService HDDServiceImpl;
+    SystemUnitService<HDD> HDDServiceImpl;
 
     @RequestMapping(value = "/sysunit/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHDDes() {
         List<HDD> hddes = HDDServiceImpl.listAll();
         if(hddes.isEmpty()){
-            return new ResponseEntity<List<HDD>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<HDD>>(hddes, HttpStatus.OK);
+        return new ResponseEntity<>(hddes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHDDesRO() {
         List<HDD> hddes = HDDServiceImpl.listAll();
         if(hddes.isEmpty()){
-            return new ResponseEntity<List<HDD>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<HDD>>(hddes, HttpStatus.OK);
+        return new ResponseEntity<>(hddes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/hdd/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,11 +44,11 @@ public class HDDController {
         System.out.println("Fetching hdd with id " + id);
 
         try {
-            HDD hdd = (HDD) HDDServiceImpl.findById(id);
-            return new ResponseEntity<HDD>(hdd, HttpStatus.OK);
+            HDD hdd = HDDServiceImpl.findById(id);
+            return new ResponseEntity<>(hdd, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<HDD>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -62,10 +61,10 @@ public class HDDController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/sysunit/hdd/{id}").buildAndExpand(hdd.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -74,18 +73,18 @@ public class HDDController {
         System.out.println("Updating " + hdd.toString());
 
         try {
-            HDD currentHDD = (HDD) HDDServiceImpl.findById(id);
+            HDD currentHDD = HDDServiceImpl.findById(id);
             currentHDD.setCapacity(hdd.getCapacity());
             currentHDD.setHddType(hdd.getHddType());
-            currentHDD.setManufacter(hdd.getManufacter());
+            currentHDD.setManufacturer(hdd.getManufacturer());
             currentHDD.setModel(hdd.getModel());
             currentHDD.setSerial(hdd.getSerial());
 
             HDDServiceImpl.update(currentHDD);
-            return new ResponseEntity<HDD>(currentHDD, HttpStatus.OK);
+            return new ResponseEntity<>(currentHDD, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<HDD>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -97,10 +96,10 @@ public class HDDController {
             HDDServiceImpl.findById(id);
 
             HDDServiceImpl.delete(id);
-            return new ResponseEntity<HDD>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<HDD>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

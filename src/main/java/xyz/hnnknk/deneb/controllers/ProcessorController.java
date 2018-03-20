@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.model.Processor;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
@@ -75,7 +74,7 @@ public class ProcessorController {
 
         try {
             Processor currentProcessor = (Processor) processorServiceImpl.findById(id);
-            currentProcessor.setManufacter(processor.getManufacter());
+            currentProcessor.setManufacturer(processor.getManufacturer());
             currentProcessor.setModel(processor.getModel());
             currentProcessor.setNumberOfCores(processor.getNumberOfCores());
             currentProcessor.setSpeed(processor.getSpeed());

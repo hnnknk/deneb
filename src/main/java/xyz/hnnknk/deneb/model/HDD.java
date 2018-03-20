@@ -1,6 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "hdd")
@@ -15,8 +16,15 @@ public class HDD extends SystemUnit {
     @Column
     private String hddType;
 
-    public HDD() {
+    public HDD(String manufacturer, String model, String serial, Integer capacity, String hddType) {
+        setManufacturer(manufacturer);
+        setModel(model);
+        this.serial = serial;
+        this.capacity = capacity;
+        this.hddType = hddType;
     }
+
+    public HDD() {}
 
     public String getSerial() {
         return serial;
@@ -44,7 +52,26 @@ public class HDD extends SystemUnit {
 
     @Override
     public String toString() {
-        return "Hdd [id=" + this.getId() + ", manufacter=" + this.getManufacter() + ", model=" + this.getModel()
+        return "Hdd [id=" + this.getId() + ", manufacturer=" + this.getManufacturer() + ", model=" + this.getModel()
                 + ", serial number=" + this.getSerial() + ", capacity=" + this.getCapacity() + ", hddType=" + this.getHddType() + "]";
+    }
+
+    //Garbage equals, should be removed in next update
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HDD hdd = (HDD) o;
+        return Objects.equals(getSerial(), hdd.getSerial()) &&
+                Objects.equals(getCapacity(), hdd.getCapacity()) &&
+                Objects.equals(getHddType(), hdd.getHddType()) &&
+                Objects.equals(getManufacturer(), hdd.getManufacturer()) &&
+                Objects.equals(getModel(), hdd.getModel());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getSerial(), getCapacity(), getHddType(), getModel(), getManufacturer());
     }
 }

@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('HddController', ['$scope', 'HddService', function($scope, HddService) {
     var self = this;
-    self.hdd={id:null,manufacter:'',model:'',serial:'',capacity:'',hddType:''};
+    self.hdd={id:null,manufacturer:'',model:'',serial:'',capacity:'',hddType:''};
     self.hdds=[];
 
     self.submit = submit;
@@ -90,7 +90,7 @@ angular.module('myApp').controller('HddController', ['$scope', 'HddService', fun
 
 
     function reset(){
-        self.hdd={id:null,manufacter:'',model:'',serial:'',capacity:'',hddType:''};
+        self.hdd={id:null,manufacturer:'',model:'',serial:'',capacity:'',hddType:''};
         $scope.myForm.$setPristine();
     }
 

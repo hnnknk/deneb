@@ -6,32 +6,32 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.model.SystemUnit;
 import xyz.hnnknk.deneb.model.HDD;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class HDDServiceImpl implements SystemUnitService {
+public class HDDServiceImpl implements SystemUnitService<HDD> {
 
     @Autowired
-    SystemUnitDAO HDDDAOImpl;
+    SystemUnitDAO<HDD> HDDDAOImpl;
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) throws EntityExistsException {
+    public void save(HDD hdd) throws EntityExistsException {
         for(HDD h : listAll()) {
-            if (h.getId().equals(systemUnit.getId())) {
-                throw new EntityExistsException("A hdd with invNumber "+ systemUnit.getId() +" already exists!");
+            if (Objects.equals(h, hdd)) {
+                throw new EntityExistsException("A "+ hdd.toString() + " already exists!");
             }
         }
-        HDDDAOImpl.save(systemUnit);
+        HDDDAOImpl.save(hdd);
     }
 
     @Transactional
     @Override
-    public void update(SystemUnit systemUnit) {
-        HDDDAOImpl.update(systemUnit);
+    public void update(HDD hdd) {
+        HDDDAOImpl.update(hdd);
     }
 
     @Transactional
@@ -47,7 +47,7 @@ public class HDDServiceImpl implements SystemUnitService {
         if(HDDDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("A hdd with " + id + " not found!");
         }
-        return (HDD) HDDDAOImpl.findById(id);
+        return HDDDAOImpl.findById(id);
     }
 
     @Transactional

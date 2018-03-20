@@ -17,11 +17,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_ram.ram.manufacter" name="ram_manufacter" class="field form-control input-sm" placeholder="Введите производителя памяти" required ng-minlength="2" ng-maxlength="10"/>
+                            <input type="text" ng-model="ctrl_ram.ram.manufacturer" name="ram_manufacturer" class="field form-control input-sm" placeholder="Введите производителя памяти" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.ram_manufacter.$error.required">Это поле необходимо заполнить</span>
-                                <span ng-show="myForm.ram_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
-                                <span ng-show="myForm.ram_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                                <span ng-show="myForm.ram_manufacturer.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.ram_manufacturer.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.ram_manufacturer.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="r in ctrl_ram.rams | filter:searchRam">
-                    <td><span ng-bind="r.manufacter"></span></td>
+                    <td><span ng-bind="r.manufacturer"></span></td>
                     <td><span ng-bind="r.model"></span></td>
                     <td><span ng-bind="r.capacity"></span></td>
                     <td>

@@ -6,31 +6,31 @@ angular.module('myApp').controller('ROController', ['$scope', '$routeParams', 'M
              ProcessorService, MotherBoardService, PowerSupplyService) {
 
     var self = this;
-    self.monitor = {id:null, invNumber:'', manufacter:'', model:'', serial:''};
+    self.monitor = {id:null, invNumber:'', manufacturer:'', model:'', serial:''};
     var monTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.ups = {id:null, invNumber:'' ,manufacter:'', model:'', serial:''};
+    self.ups = {id:null, invNumber:'' ,manufacturer:'', model:'', serial:''};
     var uTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.mouse = {id:null, invNumber:'', manufacter:'', model:'', serial:''};
+    self.mouse = {id:null, invNumber:'', manufacturer:'', model:'', serial:''};
     var mTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.keyboard = {id:null, invNumber:'', manufacter:'', model:'', serial:''};
+    self.keyboard = {id:null, invNumber:'', manufacturer:'', model:'', serial:''};
     var kTitles = ['Инвентарный номер', 'Производитель', 'Модель', 'Серийный номер'];
 
-    self.hdd = {id:null, manufacter:'', model:'', serial:'', capacity:'', hddtypes:''};
+    self.hdd = {id:null, manufacturer:'', model:'', serial:'', capacity:'', hddtypes:''};
     var hTitles = ['Производитель', 'Модель', 'Серийный номер', 'Емкость', "Тип диска"];
 
-    self.motherboard = {id:null, manufacter:'', model:'', socket:''};
+    self.motherboard = {id:null, manufacturer:'', model:'', socket:''};
     var motTitles = ['Производитель', 'Модель', 'Сокет'];
 
-    self.powersupply = {id:null, manufacter:'', model:'', power:''};
+    self.powersupply = {id:null, manufacturer:'', model:'', power:''};
     var powTitles = ['Производитель', 'Модель', 'Мощность'];
 
-    self.processor = {id:null, manufacter:'', model:'', speed:'', numberOfCores:''};
+    self.processor = {id:null, manufacturer:'', model:'', speed:'', numberOfCores:''};
     var pTitles = ['Производитель', 'Модель', 'Скорость', 'Кол-во ядер'];
 
-    self.ram = {id:null, manufacter:'', model:'', capacity:''};
+    self.ram = {id:null, manufacturer:'', model:'', capacity:''};
     var rTitles = ['Производитель', 'Модель', 'Емкость'];
 
     self.mainTitle = '';

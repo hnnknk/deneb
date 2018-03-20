@@ -9,7 +9,7 @@ public class SystemUnit {
     @GeneratedValue
     private Long id;
 
-    private String manufacter;
+    private String manufacturer;
 
     private String model;
 
@@ -24,12 +24,12 @@ public class SystemUnit {
         this.id = id;
     }
 
-    public String getManufacter() {
-        return manufacter;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufacter(String manufacter) {
-        this.manufacter = manufacter;
+    public void setManufacturer(String manufacter) {
+        this.manufacturer = manufacter;
     }
 
     public String getModel() {

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.model.PowerSupply;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
@@ -20,25 +19,25 @@ import java.util.List;
 public class PowerSupplyController {
 
     @Autowired
-    SystemUnitService powerSupplyServiceImpl;
+    SystemUnitService<PowerSupply> powerSupplyServiceImpl;
 
 
     @RequestMapping(value = "/sysunit/powersupply/", method = RequestMethod.GET)
     public ResponseEntity<List<PowerSupply>> listAllPowerSupplyes() {
         List<PowerSupply> powerSupplyes = powerSupplyServiceImpl.listAll();
         if(powerSupplyes.isEmpty()){
-            return new ResponseEntity<List<PowerSupply>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<PowerSupply>>(powerSupplyes, HttpStatus.OK);
+        return new ResponseEntity<>(powerSupplyes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/powersupply/", method = RequestMethod.GET)
     public ResponseEntity<List<PowerSupply>> listAllPowerSupplyesRO() {
         List<PowerSupply> powerSupplyes = powerSupplyServiceImpl.listAll();
         if(powerSupplyes.isEmpty()){
-            return new ResponseEntity<List<PowerSupply>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<PowerSupply>>(powerSupplyes, HttpStatus.OK);
+        return new ResponseEntity<>(powerSupplyes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/powersupply/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,11 +45,11 @@ public class PowerSupplyController {
         System.out.println("Fetching powerSupply with id " + id);
 
         try {
-            PowerSupply powerSupply = (PowerSupply) powerSupplyServiceImpl.findById(id);
-            return new ResponseEntity<PowerSupply>(powerSupply, HttpStatus.OK);
+            PowerSupply powerSupply = powerSupplyServiceImpl.findById(id);
+            return new ResponseEntity<>(powerSupply, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<PowerSupply>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -63,10 +62,10 @@ public class PowerSupplyController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/sysunit/powersupply/{id}").buildAndExpand(powerSupply.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -75,16 +74,16 @@ public class PowerSupplyController {
         System.out.println("Updating " + powerSupply.toString());
 
         try {
-            PowerSupply currentPowerSupply = (PowerSupply) powerSupplyServiceImpl.findById(id);
-            currentPowerSupply.setManufacter(powerSupply.getManufacter());
+            PowerSupply currentPowerSupply = powerSupplyServiceImpl.findById(id);
+            currentPowerSupply.setManufacturer(powerSupply.getManufacturer());
             currentPowerSupply.setModel(powerSupply.getModel());
             currentPowerSupply.setPower(powerSupply.getPower());
 
             powerSupplyServiceImpl.update(currentPowerSupply);
-            return new ResponseEntity<PowerSupply>(currentPowerSupply, HttpStatus.OK);
+            return new ResponseEntity<>(currentPowerSupply, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<PowerSupply>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -96,10 +95,10 @@ public class PowerSupplyController {
             powerSupplyServiceImpl.findById(id);
 
             powerSupplyServiceImpl.delete(id);
-            return new ResponseEntity<PowerSupply>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<PowerSupply>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

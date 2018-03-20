@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('MotherBoardController', ['$scope', 'MotherBoardService', function($scope, MotherBoardService) {
     var self = this;
-    self.motherboard={id:null,manufacter:'',model:'',socket:''};
+    self.motherboard={id:null,manufacturer:'',model:'',socket:''};
     self.motherboards=[];
 
     self.submit = submit;
@@ -89,7 +89,7 @@ angular.module('myApp').controller('MotherBoardController', ['$scope', 'MotherBo
 
 
     function reset(){
-        self.motherboard={id:null,manufacter:'',model:'',socket:''};
+        self.motherboard={id:null,manufacturer:'',model:'',socket:''};
         $scope.myForm.$setPristine();
     }
 

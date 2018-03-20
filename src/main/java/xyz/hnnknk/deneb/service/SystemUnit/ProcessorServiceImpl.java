@@ -6,32 +6,32 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.model.SystemUnit;
 import xyz.hnnknk.deneb.model.Processor;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class ProcessorServiceImpl implements SystemUnitService {
+public class ProcessorServiceImpl implements SystemUnitService<Processor> {
 
     @Autowired
-    SystemUnitDAO processorDAOImpl;
+    SystemUnitDAO<Processor> processorDAOImpl;
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) throws EntityExistsException {
+    public void save(Processor processor) throws EntityExistsException {
         for(Processor r : listAll()) {
-            if (r.getId().equals(systemUnit.getId())) {
-                throw new EntityExistsException("A processor with invNumber "+ systemUnit.getId() +" already exists!");
+            if (Objects.equals(r, processor)) {
+                throw new EntityExistsException("A "+ processor.toString() +" already exists!");
             }
         }
-        processorDAOImpl.save(systemUnit);
+        processorDAOImpl.save(processor);
     }
 
     @Transactional
     @Override
-    public void update(SystemUnit systemUnit) {
-        processorDAOImpl.update(systemUnit);
+    public void update(Processor processor) {
+        processorDAOImpl.update(processor);
     }
 
     @Transactional
@@ -47,7 +47,7 @@ public class ProcessorServiceImpl implements SystemUnitService {
         if(processorDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("A processor with " + id + " not found!");
         }
-        return (Processor) processorDAOImpl.findById(id);
+        return processorDAOImpl.findById(id);
     }
 
     @Transactional

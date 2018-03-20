@@ -18,11 +18,11 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable">Производитель</label>
                         <div class="col-md-7">
-                            <input type="text" ng-model="ctrl_hdd.hdd.manufacter" name="hdd_manufacter" class="field form-control input-sm" placeholder="Введите производителя жесткого диска" required ng-minlength="2" ng-maxlength="10"/>
+                            <input type="text" ng-model="ctrl_hdd.hdd.manufacturer" name="hdd_manufacturer" class="field form-control input-sm" placeholder="Введите производителя жесткого диска" required ng-minlength="2" ng-maxlength="10"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.hdd_manufacter.$error.required">Это поле необходимо заполнить</span>
-                                <span ng-show="myForm.hdd_manufacter.$error.minlength">Поле должно содержать как минимум 2 символа</span>
-                                <span ng-show="myForm.hdd_manufacter.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                                <span ng-show="myForm.hdd_manufacturer.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.hdd_manufacturer.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.hdd_manufacturer.$error.maxlength">Поле должно содержать не более 10 символов</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="h in ctrl_hdd.hdds | filter:searchHdd">
-                    <td><span ng-bind="h.manufacter"></span></td>
+                    <td><span ng-bind="h.manufacturer"></span></td>
                     <td><span ng-bind="h.model"></span></td>
                     <td><span ng-bind="h.serial"></span></td>
                     <td><span ng-bind="h.capacity"></span></td>

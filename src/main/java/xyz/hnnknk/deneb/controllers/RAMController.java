@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.model.RAM;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
@@ -20,24 +19,24 @@ import java.util.List;
 public class RAMController {
 
     @Autowired
-    SystemUnitService RAMServiceImpl;
+    SystemUnitService<RAM> RAMServiceImpl;
 
     @RequestMapping(value = "/sysunit/ram/", method = RequestMethod.GET)
     public ResponseEntity<List<RAM>> listAllRAMes() {
         List<RAM> rames = RAMServiceImpl.listAll();
         if(rames.isEmpty()){
-            return new ResponseEntity<List<RAM>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<RAM>>(rames, HttpStatus.OK);
+        return new ResponseEntity<>(rames, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/ram/", method = RequestMethod.GET)
     public ResponseEntity<List<RAM>> listAllRAMesRO() {
         List<RAM> rames = RAMServiceImpl.listAll();
         if(rames.isEmpty()){
-            return new ResponseEntity<List<RAM>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<RAM>>(rames, HttpStatus.OK);
+        return new ResponseEntity<>(rames, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ram/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,11 +44,11 @@ public class RAMController {
         System.out.println("Fetching ram with id " + id);
 
         try {
-            RAM ram = (RAM) RAMServiceImpl.findById(id);
-            return new ResponseEntity<RAM>(ram, HttpStatus.OK);
+            RAM ram = RAMServiceImpl.findById(id);
+            return new ResponseEntity<>(ram, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<RAM>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -62,10 +61,10 @@ public class RAMController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/sysunit/ram/{id}").buildAndExpand(ram.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -74,16 +73,16 @@ public class RAMController {
         System.out.println("Updating " + ram.toString());
 
         try {
-            RAM currentRAM = (RAM) RAMServiceImpl.findById(id);
+            RAM currentRAM = RAMServiceImpl.findById(id);
             currentRAM.setCapacity(ram.getCapacity());
-            currentRAM.setManufacter(ram.getManufacter());
+            currentRAM.setManufacturer(ram.getManufacturer());
             currentRAM.setModel(ram.getModel());
 
             RAMServiceImpl.update(currentRAM);
-            return new ResponseEntity<RAM>(currentRAM, HttpStatus.OK);
+            return new ResponseEntity<>(currentRAM, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<RAM>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -95,10 +94,10 @@ public class RAMController {
             RAMServiceImpl.findById(id);
 
             RAMServiceImpl.delete(id);
-            return new ResponseEntity<RAM>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<RAM>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

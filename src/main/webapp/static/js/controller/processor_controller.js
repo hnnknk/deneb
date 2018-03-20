@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('ProcessorController', ['$scope', 'ProcessorService', function($scope, ProcessorService) {
     var self = this;
-    self.processor={id:null,manufacter:'',model:'',speed:'',numberOfCores:''};
+    self.processor={id:null,manufacturer:'',model:'',speed:'',numberOfCores:''};
     self.processors=[];
 
     self.submit = submit;
@@ -89,7 +89,7 @@ angular.module('myApp').controller('ProcessorController', ['$scope', 'ProcessorS
 
 
     function reset(){
-        self.processor={id:null,manufacter:'',model:'',speed:'',numberOfCores:''};
+        self.processor={id:null,manufacturer:'',model:'',speed:'',numberOfCores:''};
         $scope.myForm.$setPristine();
     }
 

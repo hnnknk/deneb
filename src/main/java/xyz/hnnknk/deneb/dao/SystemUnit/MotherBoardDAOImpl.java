@@ -4,25 +4,24 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xyz.hnnknk.deneb.model.MotherBoard;
-import xyz.hnnknk.deneb.model.SystemUnit;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class MotherBoardDAOImpl implements SystemUnitDAO {
+public class MotherBoardDAOImpl implements SystemUnitDAO<MotherBoard> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().save(systemUnit);
+    public void save(MotherBoard motherBoard) {
+        sessionFactory.getCurrentSession().save(motherBoard);
     }
 
     @Override
-    public void update(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().update(systemUnit);
+    public void update(MotherBoard motherBoard) {
+        sessionFactory.getCurrentSession().update(motherBoard);
     }
 
     @Override

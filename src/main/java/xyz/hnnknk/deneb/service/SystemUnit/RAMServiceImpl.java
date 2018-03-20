@@ -6,32 +6,32 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.model.SystemUnit;
 import xyz.hnnknk.deneb.model.RAM;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class RAMServiceImpl implements SystemUnitService {
+public class RAMServiceImpl implements SystemUnitService<RAM> {
 
     @Autowired
-    SystemUnitDAO RAMDAOImpl;
+    SystemUnitDAO<RAM> RAMDAOImpl;
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) throws EntityExistsException {
+    public void save(RAM ram) throws EntityExistsException {
         for(RAM r : listAll()) {
-            if (r.getId().equals(systemUnit.getId())) {
-                throw new EntityExistsException("A ram memory with invNumber "+ systemUnit.getId() +" already exists!");
+            if (Objects.equals(r, ram)) {
+                throw new EntityExistsException("A "+ ram.toString() +" already exists!");
             }
         }
-        RAMDAOImpl.save(systemUnit);
+        RAMDAOImpl.save(ram);
     }
 
     @Transactional
     @Override
-    public void update(SystemUnit systemUnit) {
-        RAMDAOImpl.update(systemUnit);
+    public void update(RAM ram) {
+        RAMDAOImpl.update(ram);
     }
 
     @Transactional
@@ -47,7 +47,7 @@ public class RAMServiceImpl implements SystemUnitService {
         if(RAMDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("A ram memory with " + id + " not found!");
         }
-        return (RAM) RAMDAOImpl.findById(id);
+        return RAMDAOImpl.findById(id);
     }
 
     @Transactional

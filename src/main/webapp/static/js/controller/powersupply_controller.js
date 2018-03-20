@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('PowerSupplyController', ['$scope', 'PowerSupplyService', function($scope, PowerSupplyService) {
     var self = this;
-    self.powersupply={id:null,manufacter:'',model:'',power:''};
+    self.powersupply={id:null,manufacturer:'',model:'',power:''};
     self.powersupplies=[];
 
     self.submit = submit;
@@ -89,7 +89,7 @@ angular.module('myApp').controller('PowerSupplyController', ['$scope', 'PowerSup
 
 
     function reset(){
-        self.powersupply={id:null,manufacter:'',model:'',power:''};
+        self.powersupply={id:null,manufacturer:'',model:'',power:''};
         $scope.myForm.$setPristine();
     }
 

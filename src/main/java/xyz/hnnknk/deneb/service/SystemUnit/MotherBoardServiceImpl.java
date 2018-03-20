@@ -6,32 +6,32 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.SystemUnit.SystemUnitDAO;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.model.SystemUnit;
 import xyz.hnnknk.deneb.model.MotherBoard;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class MotherBoardServiceImpl implements SystemUnitService {
+public class MotherBoardServiceImpl implements SystemUnitService<MotherBoard> {
 
     @Autowired
-    SystemUnitDAO motherBoardDAOImpl;
+    SystemUnitDAO<MotherBoard> motherBoardDAOImpl;
 
     @Transactional
     @Override
-    public void save(SystemUnit systemUnit) throws EntityExistsException {
+    public void save(MotherBoard motherBoard) throws EntityExistsException {
         for(MotherBoard r : listAll()) {
-            if (r.getId().equals(systemUnit.getId())) {
-                throw new EntityExistsException("A motherBoard with invNumber "+ systemUnit.getId() +" already exists!");
+            if (Objects.equals(r, motherBoard)) {
+                throw new EntityExistsException("A "+ motherBoard.toString() +" already exists!");
             }
         }
-        motherBoardDAOImpl.save(systemUnit);
+        motherBoardDAOImpl.save(motherBoard);
     }
 
     @Transactional
     @Override
-    public void update(SystemUnit systemUnit) {
-        motherBoardDAOImpl.update(systemUnit);
+    public void update(MotherBoard motherBoard) {
+        motherBoardDAOImpl.update(motherBoard);
     }
 
     @Transactional
@@ -47,7 +47,8 @@ public class MotherBoardServiceImpl implements SystemUnitService {
         if(motherBoardDAOImpl.findById(id) == null) {
             throw new EntityNotFoundException("A motherBoard with " + id + " not found!");
         }
-        return (MotherBoard) motherBoardDAOImpl.findById(id);
+
+        return motherBoardDAOImpl.findById(id);
     }
 
     @Transactional

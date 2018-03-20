@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class RAMDAOImpl implements SystemUnitDAO {
+public class RAMDAOImpl implements SystemUnitDAO<RAM> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().save(systemUnit);
+    public void save(RAM ram) {
+        sessionFactory.getCurrentSession().save(ram);
     }
 
     @Override
-    public void update(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().update(systemUnit);
+    public void update(RAM ram) {
+        sessionFactory.getCurrentSession().update(ram);
     }
 
     @Override

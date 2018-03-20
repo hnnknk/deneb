@@ -9,37 +9,34 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.service.NotificationService;
 import xyz.hnnknk.deneb.model.MotherBoard;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
 public class MotherBoardController {
 
     @Autowired
-    SystemUnitService motherBoardServiceImpl;
+    SystemUnitService<MotherBoard> motherBoardServiceImpl;
 
     @RequestMapping(value = "/sysunit/motherboard/", method = RequestMethod.GET)
     public ResponseEntity<List<MotherBoard>> listAllMotherBoardes() {
         List<MotherBoard> motherBoardes = motherBoardServiceImpl.listAll();
         if(motherBoardes.isEmpty()){
-            return new ResponseEntity<List<MotherBoard>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<MotherBoard>>(motherBoardes, HttpStatus.OK);
+        return new ResponseEntity<>(motherBoardes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/motherboard/", method = RequestMethod.GET)
     public ResponseEntity<List<MotherBoard>> listAllMotherBoardesRO() {
         List<MotherBoard> motherBoardes = motherBoardServiceImpl.listAll();
         if(motherBoardes.isEmpty()){
-            return new ResponseEntity<List<MotherBoard>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<MotherBoard>>(motherBoardes, HttpStatus.OK);
+        return new ResponseEntity<>(motherBoardes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/motherboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,11 +44,11 @@ public class MotherBoardController {
         System.out.println("Fetching motherBoard with id " + id);
         
         try {
-            MotherBoard motherBoard = (MotherBoard) motherBoardServiceImpl.findById(id);
-            return new ResponseEntity<MotherBoard>(motherBoard, HttpStatus.OK);
+            MotherBoard motherBoard = motherBoardServiceImpl.findById(id);
+            return new ResponseEntity<>(motherBoard, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<MotherBoard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         }
     }
@@ -65,10 +62,10 @@ public class MotherBoardController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/sysunit/motherboard/{id}").buildAndExpand(motherBoard.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -77,16 +74,16 @@ public class MotherBoardController {
         System.out.println("Updating " + motherBoard.toString());
 
         try {
-            MotherBoard currentMotherBoard = (MotherBoard) motherBoardServiceImpl.findById(id);
-            currentMotherBoard.setManufacter(motherBoard.getManufacter());
+            MotherBoard currentMotherBoard = motherBoardServiceImpl.findById(id);
+            currentMotherBoard.setManufacturer(motherBoard.getManufacturer());
             currentMotherBoard.setModel(motherBoard.getModel());
             currentMotherBoard.setSocket(motherBoard.getSocket());
 
             motherBoardServiceImpl.update(currentMotherBoard);
-            return new ResponseEntity<MotherBoard>(currentMotherBoard, HttpStatus.OK);
+            return new ResponseEntity<>(currentMotherBoard, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<MotherBoard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -98,10 +95,10 @@ public class MotherBoardController {
             motherBoardServiceImpl.findById(id);
 
             motherBoardServiceImpl.delete(id);
-            return new ResponseEntity<MotherBoard>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<MotherBoard>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

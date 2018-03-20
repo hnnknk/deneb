@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class PowerSupplyDAOImpl implements SystemUnitDAO {
+public class PowerSupplyDAOImpl implements SystemUnitDAO<PowerSupply> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().save(systemUnit);
+    public void save(PowerSupply powerSupply) {
+        sessionFactory.getCurrentSession().save(powerSupply);
     }
 
     @Override
-    public void update(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().update(systemUnit);
+    public void update(PowerSupply powerSupply) {
+        sessionFactory.getCurrentSession().update(powerSupply);
     }
 
     @Override

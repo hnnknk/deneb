@@ -10,19 +10,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class ProcessorDAOImpl implements SystemUnitDAO {
+public class ProcessorDAOImpl implements SystemUnitDAO<Processor> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void save(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().save(systemUnit);
+    public void save(Processor processor) {
+        sessionFactory.getCurrentSession().save(processor);
     }
 
     @Override
-    public void update(SystemUnit systemUnit) {
-        sessionFactory.getCurrentSession().update(systemUnit);
+    public void update(Processor processor) {
+        sessionFactory.getCurrentSession().update(processor);
     }
 
     @Override
