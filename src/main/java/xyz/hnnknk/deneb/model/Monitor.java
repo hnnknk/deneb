@@ -10,14 +10,14 @@ public class Monitor extends Peripheral{
     public Monitor() {
     }
 
-    public Monitor (String invNumber, String manufacter, String model, String serial) {
-        super(invNumber, manufacter, model, serial);
+    public Monitor (String invNumber, String manufacturer, String model, String serial) {
+        super(invNumber, manufacturer, model, serial);
     }
 
     @Override
     public String toString() {
-        return "Monitor [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacter="
-                + this.getManufacter() + ", model=" + this.getModel() + ", serial number=" + this.getSerial() + "]";
+        return "Monitor [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufactururer="
+                + this.getManufacturer() + ", model=" + this.getModel() + ", serial number=" + this.getSerial() + "]";
     }
 
     @Override

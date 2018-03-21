@@ -23,21 +23,21 @@ public class PowerSupplyController {
 
 
     @RequestMapping(value = "/sysunit/powersupply/", method = RequestMethod.GET)
-    public ResponseEntity<List<PowerSupply>> listAllPowerSupplyes() {
-        List<PowerSupply> powerSupplyes = powerSupplyServiceImpl.listAll();
-        if(powerSupplyes.isEmpty()){
+    public ResponseEntity<List<PowerSupply>> listAllPowerSupplies() {
+        List<PowerSupply> powerSupplies = powerSupplyServiceImpl.listAll();
+        if(powerSupplies.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(powerSupplyes, HttpStatus.OK);
+        return new ResponseEntity<>(powerSupplies, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/powersupply/", method = RequestMethod.GET)
-    public ResponseEntity<List<PowerSupply>> listAllPowerSupplyesRO() {
-        List<PowerSupply> powerSupplyes = powerSupplyServiceImpl.listAll();
-        if(powerSupplyes.isEmpty()){
+    public ResponseEntity<List<PowerSupply>> listAllPowerSuppliesRO() {
+        List<PowerSupply> powerSupplies = powerSupplyServiceImpl.listAll();
+        if(powerSupplies.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(powerSupplyes, HttpStatus.OK);
+        return new ResponseEntity<>(powerSupplies, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/powersupply/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

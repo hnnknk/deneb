@@ -61,7 +61,7 @@ angular.module('myApp').controller('HddController', ['$scope', 'HddService', fun
             $(".alert").removeClass("in").show();
             $(".alert").delay(1000).addClass("in").fadeOut(4000);
             console.log('Saving New Hdd', self.hdd);
-            console.log('hdd type =',self.hdd.hddtype)
+            console.log('hdd type =',self.hdd.hddtype);
             createHdd(self.hdd);
         }else{
             updateHdd(self.hdd, self.hdd.id);

@@ -35,7 +35,7 @@ public class MouseServiceTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         Mouse mou = new Mouse("144","A4tech","x7","1n5dHrR85Ye");
-        ArrayList<Mouse> mouses = new ArrayList<Mouse>();
+        ArrayList<Mouse> mouses = new ArrayList<>();
         mouses.add(mou);
 
         Mockito.when(mouseDAOImpl.listAll()).thenReturn(mouses);
@@ -48,7 +48,7 @@ public class MouseServiceTest {
         Assert.assertNotNull(m);
         Assert.assertEquals("1n5dHrR85Ye", m.getSerial());
         Assert.assertEquals("x7", m.getModel());
-        Assert.assertEquals("A4tech", m.getManufacter());
+        Assert.assertEquals("A4tech", m.getManufacturer());
         Assert.assertEquals("144", m.getInvNumber());
     }
 

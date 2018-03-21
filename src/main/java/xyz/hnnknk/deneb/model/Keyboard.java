@@ -10,14 +10,14 @@ public class Keyboard extends Peripheral {
     public Keyboard() {
     }
 
-    public Keyboard(String invNumber, String manufacter, String model, String serial) {
-        super(invNumber, manufacter, model, serial);
+    public Keyboard(String invNumber, String manufacturer, String model, String serial) {
+        super(invNumber, manufacturer, model, serial);
     }
 
     @Override
     public String toString() {
-        return "Keyboard [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacter="
-                + this.getManufacter() + ", model=" + this.getModel() + ", serial number=" + this.getModel() + "]";
+        return "Keyboard [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacturer="
+                + this.getManufacturer() + ", model=" + this.getModel() + ", serial number=" + this.getModel() + "]";
     }
 
     @Override

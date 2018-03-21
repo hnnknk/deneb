@@ -52,7 +52,6 @@ public class UpsControllerIntegrationTest {
         try {
             this.upsServiceImpl.save(new Ups("133", "APC", "CS500", "3Hg45ks86Gr"));
             this.upsServiceImpl.save(new Ups("118", "APC", "CS500", "8Hg4DF54s4r"));
-
         } catch (EntityExistsException e) {}
 
         List<Ups> list = this.upsServiceImpl.listAll();
@@ -92,7 +91,7 @@ public class UpsControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.*", hasSize(5)))
                 .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacter", is("APC")))
+                .andExpect(jsonPath("$.manufacturer", is("APC")))
                 .andExpect(jsonPath("$.model", is("CS500")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
                 .andExpect(jsonPath("$.invNumber", is("133")));

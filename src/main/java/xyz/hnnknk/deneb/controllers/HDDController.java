@@ -23,20 +23,20 @@ public class HDDController {
 
     @RequestMapping(value = "/sysunit/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHDDes() {
-        List<HDD> hddes = HDDServiceImpl.listAll();
-        if(hddes.isEmpty()){
+        List<HDD> hdds = HDDServiceImpl.listAll();
+        if(hdds.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(hddes, HttpStatus.OK);
+        return new ResponseEntity<>(hdds, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHDDesRO() {
-        List<HDD> hddes = HDDServiceImpl.listAll();
-        if(hddes.isEmpty()){
+        List<HDD> hdds = HDDServiceImpl.listAll();
+        if(hdds.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(hddes, HttpStatus.OK);
+        return new ResponseEntity<>(hdds, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/hdd/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

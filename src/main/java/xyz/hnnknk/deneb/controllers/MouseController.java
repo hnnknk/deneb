@@ -27,7 +27,7 @@ public class MouseController {
     NotificationService notificationService;
 
     @RequestMapping(value = "/components/mouse/", method = RequestMethod.GET)
-    public ResponseEntity<List<Mouse>> listAllmouses() {
+    public ResponseEntity<List<Mouse>> listAllMouses() {
         List<Mouse> mouses = mouseServiceImpl.listAll();
         if(mouses.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -36,7 +36,7 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/ro/mouse/", method = RequestMethod.GET)
-    public ResponseEntity<List<Mouse>> listAllmousesRO() {
+    public ResponseEntity<List<Mouse>> listAllMousesRO() {
         List<Mouse> mouses = mouseServiceImpl.listAll();
         if(mouses.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -45,7 +45,7 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Mouse> getmouse(@PathVariable("id") long id) {
+    public ResponseEntity<Mouse> getMouse(@PathVariable("id") long id) {
         System.out.println("Fetching mouse with id " + id);
 
         try {
@@ -59,7 +59,7 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/mouse/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createmouse(@Valid @RequestBody Mouse mouse, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createMouse(@Valid @RequestBody Mouse mouse, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating " + mouse.toString());
 
         try {
@@ -77,18 +77,18 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Mouse> updatemouse(@PathVariable("id") long id,@Valid @RequestBody Mouse mouse) {
+    public ResponseEntity<Mouse> updateMouse(@PathVariable("id") long id,@Valid @RequestBody Mouse mouse) {
         System.out.println("Updating " + mouse.toString());
 
         try {
-            Mouse currentmouse = mouseServiceImpl.findById(id);
-            currentmouse.setInvNumber(mouse.getInvNumber());
-            currentmouse.setManufacter(mouse.getManufacter());
-            currentmouse.setModel(mouse.getModel());
-            currentmouse.setSerial(mouse.getSerial());
+            Mouse currentMouse = mouseServiceImpl.findById(id);
+            currentMouse.setInvNumber(mouse.getInvNumber());
+            currentMouse.setManufacturer(mouse.getManufacturer());
+            currentMouse.setModel(mouse.getModel());
+            currentMouse.setSerial(mouse.getSerial());
 
-            mouseServiceImpl.update(currentmouse);
-            return new ResponseEntity<>(currentmouse, HttpStatus.OK);
+            mouseServiceImpl.update(currentMouse);
+            return new ResponseEntity<>(currentMouse, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -96,7 +96,7 @@ public class MouseController {
     }
 
     @RequestMapping(value = "/components/mouse/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Mouse> deletemouse(@PathVariable("id") long id) {
+    public ResponseEntity<Mouse> deleteMouse(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting mouse with id " + id);
 
         try {

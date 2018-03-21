@@ -61,7 +61,7 @@ angular.module('myApp').controller('RamController', ['$scope', 'RamService', fun
             $(".alert").removeClass("in").show();
             $(".alert").delay(1000).addClass("in").fadeOut(4000);
             console.log('Saving New Ram', self.ram);
-            console.log('ram type =',self.ram.ramtype)
+            console.log('ram type =',self.ram.ramtype);
             createRam(self.ram);
         }else{
             updateRam(self.ram, self.ram.id);

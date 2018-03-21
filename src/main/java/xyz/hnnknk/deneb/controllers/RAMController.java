@@ -23,20 +23,20 @@ public class RAMController {
 
     @RequestMapping(value = "/sysunit/ram/", method = RequestMethod.GET)
     public ResponseEntity<List<RAM>> listAllRAMes() {
-        List<RAM> rames = RAMServiceImpl.listAll();
-        if(rames.isEmpty()){
+        List<RAM> rams = RAMServiceImpl.listAll();
+        if(rams.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(rames, HttpStatus.OK);
+        return new ResponseEntity<>(rams, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/ram/", method = RequestMethod.GET)
     public ResponseEntity<List<RAM>> listAllRAMesRO() {
-        List<RAM> rames = RAMServiceImpl.listAll();
-        if(rames.isEmpty()){
+        List<RAM> rams = RAMServiceImpl.listAll();
+        if(rams.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(rames, HttpStatus.OK);
+        return new ResponseEntity<>(rams, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ram/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

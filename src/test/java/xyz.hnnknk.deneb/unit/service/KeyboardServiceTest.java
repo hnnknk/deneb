@@ -1,12 +1,10 @@
 package xyz.hnnknk.deneb.unit.service;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -51,7 +49,7 @@ public class KeyboardServiceTest {
         assertNotNull(k);
         assertEquals("1n5dHrR85Ye", k.getSerial());
         assertEquals("6301C", k.getModel());
-        assertEquals("BTC", k.getManufacter());
+        assertEquals("BTC", k.getManufacturer());
         assertEquals("144", k.getInvNumber());
     }
 

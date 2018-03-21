@@ -31,6 +31,7 @@ public class KeyboardDAOTest {
 
     @Before
     public void setup() {
+        clear();
         this.key = new Keyboard("144","BTC","6301C","1n5dHrR85Ye");
         keyboardDAOImpl.save(key);
         this.key2 = new Keyboard("123","Logitech","B-100","1n5dHrR85Ye");

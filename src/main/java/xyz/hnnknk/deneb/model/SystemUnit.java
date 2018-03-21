@@ -28,8 +28,8 @@ public class SystemUnit {
         return manufacturer;
     }
 
-    public void setManufacturer(String manufacter) {
-        this.manufacturer = manufacter;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public String getModel() {

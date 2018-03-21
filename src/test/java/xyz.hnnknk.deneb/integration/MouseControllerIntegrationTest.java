@@ -48,10 +48,11 @@ public class MouseControllerIntegrationTest {
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+
         try {
             this.mouseServiceImpl.save(new Mouse("133", "A4Tech", "X-718F", "3Hg45ks86Gr"));
             this.mouseServiceImpl.save(new Mouse("118", "Logitech", "B100", "8Hg4DF54s4r"));
-        } catch (EntityExistsException e) {}
+        } catch (EntityExistsException e) { }
 
         List<Mouse> list = this.mouseServiceImpl.listAll();
         for(Mouse m : list) {
@@ -90,7 +91,7 @@ public class MouseControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.*", hasSize(5)))
                 .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacter", is("A4Tech")))
+                .andExpect(jsonPath("$.manufacturer", is("A4Tech")))
                 .andExpect(jsonPath("$.model", is("X-718F")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
                 .andExpect(jsonPath("$.invNumber", is("133")));

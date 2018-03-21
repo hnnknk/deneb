@@ -3,7 +3,6 @@ package xyz.hnnknk.deneb.integration;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,9 @@ import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
 
 import javax.servlet.ServletContext;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -45,16 +46,20 @@ public class KeyboardControllerIntegrationTest {
 
     private Long firstId;
     private Long secondId;
+    private int init = 0;
 
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+
         try {
             this.keyboardServiceImpl.save(new Keyboard("144", "BTC", "6301c", "3Hg45ks86Gr"));
             this.keyboardServiceImpl.save(new Keyboard("155", "Logitech", "K120", "783G6r45TNe"));
-        } catch (EntityExistsException e) {}
+
+        } catch (EntityExistsException e) { }
 
         List<Keyboard> list = this.keyboardServiceImpl.listAll();
+
         for(Keyboard k : list) {
             if(k.getInvNumber().equals("144")) {
                 firstId = k.getId();
@@ -90,7 +95,7 @@ public class KeyboardControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.*", hasSize(5)))
                 .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacter", is("BTC")))
+                .andExpect(jsonPath("$.manufacturer", is("BTC")))
                 .andExpect(jsonPath("$.model", is("6301c")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
                 .andExpect(jsonPath("$.invNumber", is("144")));

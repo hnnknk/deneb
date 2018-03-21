@@ -21,41 +21,41 @@ public class NotificationController {
     public ResponseEntity<List<Notification>> listAllNots() {
         List<Notification> notes = notificationService.listAllNots();
         if(notes.isEmpty()){
-            return new ResponseEntity<List<Notification>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Notification>>(notes, HttpStatus.OK);
+        return new ResponseEntity<>(notes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/notification/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Notification> getnotification(@PathVariable("id") long id) {
+    public ResponseEntity<Notification> getNotification(@PathVariable("id") long id) {
         System.out.println("Fetching note with id " + id);
         Notification notification =notificationService.findById(id);
         if (notification == null) {
             System.out.println("note with id " + id + " not found");
-            return new ResponseEntity<Notification>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Notification>(notification, HttpStatus.OK);
+        return new ResponseEntity<>(notification, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/components/notification/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Notification> updatenotification(@PathVariable("id") long id,@Valid @RequestBody Notification notification) {
+    public ResponseEntity<Notification> updateNotification(@PathVariable("id") long id,@Valid @RequestBody Notification notification) {
         System.out.println("Updating " + notification.toString());
 
-        Notification currentnotification = notificationService.findById(id);
+        Notification currentNotification = notificationService.findById(id);
 
-        if (currentnotification==null) {
+        if (currentNotification==null) {
             System.out.println("notification with id " + id + " not found");
-            return new ResponseEntity<Notification>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        currentnotification.setEmail(notification.getEmail());
-        currentnotification.setUpsCreated(notification.getUpsCreated());
-        currentnotification.setUserCreated(notification.getUserCreated());
-        currentnotification.setKeyboardCreated(notification.getKeyboardCreated());
-        currentnotification.setMouseCreated(notification.getMouseCreated());
-        currentnotification.setMonitorCreated(notification.getMonitorCreated());
+        currentNotification.setEmail(notification.getEmail());
+        currentNotification.setUpsCreated(notification.getUpsCreated());
+        currentNotification.setUserCreated(notification.getUserCreated());
+        currentNotification.setKeyboardCreated(notification.getKeyboardCreated());
+        currentNotification.setMouseCreated(notification.getMouseCreated());
+        currentNotification.setMonitorCreated(notification.getMonitorCreated());
 
-        notificationService.update(currentnotification);
-        return new ResponseEntity<Notification>(currentnotification, HttpStatus.OK);
+        notificationService.update(currentNotification);
+        return new ResponseEntity<>(currentNotification, HttpStatus.OK);
     }
 }

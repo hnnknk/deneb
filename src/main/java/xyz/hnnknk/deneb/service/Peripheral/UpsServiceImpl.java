@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
-import xyz.hnnknk.deneb.model.Peripheral;
 import xyz.hnnknk.deneb.model.Ups;
 
 import java.util.List;

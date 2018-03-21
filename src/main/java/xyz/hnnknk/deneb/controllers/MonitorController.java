@@ -82,7 +82,7 @@ public class MonitorController {
         try {
             Monitor currentMonitor = monitorServiceImpl.findById(id);
             currentMonitor.setInvNumber(monitor.getInvNumber());
-            currentMonitor.setManufacter(monitor.getManufacter());
+            currentMonitor.setManufacturer(monitor.getManufacturer());
             currentMonitor.setModel(monitor.getModel());
             currentMonitor.setSerial(monitor.getSerial());
 

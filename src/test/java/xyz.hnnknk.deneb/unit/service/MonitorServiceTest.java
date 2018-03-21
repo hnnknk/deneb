@@ -1,12 +1,10 @@
 package xyz.hnnknk.deneb.unit.service;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -51,7 +49,7 @@ public class MonitorServiceTest {
         assertNotNull(m);
         assertEquals("1n5dHrR85Ye", m.getSerial());
         assertEquals("170v", m.getModel());
-        assertEquals("Philips", m.getManufacter());
+        assertEquals("Philips", m.getManufacturer());
         assertEquals("144", m.getInvNumber());
     }
 
@@ -83,7 +81,7 @@ public class MonitorServiceTest {
     @Test
     public void listAllReturnEmpty() {
         reset(monitorDAOImpl);
-        ArrayList<Monitor> mons = new ArrayList<Monitor>();
+        ArrayList<Monitor> mons = new ArrayList<>();
         when(monitorDAOImpl.listAll()).thenReturn(mons);
 
         ArrayList<Monitor> monitors = (ArrayList<Monitor>) monitorService.listAll();

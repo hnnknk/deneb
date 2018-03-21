@@ -10,8 +10,8 @@ public class Mouse extends Peripheral {
     public Mouse() {
     }
 
-    public Mouse (String invNumber, String manufacter, String model, String serial) {
-        super(invNumber, manufacter, model, serial);
+    public Mouse (String invNumber, String manufacturer, String model, String serial) {
+        super(invNumber, manufacturer, model, serial);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Mouse extends Peripheral {
 
     @Override
     public String toString() {
-        return "Mouse [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacter="
-                + this.getManufacter() + ", model=" + this.getModel() + ", serial number=" + this.getSerial() + "]";
+        return "Mouse [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacturer="
+                + this.getManufacturer() + ", model=" + this.getModel() + ", serial number=" + this.getSerial() + "]";
     }
 }

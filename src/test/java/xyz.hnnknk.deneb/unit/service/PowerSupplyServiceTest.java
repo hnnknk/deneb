@@ -36,10 +36,10 @@ public class PowerSupplyServiceTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         PowerSupply p = new PowerSupply("Corsair", "450Bronze", 450);
-        ArrayList<PowerSupply> powerSupplys = new ArrayList<>();
-        powerSupplys.add(p);
+        ArrayList<PowerSupply> powerSupplies = new ArrayList<>();
+        powerSupplies.add(p);
 
-        when(powerSupplyDAOImpl.listAll()).thenReturn(powerSupplys);
+        when(powerSupplyDAOImpl.listAll()).thenReturn(powerSupplies);
         when(powerSupplyDAOImpl.findById(1L)).thenReturn(p);
     }
 
@@ -71,10 +71,10 @@ public class PowerSupplyServiceTest {
 
     @Test
     public void listAllReturnSuccess() {
-        ArrayList<PowerSupply> powerSupplys = (ArrayList<PowerSupply>) PowerSupplyServiceImpl.listAll();
-        assertNotNull(powerSupplys);
-        assertNotNull(powerSupplys.get(0));
-        assertEquals("450Bronze", powerSupplys.get(0).getModel());
+        ArrayList<PowerSupply> powerSupplies = (ArrayList<PowerSupply>) PowerSupplyServiceImpl.listAll();
+        assertNotNull(powerSupplies);
+        assertNotNull(powerSupplies.get(0));
+        assertEquals("450Bronze", powerSupplies.get(0).getModel());
     }
 
     @Test
@@ -83,9 +83,9 @@ public class PowerSupplyServiceTest {
         ArrayList<PowerSupply> keys = new ArrayList<>();
         when(powerSupplyDAOImpl.listAll()).thenReturn(keys);
 
-        ArrayList<PowerSupply> powerSupplys = (ArrayList<PowerSupply>) PowerSupplyServiceImpl.listAll();
-        assertNotNull(powerSupplys);
-        assertTrue(powerSupplys.isEmpty());
+        ArrayList<PowerSupply> powerSupplies = (ArrayList<PowerSupply>) PowerSupplyServiceImpl.listAll();
+        assertNotNull(powerSupplies);
+        assertTrue(powerSupplies.isEmpty());
     }
 
 }

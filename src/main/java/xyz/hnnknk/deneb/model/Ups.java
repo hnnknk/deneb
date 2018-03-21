@@ -10,8 +10,8 @@ public class Ups extends Peripheral{
     public Ups() {
     }
 
-    public Ups (String invNumber, String manufacter, String model, String serial) {
-        super(invNumber, manufacter, model, serial);
+    public Ups (String invNumber, String manufacturer, String model, String serial) {
+        super(invNumber, manufacturer, model, serial);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Ups extends Peripheral{
     @Override
     public String toString() {
         return "Ups [id=" + this.getId() + ", inventory number=" + this.getInvNumber() + ", manufacter="
-                + this.getManufacter() + ", model=" + this.getModel() + ", serial number=" + this.getSerial() + "]";
+                + this.getManufacturer() + ", model=" + this.getModel() + ", serial number=" + this.getSerial() + "]";
     }
 }

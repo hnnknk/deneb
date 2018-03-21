@@ -48,10 +48,11 @@ public class MonitorControllerIntegrationTest {
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+
         try {
             this.monitorServiceImpl.save(new Monitor("144", "Philips", "170v", "3Hg45ks86Gr"));
             this.monitorServiceImpl.save(new Monitor("155", "Philips", "170v", "783G6r45TNe"));
-        } catch (EntityExistsException e) {}
+        } catch (EntityExistsException e) { }
 
         List<Monitor> list = this.monitorServiceImpl.listAll();
 
@@ -91,7 +92,7 @@ public class MonitorControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.*", hasSize(5)))
                 .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacter", is("Philips")))
+                .andExpect(jsonPath("$.manufacturer", is("Philips")))
                 .andExpect(jsonPath("$.model", is("170v")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
                 .andExpect(jsonPath("$.invNumber", is("144")));

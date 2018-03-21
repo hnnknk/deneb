@@ -81,7 +81,7 @@ public class UpsController {
         try {
             Ups currentUps = upsServiceImpl.findById(id);
             currentUps.setInvNumber(ups.getInvNumber());
-            currentUps.setManufacter(ups.getManufacter());
+            currentUps.setManufacturer(ups.getManufacturer());
             currentUps.setModel(ups.getModel());
             currentUps.setSerial(ups.getSerial());
 

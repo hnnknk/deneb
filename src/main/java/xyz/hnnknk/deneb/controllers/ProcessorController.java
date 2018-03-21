@@ -22,21 +22,21 @@ public class ProcessorController {
     SystemUnitService processorServiceImpl;
 
     @RequestMapping(value = "/sysunit/processor/", method = RequestMethod.GET)
-    public ResponseEntity<List<Processor>> listAllProcessores() {
-        List<Processor> processores = processorServiceImpl.listAll();
-        if(processores.isEmpty()){
-            return new ResponseEntity<List<Processor>>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<List<Processor>> listAllProcessors() {
+        List<Processor> processors = processorServiceImpl.listAll();
+        if(processors.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Processor>>(processores, HttpStatus.OK);
+        return new ResponseEntity<>(processors, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/processor/", method = RequestMethod.GET)
-    public ResponseEntity<List<Processor>> listAllProcessoresRO() {
-        List<Processor> processores = processorServiceImpl.listAll();
-        if(processores.isEmpty()){
-            return new ResponseEntity<List<Processor>>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<List<Processor>> listAllProcessorsRO() {
+        List<Processor> processors = processorServiceImpl.listAll();
+        if(processors.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Processor>>(processores, HttpStatus.OK);
+        return new ResponseEntity<>(processors, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/processor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,10 +45,10 @@ public class ProcessorController {
 
         try {
             Processor processor = (Processor) processorServiceImpl.findById(id);
-            return new ResponseEntity<Processor>(processor, HttpStatus.OK);
+            return new ResponseEntity<>(processor, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Processor>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -61,10 +61,10 @@ public class ProcessorController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/sysunit/processor/{id}").buildAndExpand(processor.getId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         } catch (EntityExistsException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
@@ -80,10 +80,10 @@ public class ProcessorController {
             currentProcessor.setSpeed(processor.getSpeed());
 
             processorServiceImpl.update(currentProcessor);
-            return new ResponseEntity<Processor>(currentProcessor, HttpStatus.OK);
+            return new ResponseEntity<>(currentProcessor, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Processor>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -95,10 +95,10 @@ public class ProcessorController {
             processorServiceImpl.findById(id);
 
             processorServiceImpl.delete(id);
-            return new ResponseEntity<Processor>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (EntityNotFoundException e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<Processor>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

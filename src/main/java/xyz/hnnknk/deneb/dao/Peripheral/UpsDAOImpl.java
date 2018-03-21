@@ -3,7 +3,6 @@ package xyz.hnnknk.deneb.dao.Peripheral;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.hnnknk.deneb.model.Peripheral;
 import xyz.hnnknk.deneb.model.Ups;
 
 import javax.persistence.TypedQuery;

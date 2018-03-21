@@ -7,7 +7,6 @@ import xyz.hnnknk.deneb.dao.Peripheral.PeripheralDAO;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.Mouse;
-import xyz.hnnknk.deneb.model.Peripheral;
 
 import java.util.List;
 import java.util.Objects;

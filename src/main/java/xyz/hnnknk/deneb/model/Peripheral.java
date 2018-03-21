@@ -16,7 +16,7 @@ public class Peripheral {
     private String invNumber;
 
     @Size(min = 2, max = 10)
-    private String manufacter;
+    private String manufacturer;
 
     @Size(min = 2, max = 10)
     private String model;
@@ -27,9 +27,9 @@ public class Peripheral {
     public Peripheral() {
     }
 
-    public Peripheral(String invNumber, String manufacter, String model, String serial) {
+    Peripheral(String invNumber, String manufacturer, String model, String serial) {
         this.setInvNumber(invNumber);
-        this.setManufacter(manufacter);
+        this.setManufacturer(manufacturer);
         this.setModel(model);
         this.setSerial(serial);
     }
@@ -50,12 +50,12 @@ public class Peripheral {
         this.invNumber = invNumber;
     }
 
-    public String getManufacter() {
-        return manufacter;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufacter(String manuacter) {
-        this.manufacter = manuacter;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public String getModel() {

@@ -82,7 +82,7 @@ public class KeyboardController {
         try {
             Keyboard currentKeyboard = keyboardServiceImpl.findById(id);
             currentKeyboard.setInvNumber(keyboard.getInvNumber());
-            currentKeyboard.setManufacter(keyboard.getManufacter());
+            currentKeyboard.setManufacturer(keyboard.getManufacturer());
             currentKeyboard.setModel(keyboard.getModel());
             currentKeyboard.setSerial(keyboard.getSerial());
 

@@ -48,7 +48,7 @@ public class UpsServiceTest {
         Assert.assertNotNull(ups);
         Assert.assertEquals("1n5dHrR85Ye", ups.getSerial());
         Assert.assertEquals("BC500", ups.getModel());
-        Assert.assertEquals("APC", ups.getManufacter());
+        Assert.assertEquals("APC", ups.getManufacturer());
         Assert.assertEquals("144", ups.getInvNumber());
     }
 

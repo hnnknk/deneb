@@ -41,7 +41,7 @@ public class HibernateConfig {
         return dataSource;
     }
 
-    Properties additionalProperties() {
+    private Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.archive.autodetection", "class,hbm");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");

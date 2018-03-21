@@ -22,21 +22,21 @@ public class MotherBoardController {
     SystemUnitService<MotherBoard> motherBoardServiceImpl;
 
     @RequestMapping(value = "/sysunit/motherboard/", method = RequestMethod.GET)
-    public ResponseEntity<List<MotherBoard>> listAllMotherBoardes() {
-        List<MotherBoard> motherBoardes = motherBoardServiceImpl.listAll();
-        if(motherBoardes.isEmpty()){
+    public ResponseEntity<List<MotherBoard>> listAllMotherBoards() {
+        List<MotherBoard> motherBoards = motherBoardServiceImpl.listAll();
+        if(motherBoards.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(motherBoardes, HttpStatus.OK);
+        return new ResponseEntity<>(motherBoards, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/ro/motherboard/", method = RequestMethod.GET)
-    public ResponseEntity<List<MotherBoard>> listAllMotherBoardesRO() {
-        List<MotherBoard> motherBoardes = motherBoardServiceImpl.listAll();
-        if(motherBoardes.isEmpty()){
+    public ResponseEntity<List<MotherBoard>> listAllMotherBoardsRO() {
+        List<MotherBoard> motherBoards = motherBoardServiceImpl.listAll();
+        if(motherBoards.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(motherBoardes, HttpStatus.OK);
+        return new ResponseEntity<>(motherBoards, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sysunit/motherboard/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
