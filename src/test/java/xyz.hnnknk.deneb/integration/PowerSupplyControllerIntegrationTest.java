@@ -16,14 +16,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
-import xyz.hnnknk.deneb.model.Keyboard;
-import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
+import xyz.hnnknk.deneb.model.PowerSupply;
+import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.servlet.ServletContext;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -34,13 +30,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
-public class KeyboardControllerIntegrationTest {
+public class PowerSupplyControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
-    private PeripheralService keyboardServiceImpl;
+    private SystemUnitService<PowerSupply> powerSupplyServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -52,18 +48,16 @@ public class KeyboardControllerIntegrationTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 
         try {
-            this.keyboardServiceImpl.save(new Keyboard("144", "BTC", "6301c", "3Hg45ks86Gr"));
-            this.keyboardServiceImpl.save(new Keyboard("155", "Logitech", "K120", "783G6r45TNe"));
+            this.powerSupplyServiceImpl.save(new PowerSupply("Corsair", "450-GOLD", 450));
+            this.powerSupplyServiceImpl.save(new PowerSupply("FSP", "F400DND", 400));
 
-        } catch (EntityExistsException e) { }
+        } catch (EntityExistsException e) {}
 
-        List<Keyboard> list = this.keyboardServiceImpl.listAll();
-
-        for(Keyboard k : list) {
-            if(k.getInvNumber().equals("144")) {
-                firstId = k.getId();
-            } else if (k.getInvNumber().equals("155")) {
-                secondId = k.getId();
+        for (PowerSupply powerSupply : powerSupplyServiceImpl.listAll()) {
+            if (powerSupply.getManufacturer().equals("Corsair")) {
+                firstId = powerSupply.getId();
+            } else if (powerSupply.getManufacturer().equals("FSP")) {
+                secondId = powerSupply.getId();
             }
         }
     }
@@ -74,13 +68,13 @@ public class KeyboardControllerIntegrationTest {
 
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
-        Assert.assertNotNull(wac.getBean("keyboardController"));
+        Assert.assertNotNull(wac.getBean("powerSupplyController"));
     }
 
     @Test
     public void testGetAllSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/keyboard/"))
+        mockMvc.perform(get("/sysunit/powersupply/"))
                 .andExpect(status().isOk());
 
     }
@@ -88,27 +82,25 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testGetSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/keyboard/" + firstId))
+        mockMvc.perform(get("/sysunit/powersupply/" + firstId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.*", hasSize(5)))
-                .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacturer", is("BTC")))
-                .andExpect(jsonPath("$.model", is("6301c")))
+                .andExpect(jsonPath("$.*", hasSize(4)))
+                .andExpect(jsonPath("$.manufacturer", is("Corsair")))
+                .andExpect(jsonPath("$.model", is("450-GOLD")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
-                .andExpect(jsonPath("$.invNumber", is("144")));
+                .andExpect(jsonPath("$.power", is(450)));
     }
 
     @Test
     public void testCreateSuccess() throws Exception {
 
-        Keyboard m = new Keyboard("131", "Defender", "df-563cr", "75HdnG45K23ls");
+        PowerSupply powerSupply = new PowerSupply("Thermalake", "600Th", 600);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(powerSupply);
 
-        mockMvc.perform(post("/components/keyboard/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
+        mockMvc.perform(post("/sysunit/powersupply/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated());
 
     }
@@ -116,18 +108,18 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testDeleteSuccess() throws Exception {
 
-        mockMvc.perform(delete("/components/keyboard/" + secondId))
+        mockMvc.perform(delete("/sysunit/powersupply/" + secondId))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     public void testUpdateSuccess() throws Exception {
 
-        Keyboard m = new Keyboard("144", "Defender", "df-566v", "u4Rgd620Nc3b");
+        PowerSupply powerSupply = new PowerSupply("Corsairrr", "450-GOLD", 450);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(powerSupply);
 
-        mockMvc.perform(put("/components/keyboard/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/sysunit/powersupply/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
 
     }
@@ -135,7 +127,7 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testGetFailed() throws Exception {
 
-        mockMvc.perform(get("/components/keyboard/144444"))
+        mockMvc.perform(get("/sysunit/powersupply/144444"))
                 .andExpect(status().isNotFound());
 
     }
@@ -143,11 +135,11 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testCreateFailed() throws Exception {
 
-        Keyboard m = new Keyboard("144", "Defender", "df-566v", "u4Rgd620Nc3b");
+        PowerSupply powerSupply = new PowerSupply("Corsair", "450-GOLD", 450);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(powerSupply);
 
-        mockMvc.perform(post("/components/keyboard/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/sysunit/powersupply/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isConflict());
 
@@ -157,11 +149,11 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testUpdateFailed() throws Exception {
 
-        Keyboard m = new Keyboard("144", "Defender", "df-566v", "u4Rgd620Nc3b");
+        PowerSupply powerSupply = new PowerSupply("Corsair", "450-GOLD", 450);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(powerSupply);
 
-        mockMvc.perform(put("/components/keyboard/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/sysunit/powersupply/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
 
     }
@@ -169,7 +161,7 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testDeleteFailed() throws Exception {
 
-        mockMvc.perform(delete("/components/keyboard/144444"))
+        mockMvc.perform(delete("/sysunit/powersupply/144444"))
                 .andExpect(status().isNotFound());
     }
 

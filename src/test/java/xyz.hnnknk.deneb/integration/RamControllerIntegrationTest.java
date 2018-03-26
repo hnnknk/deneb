@@ -16,14 +16,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import xyz.hnnknk.deneb.config.WebConfig;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
-import xyz.hnnknk.deneb.model.Keyboard;
-import xyz.hnnknk.deneb.service.Peripheral.PeripheralService;
+import xyz.hnnknk.deneb.model.RAM;
+import xyz.hnnknk.deneb.model.RAM;
+import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.servlet.ServletContext;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -34,13 +31,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
-public class KeyboardControllerIntegrationTest {
+public class RamControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
-    private PeripheralService keyboardServiceImpl;
+    private SystemUnitService<RAM> ramServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -52,18 +49,16 @@ public class KeyboardControllerIntegrationTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 
         try {
-            this.keyboardServiceImpl.save(new Keyboard("144", "BTC", "6301c", "3Hg45ks86Gr"));
-            this.keyboardServiceImpl.save(new Keyboard("155", "Logitech", "K120", "783G6r45TNe"));
+            this.ramServiceImpl.save(new RAM("Corsair", "c473hdb3/2",4096));
+            this.ramServiceImpl.save(new RAM("Kingston", "kn39hdn/2",2048));
 
-        } catch (EntityExistsException e) { }
+        } catch (EntityExistsException e) {}
 
-        List<Keyboard> list = this.keyboardServiceImpl.listAll();
-
-        for(Keyboard k : list) {
-            if(k.getInvNumber().equals("144")) {
-                firstId = k.getId();
-            } else if (k.getInvNumber().equals("155")) {
-                secondId = k.getId();
+        for (RAM ram : ramServiceImpl.listAll()) {
+            if (ram.getManufacturer().equals("Corsair")) {
+                firstId = ram.getId();
+            } else if (ram.getManufacturer().equals("Kingston")) {
+                secondId = ram.getId();
             }
         }
     }
@@ -74,13 +69,13 @@ public class KeyboardControllerIntegrationTest {
 
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
-        Assert.assertNotNull(wac.getBean("keyboardController"));
+        Assert.assertNotNull(wac.getBean("RAMController"));
     }
 
     @Test
     public void testGetAllSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/keyboard/"))
+        mockMvc.perform(get("/sysunit/ram/"))
                 .andExpect(status().isOk());
 
     }
@@ -88,27 +83,25 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testGetSuccess() throws Exception {
 
-        mockMvc.perform(get("/components/keyboard/" + firstId))
+        mockMvc.perform(get("/sysunit/ram/" + firstId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.*", hasSize(5)))
-                .andExpect(jsonPath("$.serial", is("3Hg45ks86Gr")))
-                .andExpect(jsonPath("$.manufacturer", is("BTC")))
-                .andExpect(jsonPath("$.model", is("6301c")))
+                .andExpect(jsonPath("$.*", hasSize(4)))
+                .andExpect(jsonPath("$.manufacturer", is("Corsair")))
+                .andExpect(jsonPath("$.model", is("c473hdb3/2")))
                 .andExpect(jsonPath("$.id", is(firstId.intValue())))
-                .andExpect(jsonPath("$.invNumber", is("144")));
+                .andExpect(jsonPath("$.capacity", is(4096)));
     }
 
     @Test
     public void testCreateSuccess() throws Exception {
 
-        Keyboard m = new Keyboard("131", "Defender", "df-563cr", "75HdnG45K23ls");
+        RAM ram = new RAM("Hynix", "hy38dns/2", 2048);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(ram);
 
-        mockMvc.perform(post("/components/keyboard/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
+        mockMvc.perform(post("/sysunit/ram/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated());
 
     }
@@ -116,18 +109,18 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testDeleteSuccess() throws Exception {
 
-        mockMvc.perform(delete("/components/keyboard/" + secondId))
+        mockMvc.perform(delete("/sysunit/ram/" + secondId))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     public void testUpdateSuccess() throws Exception {
 
-        Keyboard m = new Keyboard("144", "Defender", "df-566v", "u4Rgd620Nc3b");
+        RAM ram = new RAM("Corsairrr", "c473hdb3/2",4096);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(ram);
 
-        mockMvc.perform(put("/components/keyboard/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/sysunit/ram/" + firstId).content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
 
     }
@@ -135,7 +128,7 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testGetFailed() throws Exception {
 
-        mockMvc.perform(get("/components/keyboard/144444"))
+        mockMvc.perform(get("/sysunit/ram/144444"))
                 .andExpect(status().isNotFound());
 
     }
@@ -143,11 +136,11 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testCreateFailed() throws Exception {
 
-        Keyboard m = new Keyboard("144", "Defender", "df-566v", "u4Rgd620Nc3b");
+        RAM ram = new RAM("Corsair", "c473hdb3/2",4096);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(ram);
 
-        mockMvc.perform(post("/components/keyboard/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/sysunit/ram/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isConflict());
 
@@ -157,11 +150,11 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testUpdateFailed() throws Exception {
 
-        Keyboard m = new Keyboard("144", "Defender", "df-566v", "u4Rgd620Nc3b");
+        RAM ram = new RAM("Corsairrr", "c473hdb3/2",4096);
 
-        String d = new ObjectMapper().writeValueAsString(m);
+        String d = new ObjectMapper().writeValueAsString(ram);
 
-        mockMvc.perform(put("/components/keyboard/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/sysunit/ram/144444").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
 
     }
@@ -169,7 +162,7 @@ public class KeyboardControllerIntegrationTest {
     @Test
     public void testDeleteFailed() throws Exception {
 
-        mockMvc.perform(delete("/components/keyboard/144444"))
+        mockMvc.perform(delete("/sysunit/ram/144444"))
                 .andExpect(status().isNotFound());
     }
 
