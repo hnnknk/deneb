@@ -6,7 +6,7 @@
 
     <groupId>xyz.hnnknk</groupId>
     <artifactId>deneb</artifactId>
-    <version>0.4</version>
+    <version>0.5</version>
     <packaging>war</packaging>
 
     <properties>
@@ -226,6 +226,12 @@
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
             <version>1.6.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-ui-router</artifactId>
+            <version>0.2.18</version>
         </dependency>
 
     </dependencies>

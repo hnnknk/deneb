@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
+import xyz.hnnknk.deneb.model.Computer;
 import xyz.hnnknk.deneb.model.HDD;
+import xyz.hnnknk.deneb.service.ComputerService;
 import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.validation.Valid;
@@ -20,6 +22,9 @@ public class HDDController {
 
     @Autowired
     SystemUnitService<HDD> HDDServiceImpl;
+
+    @Autowired
+    ComputerService computerService;
 
     @RequestMapping(value = "/sysunit/hdd/", method = RequestMethod.GET)
     public ResponseEntity<List<HDD>> listAllHDDes() {

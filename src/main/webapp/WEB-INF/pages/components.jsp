@@ -14,6 +14,7 @@
     <script src="webjars/angularjs/1.6.8/angular-cookies.min.js"></script>
     <script src="webjars/angularjs/1.6.8/angular-resource.min.js"></script>
     <script src="webjars/angularjs/1.6.8/angular-route.min.js"></script>
+    <script src="webjars/angularjs/1.6.8/angular-animate.min.js"></script>
 
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/interceptors/errorInterceptor.js' />"></script>
@@ -31,6 +32,7 @@
             <a class="navbar-brand" href="/">Deneb</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <li data-ng-if="islogged"><a href="#!computer">Компьютер</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">Системный блок
                     <span class="caret"></span></a>
@@ -70,6 +72,8 @@
 
 <div ng-view></div>
 
+<script src="<c:url value='/static/js/controller/computer_controller.js' />"></script>
+<script src="<c:url value='/static/js/service/computer_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/ro_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/monitor_controller.js' />"></script>

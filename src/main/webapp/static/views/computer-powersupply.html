@@ -1,0 +1,60 @@
+<!-- PowerSupply section -->
+<div id="powersupply_div" class="generic-container" ng-controller="ComputerController as ctrl">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Добавление блока питания</span></div>
+
+        <div class="formcontainer">
+            <form ng-submit="ctrl.nextToRam()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl.powersupply.id" />
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Производитель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.powersupply.manufacturer" name="power_manufacturer" class="field form-control input-sm" placeholder="Введите производителя блока питания" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.power_manufacturer.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.power_manufacturer.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.power_manufacturer.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Модель</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.powersupply.model" name="power_model" class="field form-control input-sm" placeholder="Введите модель блока питания" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.power_model.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.power_model.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.power_model.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable">Мощность</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.powersupply.power" name="power_power" class="field form-control input-sm" placeholder="Введите мощность блока питания" required ng-minlength="2" ng-maxlength="10"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.power_power.$error.required">Это поле необходимо заполнить</span>
+                                <span ng-show="myForm.power_power.$error.minlength">Поле должно содержать как минимум 2 символа</span>
+                                <span ng-show="myForm.power_power.$error.maxlength">Поле должно содержать не более 10 символов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="Продолжить" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,9 @@ public class HDD extends SystemUnit {
     @Column
     private String hddType;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "hdd")
+    private Computer computer;
+
     public HDD(String manufacturer, String model, String serial, Integer capacity, String hddType) {
         setManufacturer(manufacturer);
         setModel(model);
@@ -48,6 +51,14 @@ public class HDD extends SystemUnit {
 
     public void setHddType(String hddType) {
         this.hddType = hddType;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 
     @Override
