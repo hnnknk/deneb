@@ -42,3 +42,15 @@ body, .form-control{
 a:hover, a:focus {
     cursor: pointer;
 }
+
+.computer-header {
+    margin-top: 5px;
+}
+
+.computer-list {
+    margin-top: 30px;
+}
+
+.body-space {
+    border-top: 15px solid transparent !important;
+}

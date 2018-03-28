@@ -32,6 +32,7 @@
             <a class="navbar-brand" href="/">Deneb</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <li data-ng-if="islogged"><a href="#!computer/list">Список</a></li>
             <li data-ng-if="islogged"><a href="#!computer">Компьютер</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">Системный блок

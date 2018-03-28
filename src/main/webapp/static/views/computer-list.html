@@ -1,0 +1,68 @@
+<div class="container" ng-controller="KeyboardController as ctrl">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control input-md computer-header text-right" placeholder="Поиск компьютера" ng-model="search.invNumber"/>
+                <i class="glyphicon glyphicon-search form-control-feedback"></i>
+            </div>
+            <div class="list-group computer-list">
+                <a class="list-group-item" ng-click="ctrl.show()" ng-repeat="c in ctrl.keyboards | filter:search">Инвентарный номер: <span ng-bind="c.invNumber"></span></a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a id="main-info" data-toggle="tab" data-target="#info">Описание</a></li>
+                <li><a data-toggle="tab" data-target="#hdd">Жесткие диски</a></li>
+                <li><a data-toggle="tab" data-target="#processor">Процессор</a></li>
+                <li><a data-toggle="tab" data-target="#motherboard">Материнская плата</a></li>
+                <li><a data-toggle="tab" data-target="#powersupply">Блок питания</a></li>
+                <li><a data-toggle="tab" data-target="#ram">Память</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="info" class="tab-pane fade in active">
+                    <table class="table table-striped">
+                        <tbody class="body-space" ng-repeat="c in ctrl.keyboards">
+                        <tr>
+                            <th>Общие характеристики</th>
+                        </tr>
+                        <tr>
+                            <td>Инвентарный номер:</td>
+                            <td><span ng-bind="c.invNumber"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Производитель:</td>
+                            <td><span ng-bind="c.manufacturer"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Модель:</td>
+                            <td><span ng-bind="c.model"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Серийный номер:</td>
+                            <td><span ng-bind="c.serial"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="hdd" class="tab-pane fade">
+                    <p>Some content in menu 1.</p>
+                </div>
+                <div id="processor" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="motherboard" class="tab-pane fade">
+                    <p>Some content in menu 3.</p>
+                </div>
+                <div id="powersupply" class="tab-pane fade">
+                    <p>Some content in menu 4.</p>
+                </div>
+                <div id="ram" class="tab-pane fade">
+                    <p>Some content in menu 5.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

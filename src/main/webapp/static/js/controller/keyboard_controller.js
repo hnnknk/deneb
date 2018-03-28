@@ -9,6 +9,7 @@ angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardSer
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
+    self.show = show;
 
     var name = 'keyboard';
 
@@ -87,6 +88,10 @@ angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardSer
             reset();
         }
         deleteKeyboard(id);
+    }
+    
+    function show() {
+        $('.nav-tabs a[id = "main-info"]').tab('show')
     }
 
 
