@@ -10,6 +10,9 @@ public class PowerSupply extends SystemUnit {
     @Column
     private Integer power;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "powerSupply")
+    private Computer computer;
+
     public PowerSupply() {
     }
 
@@ -25,6 +28,14 @@ public class PowerSupply extends SystemUnit {
 
     public void setPower(Integer power) {
         this.power = power;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 
     //Garbage equals, should be removed in next update

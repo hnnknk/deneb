@@ -4,6 +4,10 @@ angular.module('myApp').controller('ComputerController', ['$scope', 'ComputerSer
 
     var self = this;
     self.hdd = {id:null,manufacturer:'',model:'',serial:'',capacity:'',hddType:''};
+    self.motherboard={id:null,manufacturer:'',model:'',socket:''};
+    self.powersupply={id:null,manufacturer:'',model:'',power:''};
+    self.processor={id:null,manufacturer:'',model:'',speed:'',numberOfCores:''};
+    self.ram={id:null,manufacturer:'',model:'',capacity:''};
     self.info = {id:null, invNumber:'', user:'', location:''};
 
     $scope.inner = ComputerService.getComputer();
@@ -27,24 +31,28 @@ angular.module('myApp').controller('ComputerController', ['$scope', 'ComputerSer
 
     function nextToMotherboard() {
         ComputerService.setHdd(self.hdd);
-        console.log(ComputerService.getComputer());
         window.location='#!computer/motherboard'
     }
 
     function nextToProcessor() {
+        ComputerService.setMotherBoard(self.motherboard);
         window.location='#!computer/processor'
     }
 
     function nextToPowerSupply() {
+        ComputerService.setProcessor(self.processor);
         window.location='#!computer/powersupply'
     }
 
     function nextToRam() {
+        ComputerService.setPowerSupply(self.powersupply);
         window.location='#!computer/ram'
     }
 
     function submit() {
-        alert("Завершено");
+        ComputerService.setRam(self.ram);
+        ComputerService.createComputer();
+        alert("Внесение компьютера прошло успешно");
         window.location='/'
     }
 }]);

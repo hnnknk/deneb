@@ -10,6 +10,9 @@ public class MotherBoard extends SystemUnit {
     @Column
     private String socket;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "motherBoard")
+    private Computer computer;
+
     public MotherBoard() {
     }
 
@@ -25,6 +28,14 @@ public class MotherBoard extends SystemUnit {
 
     public void setSocket(String socket) {
         this.socket = socket;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 
     //Garbage equals, should be removed in next update

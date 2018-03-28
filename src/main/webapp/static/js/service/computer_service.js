@@ -8,7 +8,12 @@ angular.module('myApp').factory('ComputerService', ['$http', '$q', function($htt
     var factory = {
         setInfo: setInfo,
         setHdd: setHdd,
-        getComputer: getComputer
+        getComputer: getComputer,
+        setMotherBoard: setMotherBoard,
+        setProcessor: setProcessor,
+        setPowerSupply: setPowerSupply,
+        setRam: setRam,
+        createComputer: createComputer
     };
 
 
@@ -21,16 +26,31 @@ angular.module('myApp').factory('ComputerService', ['$http', '$q', function($htt
 
     function setHdd(hdd) {
         inner.hdd = hdd;
-        createComputer(getComputer());
+    }
+
+    function setMotherBoard(motherBoard) {
+        inner.motherBoard = motherBoard;
+    }
+
+    function setProcessor(processor) {
+        inner.processor = processor;
+    }
+
+    function setPowerSupply(powerSupply) {
+        inner.powerSupply = powerSupply;
+    }
+
+    function setRam(ram) {
+        inner.ram = ram;
     }
 
     function getComputer() {
         return inner;
     }
 
-    function createComputer(computer) {
+    function createComputer() {
         var deferred = $q.defer();
-        $http.post(REST_SERVICE_URI, computer)
+        $http.post(REST_SERVICE_URI, getComputer())
             .then(
                 function (response) {
                     handleSuccessCreate();

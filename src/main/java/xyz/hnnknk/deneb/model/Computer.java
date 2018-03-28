@@ -24,8 +24,24 @@ public class Computer {
     private String location;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "com_id", referencedColumnName = "id")
+    @JoinColumn(name = "com_hdd_id", referencedColumnName = "id")
     private HDD hdd;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "com_mother_id", referencedColumnName = "id")
+    private MotherBoard motherBoard;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "com_proc_id", referencedColumnName = "id")
+    private Processor processor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "com_power_id", referencedColumnName = "id")
+    private PowerSupply powerSupply;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "com_ram_id", referencedColumnName = "id")
+    private RAM ram;
 
     public Computer() {
     }
@@ -70,6 +86,38 @@ public class Computer {
         this.hdd = hdd;
     }
 
+    public MotherBoard getMotherBoard() {
+        return motherBoard;
+    }
+
+    public void setMotherBoard(MotherBoard motherBoard) {
+        this.motherBoard = motherBoard;
+    }
+
+    public Processor getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
+    }
+
+    public PowerSupply getPowerSupply() {
+        return powerSupply;
+    }
+
+    public void setPowerSupply(PowerSupply powerSupply) {
+        this.powerSupply = powerSupply;
+    }
+
+    public RAM getRam() {
+        return ram;
+    }
+
+    public void setRam(RAM ram) {
+        this.ram = ram;
+    }
+
     @Override
     public String toString() {
         return "Computer{" +
@@ -78,6 +126,10 @@ public class Computer {
                 ", user='" + user + '\'' +
                 ", location='" + location + '\'' +
                 ", hdd=" + hdd +
+                ", motherBoard=" + motherBoard +
+                ", processor=" + processor +
+                ", powerSupply=" + powerSupply +
+                ", ram=" + ram +
                 '}';
     }
 

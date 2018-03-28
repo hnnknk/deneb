@@ -13,6 +13,9 @@ public class Processor extends SystemUnit{
     @Column
     private Integer numberOfCores;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "processor")
+    private Computer computer;
+
     public Processor() {
     }
 
@@ -37,6 +40,14 @@ public class Processor extends SystemUnit{
 
     public void setNumberOfCores(Integer numberOfCores) {
         this.numberOfCores = numberOfCores;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 
     //Garbage equals, should be removed in next update

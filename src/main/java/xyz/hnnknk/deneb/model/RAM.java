@@ -10,6 +10,9 @@ public class RAM extends SystemUnit{
     @Column
     private Integer capacity;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ram")
+    private Computer computer;
+
     public RAM() {
     }
 
@@ -25,6 +28,14 @@ public class RAM extends SystemUnit{
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 
     //Garbage equals, should be removed in next update
