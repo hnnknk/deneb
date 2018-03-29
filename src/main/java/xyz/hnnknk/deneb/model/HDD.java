@@ -1,5 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -17,6 +19,7 @@ public class HDD extends SystemUnit {
     private String hddType;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "hdd")
+    @JsonIgnore
     private Computer computer;
 
     public HDD(String manufacturer, String model, String serial, Integer capacity, String hddType) {

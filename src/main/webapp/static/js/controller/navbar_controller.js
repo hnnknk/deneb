@@ -6,7 +6,7 @@ angular.module('myApp').controller('navCtrl', function($scope, $http, $httpParam
 
     var prep = {
         method:'POST',
-        url: 'http://localhost:8080/oauth/check_token?token=' + $cookies.get("access_token"),
+        url: 'http://localhost:8080/oauth/check_token?token=' + $cookies.get("access_token")
     };
 
     check();

@@ -54,3 +54,10 @@ a:hover, a:focus {
 .body-space {
     border-top: 15px solid transparent !important;
 }
+.nav-tabs a {
+    color: #777;
+}
+
+.table-first-column {
+    width: 55% !important;
+}

@@ -10,20 +10,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 import xyz.hnnknk.deneb.exceptions.EntityExistsException;
 import xyz.hnnknk.deneb.exceptions.EntityNotFoundException;
 import xyz.hnnknk.deneb.model.Computer;
-import xyz.hnnknk.deneb.model.HDD;
 import xyz.hnnknk.deneb.service.ComputerService;
-import xyz.hnnknk.deneb.service.SystemUnit.SystemUnitService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class ComputerController {
 
     @Autowired
     ComputerService computerService;
-
-    @Autowired
-    SystemUnitService<HDD> HDDServiceImpl;
 
     @RequestMapping(value = "/computers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Computer> getComputer(@PathVariable("id") long id) {
@@ -37,6 +33,15 @@ public class ComputerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @RequestMapping(value = "/computers/", method = RequestMethod.GET)
+    public ResponseEntity<List<Computer>> listAll() {
+        List<Computer> computers = computerService.listAll();
+        if(computers.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(computers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/computers/", method = RequestMethod.POST)

@@ -89,11 +89,6 @@ angular.module('myApp').controller('KeyboardController', ['$scope', 'KeyboardSer
         }
         deleteKeyboard(id);
     }
-    
-    function show() {
-        $('.nav-tabs a[id = "main-info"]').tab('show')
-    }
-
 
     function reset(){
         self.keyboard={id:null,invNumber:'',manufacter:'',model:'',serial:''};

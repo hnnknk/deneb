@@ -1,16 +1,19 @@
 package xyz.hnnknk.deneb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "ram")
-public class RAM extends SystemUnit{
+public class RAM extends SystemUnit {
 
     @Column
     private Integer capacity;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "ram")
+    @JsonIgnore
     private Computer computer;
 
     public RAM() {

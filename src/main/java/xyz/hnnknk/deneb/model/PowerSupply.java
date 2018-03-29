@@ -1,5 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,6 +13,7 @@ public class PowerSupply extends SystemUnit {
     private Integer power;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "powerSupply")
+    @JsonIgnore
     private Computer computer;
 
     public PowerSupply() {

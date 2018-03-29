@@ -1,5 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -14,6 +16,7 @@ public class Processor extends SystemUnit{
     private Integer numberOfCores;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "processor")
+    @JsonIgnore
     private Computer computer;
 
     public Processor() {

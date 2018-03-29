@@ -55,4 +55,5 @@ angular.module('myApp').controller('ComputerController', ['$scope', 'ComputerSer
         alert("Внесение компьютера прошло успешно");
         window.location='/'
     }
+
 }]);

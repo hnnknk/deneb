@@ -1,5 +1,7 @@
 package xyz.hnnknk.deneb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,6 +13,7 @@ public class MotherBoard extends SystemUnit {
     private String socket;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "motherBoard")
+    @JsonIgnore
     private Computer computer;
 
     public MotherBoard() {

@@ -74,6 +74,7 @@
 <div ng-view></div>
 
 <script src="<c:url value='/static/js/controller/computer_controller.js' />"></script>
+<script src="<c:url value='/static/js/controller/computer_list_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/computer_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/ro_controller.js' />"></script>
 <script src="<c:url value='/static/js/service/monitor_service.js' />"></script>

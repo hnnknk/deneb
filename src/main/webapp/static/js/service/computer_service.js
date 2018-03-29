@@ -5,6 +5,8 @@ angular.module('myApp').factory('ComputerService', ['$http', '$q', function($htt
     var inner = {};
     var REST_SERVICE_URI = 'http://localhost:8080/computers/';
 
+    var number = 1;
+
     var factory = {
         setInfo: setInfo,
         setHdd: setHdd,
@@ -13,11 +15,27 @@ angular.module('myApp').factory('ComputerService', ['$http', '$q', function($htt
         setProcessor: setProcessor,
         setPowerSupply: setPowerSupply,
         setRam: setRam,
-        createComputer: createComputer
+        createComputer: createComputer,
+        fetchAllComputers: fetchAllComputers,
     };
 
 
     return factory;
+
+    function fetchAllComputers() {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching Computers');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
 
     function setInfo(info) {
         inner = info;
